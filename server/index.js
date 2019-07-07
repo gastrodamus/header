@@ -6,7 +6,6 @@ const path = require('path')
 const Business = require('./db/Business.js')
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'dist')));
-app.get('/', (req, res) => res.send('Hello World! from express server'))
 
 app.get('/munch/header', (req, res) => {
   console.log('get request received')
