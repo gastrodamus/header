@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const db = require('./index.js');
+
+const mongoUri = 'mongodb://localhost/munch';
+mongoose.connect(mongoUri, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 const businessSchema = new mongoose.Schema({
@@ -8,8 +10,8 @@ const businessSchema = new mongoose.Schema({
   price: Number,
   categories: String,
   reviews: [{
-    star: Number
-  }]
+    star: Number,
+  }],
 });
 
 const Business = mongoose.model('Business', businessSchema);
