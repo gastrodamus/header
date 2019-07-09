@@ -1,10 +1,9 @@
-const express = require('express');
+const express = require('express')
+const app = express()
+const port = 3000
+const path = require('path')
 
-const app = express();
-const port = 3000;
-const path = require('path');
-
-const Business = require('./db/Business.js');
+const Business = require('./db/Business.js')
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 
@@ -20,4 +19,4 @@ app.get('/munch/header', (req, res) => {
   })
 })
 
-app.listen(port, () => console.log(`Server listening on port ${port}!`));
+app.listen(port, () => console.log(`Server listening on port ${port}!`))
