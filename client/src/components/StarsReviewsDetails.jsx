@@ -6,7 +6,16 @@ const StarsReviewsDetails = () => (
     <div>
       <span>****</span>
       <span>200 reviews</span>
-      <button>Details</button>
+      <button
+        className="details"
+        onClick={props.openModal}
+      >Details
+      </button>
+      <Modal 
+        isOpen={props.detailsModalStatus}
+        onRequestClose={props.closeDetailsModal}
+        style={customStyles}
+      />
     </div>
     <div>
       <PriceCategoryEdit />

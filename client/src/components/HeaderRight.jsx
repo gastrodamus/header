@@ -8,7 +8,13 @@ const HeaderRight = () => (
       <WriteReview />
     </div>
     <div>
-      <PhotoShareSave />
+      <PhotoShareSave
+        shareModalStatus={props.shareModalStatus}
+        openModal={props.openModal}
+        closeShareModal={props.closeShareModal}
+        saveModalStatus={props.saveModalStatus}
+        closeSaveModal={props.closeSaveModal}
+      />
     </div>
   </div>
 );

@@ -8,7 +8,11 @@ const HeaderLeft = () => (
       <RestaurantName />
     </div>
     <div className="stars-reviews-details">
-      <StarsReviewsDetails />
+      <StarsReviewsDetails
+        detailsModalStatus={props.detailsModalStatus}
+        openModal={props.openModal}
+        closeDetailsModal={props.closeDetailsModal}
+      />
     </div>
   </div>
 );
