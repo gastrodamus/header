@@ -2,14 +2,13 @@ import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      detailsModalIsOpen: false,
-      shareModalIsOpen: false,
-      saveModalIsOpen: false
+      fill_me_in : ''
     };
 
     this.openModal = this.openModal.bind(this);
@@ -69,7 +68,7 @@ class App extends React.Component {
           />
         </div>
       </div>
-    );
+    )
   }
 }
 

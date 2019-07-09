@@ -45,8 +45,6 @@
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-modal": "^3.8.2",
-    "react-test-renderer": "^16.8.6",
-    "styled-components": "^4.3.2"
+    "react-test-renderer": "^16.8.6"
   }
 }

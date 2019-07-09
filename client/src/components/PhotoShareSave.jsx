@@ -1,7 +1,4 @@
 import React from 'react';
-import Modal from 'react-modal';
-import Share from './Share.jsx';
-import Save from './Save.jsx';
 
 Modal.setAppElement(document.getElementById('app'));
 

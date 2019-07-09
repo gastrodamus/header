@@ -2,7 +2,7 @@ import React from 'react';
 import WriteReview from './WriteReview.jsx';
 import PhotoShareSave from './PhotoShareSave.jsx';
 
-const HeaderRight = props => (
+const HeaderRight = () => (
   <div className="header-right">
     <div className="write-review">
       <WriteReview />

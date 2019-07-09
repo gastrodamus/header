@@ -2,8 +2,8 @@ import React from 'react';
 import RestaurantName from './RestaurantName.jsx';
 import StarsReviewsDetails from './StarsReviewsDetails.jsx';
 
-const HeaderLeft = props => (
-  <div className="header-left">
+const HeaderLeft = () => (
+  <div>
     <div className="restaurant-name">
       <RestaurantName />
     </div>

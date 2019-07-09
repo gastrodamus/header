@@ -10,6 +10,11 @@
   width: 50%;
 }
 
+.header-left {
+  display: flex;
+  justify-content: center;
+}
+
 .header-right {
   display: flex;
   justify-content: center;
@@ -21,11 +26,6 @@
 }
 
 .write-review {
-  display: flex;
-  justify-content: center;
-}
-
-.photo-share-save{
   display: flex;
   justify-content: center;
 }
