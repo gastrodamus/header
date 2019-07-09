@@ -18,6 +18,7 @@ const customStyles = {
   },
 };
 
+
 // const ModalWrapper = styled.div`
 //   top: '50%';
 //   left: '50%';
@@ -29,21 +30,22 @@ const customStyles = {
 //   width: 540;
 // `;
 
-const StarsReviewsDetails = props => (
+
+const StarsReviewsDetails = (props) => (
   <div>
     <div>
       <span>****</span>
       <span>200 reviews</span>
       <button
-        className="details"
-        onClick={props.openDetailsModal}
+        onClick={props.openModal}
       >Details
       </button>
-      <Modal 
-        isOpen={props.detailsModalStatus}
-        onRequestClose={props.closeDetailsModal}
-        style={customStyles}
-      />
+        <Modal 
+          isOpen={props.modalStatus}
+          onAfterOpen={props.afterOpenModal}
+          onRequestClose={props.closeModal}
+          style={customStyles}
+        />
     </div>
     <div>
       <PriceCategoryEdit />
