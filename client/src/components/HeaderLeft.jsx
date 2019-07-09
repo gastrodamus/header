@@ -1,13 +1,14 @@
 import React from 'react';
 import RestaurantName from './RestaurantName.jsx';
-import StarReviewsDetails from './StarsReviewsDetails.jsx';
+import StarsReviewsDetails from './StarsReviewsDetails.jsx';
 
-const HeaderLeft = (props) => (
+const HeaderLeft = props => (
   <div>
-    HeaderLeft
-    <div>
+    <div className="restaurant-name">
       <RestaurantName />
-      <StarReviewsDetails
+    </div>
+    <div className="stars-reviews-details">
+      <StarsReviewsDetails
         modalStatus={props.modalStatus}
         openModal={props.openModal}
         closeModal={props.closeModal}

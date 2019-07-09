@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,8 +31,6 @@ class App extends React.Component {
     var state = Object.assign({}, this.state);
     state.modalIsOpen = false;
     this.setState(state);
-
-
   }
 
   afterOpenModal() {
@@ -41,8 +40,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="flex-container">
+        <div className="header-left">
           <HeaderLeft
             modalStatus={this.state.modalIsOpen}
             openModal={this.openModal}

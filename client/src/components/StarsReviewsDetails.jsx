@@ -1,4 +1,5 @@
 import React from 'react';
+import PriceCategoryEdit from './PriceCategoryEdit.jsx';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 
@@ -30,8 +31,7 @@ const customStyles = {
 // `;
 
 
-
-const StarReviewsDetails = props => (
+const StarsReviewsDetails = (props) => (
   <div>
     <div>
       <span>****</span>
@@ -47,7 +47,10 @@ const StarReviewsDetails = props => (
           style={customStyles}
         />
     </div>
+    <div>
+      <PriceCategoryEdit />
+    </div>
   </div>
 );
 
-export default StarReviewsDetails;
+export default StarsReviewsDetails;
