@@ -1,4 +1,4 @@
-mport React from 'react';
+import React from 'react';
 import { shallow } from 'enzyme';
 import StarsReviewsDetails from '../client/src/components/StarsReviewsDetails.jsx';
 
