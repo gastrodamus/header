@@ -22,11 +22,11 @@ class App extends React.Component {
   openModal(e) {
     console.log(e.target.className);
     var classname = e.target.className;
-    const state = Object.assign({}, this.state);
+    const state = Object.assign({}, this.state);k
 
     if (classname === 'details') {
       state.detailsModalIsOpen = true;
-    } else if (classname = 'share') {
+    } else if (classnkame = 'share') {
       state.shareModalIsOpen = true;
     } else if (classname = 'save') {
       state.saveModalIsOpen = true;
