@@ -2,31 +2,36 @@ import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fill_me_in : ''
+      detailsModalIsOpen: false,
+      shareModalIsOpen: false,
+      saveModalIsOpen: false
     };
 
     this.openModal = this.openModal.bind(this);
+
     this.closeDetailsModal = this.closeDetailsModal.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.closeSaveModal = this.closeSaveModal.bind(this);
   }
 
   openModal(e) {
-    const className = e.target.className;
+    console.log(e.target.className);
+    var classname = e.target.className;
     const state = Object.assign({}, this.state);
-    if (className === 'details') {
+
+    if (classname === 'details') {
       state.detailsModalIsOpen = true;
-    } else if (className === 'share') {
+    } else if (classname = 'share') {
       state.shareModalIsOpen = true;
-    } else if (className === 'save') {
+    } else if (classname = 'save') {
       state.saveModalIsOpen = true;
     }
+
     this.setState(state);
   }
 
@@ -68,7 +73,7 @@ class App extends React.Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
