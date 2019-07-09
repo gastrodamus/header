@@ -10,7 +10,7 @@ const HeaderLeft = props => (
     <div className="stars-reviews-details">
       <StarsReviewsDetails
         detailsModalStatus={props.detailsModalStatus}
-        openDetailsModal={props.openDetailsModal}
+        openModal={props.openModal}
         closeDetailsModal={props.closeDetailsModal}
       />
     </div>

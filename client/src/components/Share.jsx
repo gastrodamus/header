@@ -18,7 +18,9 @@ const customStyles = {
 
 const Share = props => (
   <div>
-    <button onClick={props.openShareModal}
+    <button 
+    className="share"
+    onClick={props.openModal}
     >Share
     </button>
     <Modal 

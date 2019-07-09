@@ -36,7 +36,7 @@ const StarsReviewsDetails = props => (
       <span>200 reviews</span>
       <button
         className="details"
-        onClick={props.openDetailsModal}
+        onClick={props.openModal}
       >Details
       </button>
       <Modal 

@@ -26,14 +26,14 @@ const PhotoShareSave = props => (
     <div>
       <Share 
         shareModalStatus={props.shareModalStatus}
-        openShareModal={props.openShareModal}
+        openModal={props.openModal}
         closeShareModal={props.closeShareModal}
       />
     </div>
     <div>
       <Save 
         saveModalStatus={props.saveModalStatus}
-        openSaveModal={props.openSaveModal}
+        openModal={props.openModal}
         closeSaveModal={props.closeSaveModal}
       />
     </div>

@@ -10,10 +10,9 @@ const HeaderRight = props => (
     <div>
       <PhotoShareSave
         shareModalStatus={props.shareModalStatus}
-        openShareModal={props.openShareModal}
+        openModal={props.openModal}
         closeShareModal={props.closeShareModal}
         saveModalStatus={props.saveModalStatus}
-        openSaveModal={props.openSaveModal}
         closeSaveModal={props.closeSaveModal}
       />
     </div>

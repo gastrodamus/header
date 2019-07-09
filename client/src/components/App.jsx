@@ -12,17 +12,22 @@ class App extends React.Component {
       saveModalIsOpen: false
     };
 
-    this.openDetailsModal = this.openDetailsModal.bind(this);
+    this.openModal = this.openModal.bind(this);
     this.closeDetailsModal = this.closeDetailsModal.bind(this);
-    this.openShareModal = this.openShareModal.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
-    this.openSaveModal = this.openSaveModal.bind(this);
     this.closeSaveModal = this.closeSaveModal.bind(this);
   }
 
-  openDetailsModal() {
+  openModal(e) {
+    const className = e.target.className;
     const state = Object.assign({}, this.state);
-    state.detailsModalIsOpen = true;
+    if (className === 'details') {
+      state.detailsModalIsOpen = true;
+    } else if (className === 'share') {
+      state.shareModalIsOpen = true;
+    } else if (className === 'save') {
+      state.saveModalIsOpen = true;
+    }
     this.setState(state);
   }
 
@@ -32,21 +37,9 @@ class App extends React.Component {
     this.setState(state);
   }
 
-  openShareModal() {
-    const state = Object.assign({}, this.state);
-    state.shareModalIsOpen = true;
-    this.setState(state);
-  }
-
   closeShareModal() {
     const state = Object.assign({}, this.state);
     state.shareModalIsOpen = false;
-    this.setState(state);
-  }
-
-  openSaveModal() {
-    const state = Object.assign({}, this.state);
-    state.saveModalIsOpen = true;
     this.setState(state);
   }
 
@@ -62,17 +55,16 @@ class App extends React.Component {
         <div>
           <HeaderLeft
             detailsModalStatus={this.state.detailsModalIsOpen}
-            openDetailsModal={this.openDetailsModal}
+            openModal={this.openModal}
             closeDetailsModal={this.closeDetailsModal}
           />
         </div>
         <div>
           <HeaderRight
             shareModalStatus={this.state.shareModalIsOpen}
-            openShareModal={this.openShareModal}
+            openModal={this.openModal}
             closeShareModal={this.closeShareModal}
             saveModalStatus={this.state.saveModalIsOpen}
-            openSaveModal={this.openSaveModal}
             closeSaveModal={this.closeSaveModal}
           />
         </div>

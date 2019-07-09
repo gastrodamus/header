@@ -18,7 +18,9 @@ const customStyles = {
 
 const Save = props => (
   <div>
-    <button onClick={props.openSaveModal}
+    <button 
+    className="save"
+    onClick={props.openModal}
     >Save
     </button>
     <Modal 
