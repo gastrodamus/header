@@ -2,58 +2,78 @@ import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      modalIsOpen: false
+      detailsModalIsOpen: false,
+      shareModalIsOpen: false,
+      saveModalIsOpen: false
     };
 
     this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
+
+    this.closeDetailsModal = this.closeDetailsModal.bind(this);
+    this.closeShareModal = this.closeShareModal.bind(this);
+    this.closeSaveModal = this.closeSaveModal.bind(this);
   }
 
-  openModal() {
-    var state = Object.assign({}, this.state);
-    state.modalIsOpen = true;
+  openModal(e) {
+    console.log(e.target.className);
+    var classname = e.target.className;
+    const state = Object.assign({}, this.state);
+
+    if (classname === 'details') {
+      state.detailsModalIsOpen = true;
+    } else if (classname = 'share') {
+      state.shareModalIsOpen = true;
+    } else if (classname = 'save') {
+      state.saveModalIsOpen = true;
+    }
+
     this.setState(state);
-    
-    // let { modalIsOpen } = this.state;
-    // this.setState({
-    //   modalIsOpen: true;
-    // })
   }
 
-  closeModal() {
-    var state = Object.assign({}, this.state);
-    state.modalIsOpen = false;
+  closeDetailsModal() {
+    const state = Object.assign({}, this.state);
+    state.detailsModalIsOpen = false;
     this.setState(state);
   }
 
-  afterOpenModal() {
-    // this.subtitle.style.color = '#f00';
-    console.log('hello world')
+  closeShareModal() {
+    const state = Object.assign({}, this.state);
+    state.shareModalIsOpen = false;
+    this.setState(state);
+  }
+
+  closeSaveModal() {
+    const state = Object.assign({}, this.state);
+    state.saveModalIsOpen = false;
+    this.setState(state);
   }
 
   render() {
     return (
       <div className="flex-container">
-        <div className="header-left">
+        <div>
           <HeaderLeft
-            modalStatus={this.state.modalIsOpen}
+            detailsModalStatus={this.state.detailsModalIsOpen}
             openModal={this.openModal}
-            closeModal={this.closeModal}
-            afterOpenModal={this.afterOpenModal}
+            closeDetailsModal={this.closeDetailsModal}
           />
         </div>
         <div>
-          <HeaderRight />
+          <HeaderRight
+            shareModalStatus={this.state.shareModalIsOpen}
+            openModal={this.openModal}
+            closeShareModal={this.closeShareModal}
+            saveModalStatus={this.state.saveModalIsOpen}
+            closeSaveModal={this.closeSaveModal}
+          />
         </div>
       </div>
-    )
+    );
   }
 }
 
