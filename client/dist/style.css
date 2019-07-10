@@ -10,6 +10,11 @@
   width: 50%;
 }
 
+.header-left {
+  display: flex;
+  justify-content: center;
+}
+
 .header-right {
   display: flex;
   justify-content: center;
@@ -18,6 +23,7 @@
 .restaurant-name { 
   display: flex;
   justify-content: center;
+  height: 60px;
 }
 
 .write-review {
@@ -25,7 +31,12 @@
   justify-content: center;
 }
 
-.photo-share-save{
+.photo-share-save {
   display: flex;
   justify-content: center;
 } 
+
+.price-category-edit {
+  display: flex;
+  justify-content:center;
+}

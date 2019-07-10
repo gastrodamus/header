@@ -1,9 +1,8 @@
 import React from 'react';
-import PriceCategoryEdit from './PriceCategoryEdit.jsx';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 
-Modal.setAppElement(document.getElementById('app'))
+Modal.setAppElement(document.getElementById('app'));
 
 const customStyles = {
   content: {
@@ -18,35 +17,47 @@ const customStyles = {
   },
 };
 
-// const ModalWrapper = styled.div`
-//   top: '50%';
-//   left: '50%';
-//   right: 'auto';
-//   bottom: 'auto';
-//   marginRight: '-50%';
-//   transform: 'translate(-50%; -50%)';
-//   height: 646;
-//   width: 540;
-// `;
+const StarTitle = styled.span`
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  color: #333333;
+  margin: 0px 6px 0px 0px;
+`;
+
+const ReviewCountTitle = styled.span`
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  color: #666666;
+`;
+
+const Button = styled.button`
+  font-size: 12px;
+  color: #999999;
+  padding: 0 6px;
+  margin-left: 10px; 
+`;
+
+const SRDWrapper = {
+  height: 50,
+  marginTop: -15,
+  marginRight: 170,
+};
 
 const StarsReviewsDetails = props => (
   <div>
-    <div>
-      <span>****</span>
-      <span>200 reviews</span>
-      <button
+    <div style={SRDWrapper}> 
+      <StarTitle>* * * *</StarTitle>
+      <ReviewCountTitle>2125 reviews</ReviewCountTitle>
+      <Button
         className="details"
         onClick={props.openModal}
       >Details
-      </button>
+      </Button>
       <Modal 
         isOpen={props.detailsModalStatus}
         onRequestClose={props.closeDetailsModal}
         style={customStyles}
       />
-    </div>
-    <div>
-      <PriceCategoryEdit />
     </div>
   </div>
 );
