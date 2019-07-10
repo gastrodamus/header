@@ -13,7 +13,6 @@ class App extends React.Component {
     };
 
     this.openModal = this.openModal.bind(this);
-
     this.closeDetailsModal = this.closeDetailsModal.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.closeSaveModal = this.closeSaveModal.bind(this);
@@ -22,11 +21,11 @@ class App extends React.Component {
   openModal(e) {
     console.log(e.target.className);
     var classname = e.target.className;
-    const state = Object.assign({}, this.state);k
+    const state = Object.assign({}, this.state);
 
     if (classname === 'details') {
       state.detailsModalIsOpen = true;
-    } else if (classnkame = 'share') {
+    } else if (classname = 'share') {
       state.shareModalIsOpen = true;
     } else if (classname = 'save') {
       state.saveModalIsOpen = true;
@@ -56,7 +55,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="flex-container">
-        <div>
+        <div className="header-left">
           <HeaderLeft
             detailsModalStatus={this.state.detailsModalIsOpen}
             openModal={this.openModal}
