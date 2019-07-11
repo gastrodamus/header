@@ -15,21 +15,24 @@ const ShareTitle = styled.button`
   padding: 5px 8px;
 `;
 
-const Share = props => (
-  <div>
-    <ShareTitle
-      className="share"
-      onClick={props.openShareModal}
-    >Share
-    </ShareTitle>
-    <Modal
-      isOpen={props.shareModalStatus}
-      onRequestClose={props.closeShareModal}
-      style={props.shareStyle}
-    >
-      <h1>share modal</h1>
-    </Modal>
-  </div>
-);
+const Share = (props) => {
+  const shareStyle = Object.assign({}, props.shareStyle)
+  return (
+    <div>
+      <ShareTitle
+        className="share"
+        onClick={props.openShareModal}
+      >Share
+      </ShareTitle>
+      <Modal
+        isOpen={props.shareModalStatus}
+        onRequestClose={props.closeShareModal}
+        style={shareStyle}
+      >
+        <h1>share modal</h1>
+      </Modal>
+    </div>
+  );
+};
 
 export default Share;

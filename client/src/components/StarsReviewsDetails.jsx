@@ -30,25 +30,28 @@ const SRDWrapper = {
   marginRight: 170,
 };
 
-const StarsReviewsDetails = props => (
-  <div>
-    <div style={SRDWrapper}> 
-      <StarTitle>* * * *</StarTitle>
-      <ReviewCountTitle>2125 reviews</ReviewCountTitle>
-      <Button
-        className="details"
-        onClick={props.openDetailsModal}
-      >Details
-      </Button>
-      <Modal
-        isOpen={props.detailsModalStatus}
-        onRequestClose={props.closeDetailsModal}
-        style={props.detailStyle}
-      >
-        <h1>details modal</h1>
-      </Modal>
+const StarsReviewsDetails = (props) => {
+  const detailStyle = Object.assign({}, props.detailStyle)
+  return (
+    <div className="srd-wrapper">
+      <div style={SRDWrapper}> 
+        <StarTitle>* * * *</StarTitle>
+        <ReviewCountTitle>2125 reviews</ReviewCountTitle>
+        <Button
+          className="details"
+          onClick={props.openDetailsModal}
+        >Details
+        </Button>
+        <Modal
+          isOpen={props.detailsModalStatus}
+          onRequestClose={props.closeDetailsModal}
+          style={detailStyle}
+        >
+          <h1>details modal</h1>
+        </Modal>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default StarsReviewsDetails;
