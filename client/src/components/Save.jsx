@@ -16,21 +16,24 @@ const SaveTitle = styled.button`
 `;
 
 
-const Save = props => (
-  <div>
-    <SaveTitle
-      className="save"
-      onClick={props.openSaveModal}
-    >Save
-    </SaveTitle>
-    <Modal
-      isOpen={props.saveModalStatus}
-      onRequestClose={props.closeSaveModal}
-      style={props.saveStyle}
-    >
-      <h1>save modal</h1>
-    </Modal>
-  </div>
-);
+const Save = (props) => {
+  const saveStyle = Object.assign({}, props.saveStyle)
+  return (
+    <div>
+      <SaveTitle
+        className="save"
+        onClick={props.openSaveModal}
+      >Save
+      </SaveTitle>
+      <Modal
+        isOpen={props.saveModalStatus}
+        onRequestClose={props.closeSaveModal}
+        style={saveStyle}
+      >
+        <h1>save modal</h1>
+      </Modal>
+    </div>
+  );
+};
 
 export default Save;
