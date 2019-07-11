@@ -4,19 +4,6 @@ import styled from 'styled-components';
 
 Modal.setAppElement(document.getElementById('app'));
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: 630,
-    width: 500,
-  },
-};
-
 const StarTitle = styled.span`
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
@@ -50,14 +37,16 @@ const StarsReviewsDetails = props => (
       <ReviewCountTitle>2125 reviews</ReviewCountTitle>
       <Button
         className="details"
-        onClick={props.openModal}
+        onClick={props.openDetailsModal}
       >Details
       </Button>
-      <Modal 
+      <Modal
         isOpen={props.detailsModalStatus}
         onRequestClose={props.closeDetailsModal}
-        style={customStyles}
-      />
+        style={props.detailStyle}
+      >
+        <h1>details modal</h1>
+      </Modal>
     </div>
   </div>
 );

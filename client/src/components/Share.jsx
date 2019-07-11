@@ -1,33 +1,34 @@
 import React from 'react';
 import Modal from 'react-modal';
+import styled from 'styled-components';
 
 Modal.setAppElement(document.getElementById('app'))
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: 570,
-    width: 455,
-  },
-};
+const ShareTitle = styled.button`
+  height: 31px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  color: #666666;
+  background: #FFFFFF;
+  padding: 5px 8px;
+`;
 
 const Share = props => (
   <div>
-    <button 
+    <ShareTitle
       className="share"
-      onClick={props.openModal}
+      onClick={props.openShareModal}
     >Share
-    </button>
-    <Modal 
+    </ShareTitle>
+    <Modal
       isOpen={props.shareModalStatus}
       onRequestClose={props.closeShareModal}
-      style={customStyles}
-    />
+      style={props.shareStyle}
+    >
+      <h1>share modal</h1>
+    </Modal>
   </div>
 );
 

@@ -2,6 +2,45 @@ import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
 
+const shareStyle = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    height: 570,
+    width: 450,
+  },
+};
+
+const detailsStyle = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    height: 630,
+    width: 500,
+  },
+};
+
+const saveStyle = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    height: 640,
+    width: 500,
+  },
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -9,28 +48,37 @@ class App extends React.Component {
     this.state = {
       detailsModalIsOpen: false,
       shareModalIsOpen: false,
-      saveModalIsOpen: false
+      saveModalIsOpen: false,
+      modalStyle: '',
     };
 
-    this.openModal = this.openModal.bind(this);
+    this.openDetailsModal = this.openDetailsModal.bind(this);
+    this.openShareModal = this.openShareModal.bind(this);
+    this.openSaveModal = this.openSaveModal.bind(this);
+
     this.closeDetailsModal = this.closeDetailsModal.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.closeSaveModal = this.closeSaveModal.bind(this);
   }
 
-  openModal(e) {
-    console.log(e.target.className);
-    var classname = e.target.className;
+  openDetailsModal () {
     const state = Object.assign({}, this.state);
+    state.detailsModalIsOpen = true;
+    state.modalStyle = detailsStyle;
+    this.setState(state);
+  }
 
-    if (classname === 'details') {
-      state.detailsModalIsOpen = true;
-    } else if (classname = 'share') {
-      state.shareModalIsOpen = true;
-    } else if (classname = 'save') {
-      state.saveModalIsOpen = true;
-    }
+  openShareModal () {
+    const state = Object.assign({}, this.state);
+    state.shareModalIsOpen = true;
+    state.modalStyle = shareStyle;
+    this.setState(state);
+  }
 
+  openSaveModal () {
+    const state = Object.assign({}, this.state);
+    state.saveModalIsOpen = true;
+    state.modalStyle = saveStyle;
     this.setState(state);
   }
 
@@ -58,17 +106,21 @@ class App extends React.Component {
         <div className="header-left">
           <HeaderLeft
             detailsModalStatus={this.state.detailsModalIsOpen}
-            openModal={this.openModal}
+            openDetailsModal={this.openDetailsModal}
             closeDetailsModal={this.closeDetailsModal}
+            detailStyle={this.state.modalStyle}
           />
         </div>
         <div>
           <HeaderRight
             shareModalStatus={this.state.shareModalIsOpen}
-            openModal={this.openModal}
+            openShareModal={this.openShareModal}
             closeShareModal={this.closeShareModal}
+            shareStyle={this.state.modalStyle}
             saveModalStatus={this.state.saveModalIsOpen}
+            openSaveModal={this.openSaveModal}
             closeSaveModal={this.closeSaveModal}
+            saveStyle={this.state.modalStyle}
           />
         </div>
       </div>

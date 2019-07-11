@@ -1,33 +1,35 @@
 import React from 'react';
 import Modal from 'react-modal';
+import styled from 'styled-components';
 
 Modal.setAppElement(document.getElementById('app'))
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: 640,
-    width: 500,
-  },
-};
+const SaveTitle = styled.button`
+  height: 31px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  color: #666666;
+  background: #FFFFFF;
+  padding: 5px 8px;
+`;
+
 
 const Save = props => (
   <div>
-    <button 
+    <SaveTitle
       className="save"
-      onClick={props.openModal}
+      onClick={props.openSaveModal}
     >Save
-    </button>
-    <Modal 
+    </SaveTitle>
+    <Modal
       isOpen={props.saveModalStatus}
       onRequestClose={props.closeSaveModal}
-      style={customStyles}
-    />
+      style={props.saveStyle}
+    >
+      <h1>save modal</h1>
+    </Modal>
   </div>
 );
 

@@ -3,16 +3,21 @@ import RestaurantName from './RestaurantName.jsx';
 import StarsReviewsDetails from './StarsReviewsDetails.jsx';
 import PriceCategoryEdit from './PriceCategoryEdit.jsx';
 
+const headerLeftStyle = {
+  marginLeft: 110,
+};
+
 const HeaderLeft = props => (
-  <div>
+  <div style={headerLeftStyle}>
     <div className="restaurant-name">
       <RestaurantName />
     </div>
     <div className="stars-reviews-details">
       <StarsReviewsDetails
         detailsModalStatus={props.detailsModalStatus}
-        openModal={props.openModal}
+        openDetailsModal={props.openDetailsModal}
         closeDetailsModal={props.closeDetailsModal}
+        detailStyle={props.detailStyle}
       />
     </div>
     <div>
