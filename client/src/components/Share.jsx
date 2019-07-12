@@ -29,7 +29,49 @@ const Share = (props) => {
         onRequestClose={props.closeShareModal}
         style={shareStyle}
       >
-        <h1>share modal</h1>
+        <div>
+          <div>
+            <h2>Share Business</h2>
+          </div>
+          <div className="space-div-notsureifneeded"></div>
+          <div className="share-options">
+            <button>Share on Facebook</button>
+            <button>Share on Twitter</button>
+            <div>
+              <input></input>
+            </div>
+            <hr></hr>
+            <div>
+              <div>
+                <label>
+                  <span>Your Name</span>
+                </label>
+                <input></input>
+              </div>
+              <div>
+                <label>
+                  <span>Your Email</span>
+                </label>
+                <input></input>
+              </div>
+              <div>
+                <label>
+                  <span>To</span>
+                  <span>Email addresses</span>
+                </label>
+                <input></input>
+              </div>
+              <div>
+                <label>
+                  <span>Add a note</span>
+                  <span>Optional</span>
+                </label>
+                <input></input>
+              </div>
+            </div>
+            <button>Share</button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

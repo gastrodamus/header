@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import App from '../client/src/components/App.jsx';
 
 describe('App component rendering test with Enzyme', () => {
@@ -9,6 +9,12 @@ describe('App component rendering test with Enzyme', () => {
 });
 
 describe('App state', () => {
+  it('checks state before function runs', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.instance().state.detailsModalIsOpen).toEqual(false);
+    expect(wrapper.instance().state.shareModalIsOpen).toEqual(false);
+    expect(wrapper.instance().state.saveModalIsOpen).toEqual(false);
+  });
   it('updates details state when openDetails method is called', () => {
     const wrapper = shallow(<App />);
     wrapper.instance().openDetailsModal();
