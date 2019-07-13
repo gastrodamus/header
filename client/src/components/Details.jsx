@@ -66,6 +66,35 @@ const DetailsFooter = styled.small`
   font-size: 12px;
 `;
 
+const FiveStarBar = styled.rect`
+  fill: #FCD6D3;
+`;
+
+const FourStarBar = styled.rect`
+  fill: #FCD6D3;
+`;
+
+const ThreeStarBar = styled.rect`
+  fill: #FCD6D3;
+`;
+
+const TwoStarBar = styled.rect`
+  fill: #FFF7CC;
+`;
+
+const OneStarBar = styled.rect`
+  fill: #FFF7CC;
+`;
+
+const Link = styled.a`
+  color: #0073bb;
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+
 const detailsStyle = {
   content: {
     top: '50%',
@@ -94,6 +123,12 @@ const yearStyle = {
   padding: 10,
   height: 30,
 };
+
+const yearSelected = {
+  padding: 10,
+  height: 30,
+  fontWeight: 'bold',
+}
 
 const xAxis = {
   jan: '20',
@@ -176,6 +211,9 @@ class Details extends React.Component {
   handleClick(e) {
     const classname = e.target.className.split(' ')[0];
     const state = Object.assign({}, this.state);
+    for (var key in state) {
+      state[key] = false;
+    }
     if (classname === 'current-year') {
       state.currentYearClicked = !state.currentYearClicked;
       if (state.currentYearClicked) {
@@ -219,9 +257,9 @@ class Details extends React.Component {
               <div className="month-trend" style={monthlyTrendStyle}>
                 <MonthTrendTitle>Monthly Trend</MonthTrendTitle>
                 <div style={yearContainer}>
-                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={yearStyle}>2019</YearsTitle>
-                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={yearStyle}>2018</YearsTitle>
-                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={yearStyle}>2017</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={this.state.currentYearClicked ? yearSelected : yearStyle}>2019</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={this.state.lastYearClicked ? yearSelected : yearStyle}>2018</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={this.state.twoYearsAgoClicked ? yearSelected : yearStyle}>2017</YearsTitle>
                   <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.threeYearsAgoToggled.toString()} className="three-years-ago" style={yearStyle}>2016</YearsTitle>
                   <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={yearStyle}>2015</YearsTitle>
                 </div>
@@ -287,7 +325,7 @@ class Details extends React.Component {
                   </svg>
                 </div>
               </div>
-              <DetailsMonthlyChanges>Understand how a business' rating changes month-to-month. Learn More</DetailsMonthlyChanges>
+              <DetailsMonthlyChanges>Understand how a business' rating changes month-to-month. <Link>Learn More</Link> </DetailsMonthlyChanges>
             </div>
             <OverallRatingTitle>Overall Rating</OverallRatingTitle>
             <hr/>
@@ -296,28 +334,28 @@ class Details extends React.Component {
               <svg className="chart" width="470" height="170" role="img">
                 <title className="title">star bar chart</title>
                 <g className="bar-star-5">
-                  <rect width="370" height="30"></rect>
+                  <FiveStarBar width="370" height="30"></FiveStarBar>
                   <text x="375" y="15" dy=".35em">788</text>
                 </g>
                 <g className="bar-star-4">
-                  <rect width="300" height="30" y="33"></rect>
+                  <FourStarBar width="300" height="30" y="33"></FourStarBar>
                   <text x="305" y="48" dy=".35em">653</text>
                 </g>
                 <g className="bar-star-3">
-                  <rect width="250" height="30" y="65"></rect>
+                  <ThreeStarBar width="250" height="30" y="65"></ThreeStarBar>
                   <text x="255" y="80" dy=".35em">364</text>
                 </g>
                 <g className="bar-star-2">
-                  <rect width="200" height="30" y="97"></rect>
+                  <TwoStarBar width="200" height="30" y="97"></TwoStarBar>
                   <text x="205" y="112" dy=".35em">198</text>
                 </g>
                 <g className="bar-star-1">
-                  <rect width="100" height="30" y="130"></rect>
+                  <OneStarBar width="100" height="30" y="130"></OneStarBar>
                   <text x="105" y="145" dy=".35em">126</text>
                 </g>
               </svg>
             </div>
-            <DetailsFooter>We calculate the overall star rating using only reviews that our automated software currently recommends. Learn More</DetailsFooter>
+            <DetailsFooter>We calculate the overall star rating using only reviews that our automated software currently recommends. <Link>Learn More</Link></DetailsFooter>
           </div>
         </Modal>
       </div>
