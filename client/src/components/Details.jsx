@@ -95,9 +95,38 @@ const yearStyle = {
   height: 30,
 };
 
-const checkStyle = {
-  width: '5px'
-}
+const xAxis = {
+  jan: '20',
+  feb: '60',
+  mar: '100',
+  apr: '140',
+  may: '180',
+  jun: '220',
+  jul: '260',
+  aug: '300',
+  sep: '340',
+  oct: '380',
+  nov: '420',
+  dec: '460',
+};
+
+const yAxis = {
+  one: '130',
+  oneHalf: '115',
+  two: '100',
+  twoHalf: '85',
+  three: '70',
+  threeHalf: '55',
+  four: '40',
+  fourHalf: '25',
+  five: '10',
+};
+
+// let lineCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,70'];
+
+// let lastYearCoordinates = [(xAxis.jan.concat(',', yAxis.four)), (xAxis.feb.concat(',', yAxis.threeHalf)), (xAxis.mar.concat(',', yAxis.fourHalf)), (xAxis.apr.concat(',', yAxis.fourHalf)), (xAxis.may.concat(',', yAxis.threeHalf)), (xAxis.jun.concat(',', yAxis.fourHalf)), (xAxis.jul.concat(',', yAxis.fourHalf)), (xAxis.aug.concat(',', yAxis.four)), (xAxis.sep.concat(',', yAxis.four)), (xAxis.oct.concat(',', yAxis.fourHalf)), (xAxis.nov.concat(',', yAxis.four)), (xAxis.dec.concat(',', yAxis.threeHalf))];
+
+let lastYearCoordinates = [xAxis.jan.concat(',', yAxis.four), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.fourHalf), xAxis.apr.concat(',', yAxis.fourHalf), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.fourHalf), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.fourHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
 
 class Details extends React.Component {
   constructor(props) {
@@ -109,13 +138,23 @@ class Details extends React.Component {
       twoYearsAgoToggled: false,
       threeYearsAgoToggled: false,
       fourYearsAgoToggled: false,
+      currentYearClicked: true,
+      lastYearClicked: false,
+      twoYearsAgoClicked: false,
+      threeYearsAgoClicked: false,
+      fourYearsAgoClicked: false,
+      fiveYearsAgoClicked: false,
     };
+
+    this.lineCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
+
+
+    this.handleClick = this.handleClick.bind(this);
 
     this.toggleState = this.toggleState.bind(this);
   }
 
   toggleState(e) {
-    console.log('hovered')
     const classname = e.target.className;
     const state = Object.assign({}, this.state)
     if (classname === 'current-year') {
@@ -129,6 +168,18 @@ class Details extends React.Component {
     } else if (classname === 'four-years-ago') {
       state.fourYearsAgoToggled = !state.fourYearsAgoToggled;
     }
+    this.setState(state);
+  }
+
+  handleClick(e) {
+    // console.log(xAxis.jan.concat(',', yAxis.four))
+    // debugger;
+    const classname = e.target.className;
+    const state = Object.assign({}, this.state);
+    // if (classname === 'last-year')  {
+      // state.lastYearClicked = true;
+      this.lineCoordinates = lastYearCoordinates;
+    // }
     this.setState(state);
   }
 
@@ -155,7 +206,7 @@ class Details extends React.Component {
                 <MonthTrendTitle>Monthly Trend</MonthTrendTitle>
                 <div style={yearContainer}>
                   <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={yearStyle}>2019</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={yearStyle}>2018</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={yearStyle}>2018</YearsTitle>
                   <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={yearStyle}>2017</YearsTitle>
                   <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.threeYearsAgoToggled.toString()} className="three-years-ago" style={yearStyle}>2016</YearsTitle>
                   <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={yearStyle}>2015</YearsTitle>
@@ -194,15 +245,13 @@ class Details extends React.Component {
                       <GraphAxisTitle x="4" y="15">5</GraphAxisTitle>
                     </g>
                     <g className="data" data-setname="average-monthly-star">
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="20" cy="70" data-value="3" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="60" cy="55" data-value="3.5" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="100" cy="40" data-value="4" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="140" cy="40" data-value="4" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="180" cy="25" data-value="4.5" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="220" cy="55" data-value="4" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="260" cy="70" data-value="3" r="5"></circle>
+                      {
+                        this.lineCoordinates.map(value => (
+                          <circle stroke="#C53926" fill="white" strokeWidth="2" cx={value.split(',')[0]} cy={value.split(',')[1]} r="5"></circle>
+                        ))
+                      }
                     </g>
-                    <polyline points="20,70 60,55 100,40 140,40 180,25 220,55 260,70" fill="#F5D9D6" fillOpacity="0.8" stroke="#C53926" strokeWidth="2"/>
+                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0.5" stroke="#C53926" strokeWidth="2"/>
                     <polyline points="20,160 460,160" fill="none" stroke="grey"/>
                     <polyline points="20,130 460,130" fill="none" stroke="grey"/>
                     <polyline points="20,100 460,100" fill="none" stroke="grey"/>
@@ -263,3 +312,17 @@ class Details extends React.Component {
 };
 
 export default Details;
+
+// 253!!!!!
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.jan} cy="70" data-value="3" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.feb} cy="55" data-value="3.5" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.mar} cy="40" data-value="4" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.apr} cy="40" data-value="4" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.may} cy="25" data-value="4.5" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.jun} cy="55" data-value="4" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.jul} cy="40" data-value="3" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.aug} cy="500" data-value="3" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.sep} cy="500" data-value="3" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.oct} cy="500" data-value="3" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.nov} cy="500" data-value="3" r="5"></circle>
+// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.dec} cy="500" data-value="3" r="5"></circle>
