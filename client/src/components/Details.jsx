@@ -94,6 +94,13 @@ const Link = styled.a`
   }
 `;
 
+const StarBarFont = styled.text`
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans serif;
+  color: #666666;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
 
 const detailsStyle = {
   content: {
@@ -334,23 +341,28 @@ class Details extends React.Component {
               <svg className="chart" width="470" height="170" role="img">
                 <title className="title">star bar chart</title>
                 <g className="bar-star-5">
-                  <FiveStarBar width="370" height="30"></FiveStarBar>
-                  <text x="375" y="15" dy=".35em">788</text>
+                  <FiveStarBar width="440" height="30"></FiveStarBar>
+                  <StarBarFont x="10" y="15" dy=".35em">5 stars</StarBarFont>
+                  <text x="445" y="15" dy=".35em">788</text>
                 </g>
                 <g className="bar-star-4">
-                  <FourStarBar width="300" height="30" y="33"></FourStarBar>
+                  <FourStarBar width="60" height="30" y="33"></FourStarBar>
+                  <StarBarFont x="10" y="48" dy=".35em">4 stars</StarBarFont>
                   <text x="305" y="48" dy=".35em">653</text>
                 </g>
                 <g className="bar-star-3">
                   <ThreeStarBar width="250" height="30" y="65"></ThreeStarBar>
+                  <StarBarFont x="10" y="80" dy=".35em">3 stars</StarBarFont>
                   <text x="255" y="80" dy=".35em">364</text>
                 </g>
                 <g className="bar-star-2">
                   <TwoStarBar width="200" height="30" y="97"></TwoStarBar>
+                  <StarBarFont x="10" y="112" dy=".35em">2 stars</StarBarFont>
                   <text x="205" y="112" dy=".35em">198</text>
                 </g>
                 <g className="bar-star-1">
                   <OneStarBar width="100" height="30" y="130"></OneStarBar>
+                  <StarBarFont x="10" y="145" dy=".35em">1 star</StarBarFont>
                   <text x="105" y="145" dy=".35em">126</text>
                 </g>
               </svg>
@@ -364,17 +376,3 @@ class Details extends React.Component {
 };
 
 export default Details;
-
-// 253!!!!!
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.jan} cy="70" data-value="3" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.feb} cy="55" data-value="3.5" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.mar} cy="40" data-value="4" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.apr} cy="40" data-value="4" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.may} cy="25" data-value="4.5" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.jun} cy="55" data-value="4" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.jul} cy="40" data-value="3" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.aug} cy="500" data-value="3" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.sep} cy="500" data-value="3" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.oct} cy="500" data-value="3" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.nov} cy="500" data-value="3" r="5"></circle>
-// <circle stroke="#C53926" fill="white" strokeWidth="2" cx={xAxis.dec} cy="500" data-value="3" r="5"></circle>
