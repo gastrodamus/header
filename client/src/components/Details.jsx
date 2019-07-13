@@ -30,6 +30,10 @@ const YearsTitle = styled.span`
   font-family: 'Helvetica Neue', Helvetica, Arial, sans serif;
   color: #666666;
   font-size: 14px;
+  &:hover {
+    border-bottom: 3px solid #D43E29;
+    cursor: pointer;
+  }
 `;
 
 const GraphAxisTitle = styled.text`
@@ -111,6 +115,7 @@ class Details extends React.Component {
   }
 
   toggleState(e) {
+    console.log('hovered')
     const classname = e.target.className;
     const state = Object.assign({}, this.state)
     if (classname === 'current-year') {
@@ -156,6 +161,7 @@ class Details extends React.Component {
                   <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={yearStyle}>2015</YearsTitle>
                 </div>
               </div>
+              <hr/>
               <div>
                 <div>
                   <svg className="graph" height="195" width="490">
