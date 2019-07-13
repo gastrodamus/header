@@ -125,8 +125,10 @@ const yAxis = {
 // let lineCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,70'];
 
 // let lastYearCoordinates = [(xAxis.jan.concat(',', yAxis.four)), (xAxis.feb.concat(',', yAxis.threeHalf)), (xAxis.mar.concat(',', yAxis.fourHalf)), (xAxis.apr.concat(',', yAxis.fourHalf)), (xAxis.may.concat(',', yAxis.threeHalf)), (xAxis.jun.concat(',', yAxis.fourHalf)), (xAxis.jul.concat(',', yAxis.fourHalf)), (xAxis.aug.concat(',', yAxis.four)), (xAxis.sep.concat(',', yAxis.four)), (xAxis.oct.concat(',', yAxis.fourHalf)), (xAxis.nov.concat(',', yAxis.four)), (xAxis.dec.concat(',', yAxis.threeHalf))];
-
+let currentYearCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
 let lastYearCoordinates = [xAxis.jan.concat(',', yAxis.four), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.fourHalf), xAxis.apr.concat(',', yAxis.fourHalf), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.fourHalf), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.fourHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
+let twoYearsAgoCoordinates = [xAxis.jan.concat(',', yAxis.three), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.threeHalf), xAxis.apr.concat(',', yAxis.four), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.four), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.threeHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
+
 
 class Details extends React.Component {
   constructor(props) {
@@ -146,7 +148,7 @@ class Details extends React.Component {
       fiveYearsAgoClicked: false,
     };
 
-    this.lineCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
+    this.lineCoordinates = currentYearCoordinates;
 
 
     this.handleClick = this.handleClick.bind(this);
@@ -172,14 +174,26 @@ class Details extends React.Component {
   }
 
   handleClick(e) {
-    // console.log(xAxis.jan.concat(',', yAxis.four))
-    // debugger;
-    const classname = e.target.className;
+    const classname = e.target.className.split(' ')[0];
     const state = Object.assign({}, this.state);
-    // if (classname === 'last-year')  {
-      // state.lastYearClicked = true;
-      this.lineCoordinates = lastYearCoordinates;
-    // }
+    if (classname === 'current-year') {
+      state.currentYearClicked = !state.currentYearClicked;
+      if (state.currentYearClicked) {
+        this.lineCoordinates = currentYearCoordinates;
+      }
+    }
+    if (classname === 'last-year')  {
+      state.lastYearClicked = !state.lastYearClicked;
+      if (state.lastYearClicked) {
+        this.lineCoordinates = lastYearCoordinates;
+      }
+    }
+    if (classname === 'two-years-ago')  {
+      state.twoYearsAgoClicked = !state.twoYearsAgoClicked;
+      if (state.twoYearsAgoClicked) {
+        this.lineCoordinates = twoYearsAgoCoordinates;
+      }
+    }
     this.setState(state);
   }
 
@@ -205,11 +219,11 @@ class Details extends React.Component {
               <div className="month-trend" style={monthlyTrendStyle}>
                 <MonthTrendTitle>Monthly Trend</MonthTrendTitle>
                 <div style={yearContainer}>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={yearStyle}>2019</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={yearStyle}>2019</YearsTitle>
                   <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={yearStyle}>2018</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={yearStyle}>2017</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.threeYearsAgoToggled.toString()} className="three-years-ago" style={yearStyle}>2016</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={yearStyle}>2015</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={yearStyle}>2017</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.threeYearsAgoToggled.toString()} className="three-years-ago" style={yearStyle}>2016</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={yearStyle}>2015</YearsTitle>
                 </div>
               </div>
               <hr/>
@@ -246,30 +260,30 @@ class Details extends React.Component {
                     </g>
                     <g className="data" data-setname="average-monthly-star">
                       {
-                        this.lineCoordinates.map(value => (
-                          <circle stroke="#C53926" fill="white" strokeWidth="2" cx={value.split(',')[0]} cy={value.split(',')[1]} r="5"></circle>
+                        this.lineCoordinates.map((value, index) => (
+                          <circle stroke="#C53926" fill="white" strokeWidth="2" cx={value.split(',')[0]} cy={value.split(',')[1]} r="5" key={index}></circle>
                         ))
                       }
                     </g>
                     <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0.5" stroke="#C53926" strokeWidth="2"/>
-                    <polyline points="20,160 460,160" fill="none" stroke="grey"/>
-                    <polyline points="20,130 460,130" fill="none" stroke="grey"/>
-                    <polyline points="20,100 460,100" fill="none" stroke="grey"/>
-                    <polyline points="20,70 460,70" fill="none" stroke="grey"/>
-                    <polyline points="20,40 460,40" fill="none" stroke="grey"/>
-                    <polyline points="20,10 460,10" fill="none" stroke="grey"/>
-                    <polyline points="20,160 20,10" fill="none" stroke="grey"/>
-                    <polyline points="60,160 60,10" fill="none" stroke="grey"/>
-                    <polyline points="100,160 100,10" fill="none" stroke="grey"/>
-                    <polyline points="140,160 140,10" fill="none" stroke="grey"/>
-                    <polyline points="180,160 180,10" fill="none" stroke="grey"/>
-                    <polyline points="220,160 220,10" fill="none" stroke="grey"/>
-                    <polyline points="260,160 260,10" fill="none" stroke="grey"/>
-                    <polyline points="300,160 300,10" fill="none" stroke="grey"/>
-                    <polyline points="340,160 340,10" fill="none" stroke="grey"/>
-                    <polyline points="380,160 380,10" fill="none" stroke="grey"/>
-                    <polyline points="420,160 420,10" fill="none" stroke="grey"/>
-                    <polyline points="460,160 460,10" fill="none" stroke="grey"/>
+                    <polyline points="20,160 460,160" fill="none" stroke="#ddd"/>
+                    <polyline points="20,130 460,130" fill="none" stroke="#ddd"/>
+                    <polyline points="20,100 460,100" fill="none" stroke="#ddd"/>
+                    <polyline points="20,70 460,70" fill="none" stroke="#ddd"/>
+                    <polyline points="20,40 460,40" fill="none" stroke="#ddd"/>
+                    <polyline points="20,10 460,10" fill="none" stroke="#ddd"/>
+                    <polyline points="20,160 20,10" fill="none" stroke="#ddd"/>
+                    <polyline points="60,160 60,10" fill="none" stroke="#ddd"/>
+                    <polyline points="100,160 100,10" fill="none" stroke="#ddd"/>
+                    <polyline points="140,160 140,10" fill="none" stroke="#ddd"/>
+                    <polyline points="180,160 180,10" fill="none" stroke="#ddd"/>
+                    <polyline points="220,160 220,10" fill="none" stroke="#ddd"/>
+                    <polyline points="260,160 260,10" fill="none" stroke="#ddd"/>
+                    <polyline points="300,160 300,10" fill="none" stroke="#ddd"/>
+                    <polyline points="340,160 340,10" fill="none" stroke="#ddd"/>
+                    <polyline points="380,160 380,10" fill="none" stroke="#ddd"/>
+                    <polyline points="420,160 420,10" fill="none" stroke="#ddd"/>
+                    <polyline points="460,160 460,10" fill="none" stroke="#ddd"/>
                   </svg>
                 </div>
               </div>
