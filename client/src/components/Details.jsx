@@ -114,18 +114,16 @@ const detailsStyle = {
     width: 500,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
 
 const monthlyTrendStyle = {
   display: 'inline-block',
-  // justifyContent: 'flex-start',
 };
 
 const yearContainer = {
   display: 'inline-block',
-  // justifyContent: 'space-between',
   marginLeft: 120,
 };
 
@@ -139,7 +137,7 @@ const yearSelected = {
   height: 30,
   fontWeight: 'bold',
   color: 'black',
-}
+};
 
 const xAxis = {
   jan: '20',
@@ -183,10 +181,9 @@ const three = Math.trunc(reviewData.threeStar / reviewData.total * 100);
 const two = Math.trunc(reviewData.twoStar / reviewData.total * 100);
 const one = Math.trunc(reviewData.oneStar / reviewData.total * 100);
 
-// let lastYearCoordinates = [(xAxis.jan.concat(',', yAxis.four)), (xAxis.feb.concat(',', yAxis.threeHalf)), (xAxis.mar.concat(',', yAxis.fourHalf)), (xAxis.apr.concat(',', yAxis.fourHalf)), (xAxis.may.concat(',', yAxis.threeHalf)), (xAxis.jun.concat(',', yAxis.fourHalf)), (xAxis.jul.concat(',', yAxis.fourHalf)), (xAxis.aug.concat(',', yAxis.four)), (xAxis.sep.concat(',', yAxis.four)), (xAxis.oct.concat(',', yAxis.fourHalf)), (xAxis.nov.concat(',', yAxis.four)), (xAxis.dec.concat(',', yAxis.threeHalf))];
-let currentYearCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
-let lastYearCoordinates = [xAxis.jan.concat(',', yAxis.four), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.fourHalf), xAxis.apr.concat(',', yAxis.fourHalf), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.fourHalf), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.fourHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
-let twoYearsAgoCoordinates = [xAxis.jan.concat(',', yAxis.three), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.threeHalf), xAxis.apr.concat(',', yAxis.four), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.four), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.threeHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
+const currentYearCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
+const lastYearCoordinates = [xAxis.jan.concat(',', yAxis.four), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.fourHalf), xAxis.apr.concat(',', yAxis.fourHalf), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.fourHalf), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.fourHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
+const twoYearsAgoCoordinates = [xAxis.jan.concat(',', yAxis.three), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.threeHalf), xAxis.apr.concat(',', yAxis.four), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.four), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.threeHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
 
 
 class Details extends React.Component {
@@ -208,15 +205,9 @@ class Details extends React.Component {
     };
 
     this.lineCoordinates = currentYearCoordinates;
-
     this.barWidth = this.barWidth.bind(this);
-
     this.handleClick = this.handleClick.bind(this);
-
-
-
     this.toggleState = this.toggleState.bind(this);
-
   }
 
   toggleState(e) {
@@ -276,7 +267,6 @@ class Details extends React.Component {
   }
 
   barWidth(number) {
-    // debugger;
     var result = number
     if (result > 38) {
       result = 38;
@@ -286,7 +276,7 @@ class Details extends React.Component {
   }
 
   render () {
-    return(
+    return (
       <div>
         <Button
           className="details"
@@ -353,7 +343,7 @@ class Details extends React.Component {
                         ))
                       }
                     </g>
-                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0.5" stroke="#C53926" strokeWidth="2"/>
+                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0" stroke="#C53926" strokeWidth="2"/>
                     <polyline points="20,160 460,160" fill="none" stroke="#ddd"/>
                     <polyline points="20,130 460,130" fill="none" stroke="#ddd"/>
                     <polyline points="20,100 460,100" fill="none" stroke="#ddd"/>
@@ -414,8 +404,8 @@ class Details extends React.Component {
           </div>
         </Modal>
       </div>
-    )
-  };
-};
+    );
+  }
+}
 
 export default Details;
