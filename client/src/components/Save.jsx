@@ -15,6 +15,124 @@ const SaveTitle = styled.button`
   padding: 5px 8px;
 `;
 
+const SignUpMunch = styled.h2`
+  font-size: 22px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: #d32323;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
+`;
+
+const ConnectWithMunch = styled.p`
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+`;
+
+const LegalMunch = styled.p`
+  font-size: 12px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+
+const FBButton = styled.button`
+  text-align: center;
+  background: #3b5998;
+  color: #fff;
+  border: 4px solid #3b5998;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 3px;
+  width: 390px;
+  margin: 5px;
+`;
+
+const GoogleButton = styled.button`
+  text-align: center;
+  background: #FFF;
+  color: #666;
+  border: 1px solid #666;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 3px;
+  width: 390px;
+  padding: 5px;
+  margin 5px;
+`;
+
+const InputForm = styled.input`
+  background: #fff;
+  margin-bottom: 9px;
+  padding: 5px 9px;
+  font-size: 14px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 10px;
+`;
+
+const InputFullForm = styled.input`
+  background: #fff;
+  margin-bottom: 9px;
+  padding: 5px 9px;
+  font-size: 14px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  width: 330px;
+`;
+
+const BirthdayText = styled.div`
+  text-align: left;
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333333;
+  font-weight: bold;
+  margin-left: 75px;
+`;
+
+const BirthdayOptions = styled.select`
+  width: 120px;
+  height: 30px;
+`;
+
+const SignUpButton = styled.button`
+  background: #d32323;
+  color: #fff;
+  padding: 10px 13px;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+  width: 330px;
+  border-radius: 5px;
+`;
+
+const MemberLoginText = styled.small`
+  font-size: 12px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #999999;
+  text-align: center;
+  margin-left: 200px;
+`;
+
+const Link = styled.a`
+  color: #0073bb;
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const Save = (props) => {
   const saveStyle = Object.assign({}, props.saveStyle)
@@ -31,27 +149,29 @@ const Save = (props) => {
         style={saveStyle}
       >
         <div>
-          <h2>Sign Up for Munch</h2>
-          <p>Connect with great local businesses</p>
-          <p>By continuing, you agree to Munch's Terms Of Service and acknowledge Munch's Privacy Policy.</p>
-          <button>Sign Up with Facebook</button>
-          <button>Sign Up with Google</button>
-          <p>Don't worry, we never post without your permission.</p>
+          <SignUpMunch>Sign Up for Munch</SignUpMunch>
+          <ConnectWithMunch>Connect with great local businesses</ConnectWithMunch>
+          <LegalMunch>By continuing, you agree to Munch's Terms Of Service and acknowledge Munch's Privacy Policy.</LegalMunch>
+          <FBButton>Sign Up with Facebook</FBButton>
+          <GoogleButton>Sign Up with Google</GoogleButton>
+          <LegalMunch>Don't worry, we never post without your permission.</LegalMunch>
           <hr></hr>
         </div>
         <form>
           <div>
-            <input placeholder="First Name"></input>
-            <input placeholder="Last Name"></input>
-            <input placeholder="Email"></input>
-            <input placeholder="Password"></input>
-            <input placeholder="ZIP Code"></input>
+            <InputForm placeholder="First Name"></InputForm>
+            <InputForm placeholder="Last Name"></InputForm>
+            <InputFullForm placeholder="Email"></InputFullForm>
+            <InputFullForm placeholder="Password"></InputFullForm>
+            <InputFullForm placeholder="ZIP Code"></InputFullForm>
           </div>
           <div>
-            <label>Birthday</label>
-            <span>Optional</span>
-            <fieldset>
-              <select className="month">
+            <BirthdayText>
+              <label>Birthday</label>
+              <span> Optional</span>
+            </BirthdayText>
+            <div>
+              <BirthdayOptions className="month">
                 <option value>Month</option>
                 <option value="1">Jan</option>
                 <option value="2">Feb</option>
@@ -65,8 +185,8 @@ const Save = (props) => {
                 <option value="10">Oct</option>
                 <option value="11">Nov</option>
                 <option value="12">Dec</option>
-              </select>
-              <select className="day">
+              </BirthdayOptions>
+              <BirthdayOptions className="day">
                 <option value>Day</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -99,8 +219,8 @@ const Save = (props) => {
                 <option value="29">29</option>
                 <option value="30">30</option>
                 <option value="31">31</option>
-              </select>
-              <select className="year">
+              </BirthdayOptions>
+              <BirthdayOptions className="year">
                 <option value>Year</option>
                 <option value="2019">2019</option>
                 <option value="2018">2018</option>
@@ -221,14 +341,14 @@ const Save = (props) => {
                 <option value="1903">1903</option>
                 <option value="1902">1902</option>
                 <option value="1901">1901</option>
-              </select>
-            </fieldset>
+              </BirthdayOptions>
+            </div>
           </div>
-          <p>You also understand that Munch may send marketing emails about Munch's products, services, and local events. You can unsubscribe at any time.</p>
-          <button>Sign Up</button>
+          <LegalMunch>You also understand that Munch may send marketing emails about Munch's products, services, and local events. You can unsubscribe at any time.</LegalMunch>
+          <SignUpButton>Sign Up</SignUpButton>
         </form>
         <div>
-          <small>Already on Munch? Log in</small>
+          <MemberLoginText>Already on Munch? <Link>Log in</Link></MemberLoginText>
         </div>
       </Modal>
     </div>
