@@ -30,7 +30,7 @@ const StarsReviewsDetails = props => (
   <div className="srd-wrapper">
     <div style={SRDWrapper}>
       <StarTitle>* * * *</StarTitle>
-      <ReviewCountTitle>2125 reviews</ReviewCountTitle>
+      <ReviewCountTitle>2129 reviews</ReviewCountTitle>
       <Details
         detailsModalStatus={props.detailsModalStatus}
         closeDetailsModal={props.closeDetailsModal}

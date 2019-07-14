@@ -13,6 +13,9 @@ const shareStyle = {
     height: 570,
     width: 450,
   },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.7)",
+  },
 };
 
 const detailsStyle = {
@@ -26,6 +29,9 @@ const detailsStyle = {
     height: 630,
     width: 500,
   },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.7)",
+  },
 };
 
 const saveStyle = {
@@ -38,6 +44,9 @@ const saveStyle = {
     transform: 'translate(-50%, -50%)',
     height: 640,
     width: 500,
+  },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.7)",
   },
 };
 
