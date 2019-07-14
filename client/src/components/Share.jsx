@@ -15,6 +15,105 @@ const ShareTitle = styled.button`
   padding: 5px 8px;
 `;
 
+const ShareBusinessHeader = styled.h2`
+  color: #333;
+  font-size: 21px;
+  font-weight: bold;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  text-align: center;
+`;
+
+const FBButton = styled.button`
+  color: #fff;
+  background: #3b5998;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 5px;
+  width: 195px;
+  height: 40px;
+  margin: 5px;
+`;
+
+const TwitterButton = styled.button`
+  color: #fff;
+  background: #50abf1;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 5px;
+  width: 195px;
+  height: 40px;
+  margin: 5px;
+`;
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
+
+const ShareLink = styled.input`
+  width: 400px;
+  height: 20px;
+  margin-left: 22px;
+  margin-bottom: 20px;
+`;
+
+const ShareTitles = styled.span`
+  color: #333;  
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  margin-left: 22px;
+  margin-top: 5px;
+  margin-bottom: 8px;
+`;
+
+const ShareInputField = styled.input`
+  width: 400px;
+  height: 20px;
+  margin-left: 22px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+`;
+
+const OptionalInputField = styled.input`
+  width: 400px;
+  height: 55px;
+  margin-left: 22px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+`;
+
+const ShareTitleSmall = styled.span`
+  color: #999;  
+  font-size: 12px;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  margin-top: 5px;
+  margin-bottom: 8px;
+`;
+
+const ShareButton = styled.button`
+  color: #fff ;
+  background: #d32323;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 5px;
+  width: 210px;
+  height: 40px;
+  margin: 5px;
+  text-align: center;
+`;
+
+const ShareButtonWrapper = styled.div`
+  text-align: center;
+`;
+
+const NameWrapper = styled.div`
+  margin-top: 20px;
+`;
+
 const Share = (props) => {
   const shareStyle = Object.assign({}, props.shareStyle)
   return (
@@ -31,45 +130,49 @@ const Share = (props) => {
       >
         <div>
           <div>
-            <h2>Share Business</h2>
+            <ShareBusinessHeader>Share business</ShareBusinessHeader>
           </div>
           <div className="space-div-notsureifneeded"></div>
-          <div className="share-options">
-            <button>Share on Facebook</button>
-            <button>Share on Twitter</button>
+          <div>
+            <ButtonWrapper>
+              <FBButton>Share on Facebook</FBButton>
+              <TwitterButton>Share on Twitter</TwitterButton>
+            </ButtonWrapper>
             <div>
-              <input></input>
+              <ShareLink></ShareLink>
             </div>
             <hr></hr>
             <div>
+              <NameWrapper>
+                <label>
+                  <ShareTitles>Your Name</ShareTitles>
+                </label>
+                <ShareInputField></ShareInputField>
+              </NameWrapper>
               <div>
                 <label>
-                  <span>Your Name</span>
+                  <ShareTitles>Your Email</ShareTitles>
                 </label>
-                <input></input>
+                <ShareInputField></ShareInputField>
               </div>
               <div>
                 <label>
-                  <span>Your Email</span>
+                  <ShareTitles>To</ShareTitles>
+                  <ShareTitleSmall> Email addresses</ShareTitleSmall>
                 </label>
-                <input></input>
+                <ShareInputField></ShareInputField>
               </div>
               <div>
                 <label>
-                  <span>To</span>
-                  <span>Email addresses</span>
+                  <ShareTitles>Add a note</ShareTitles>
+                  <ShareTitleSmall> Optional</ShareTitleSmall>
                 </label>
-                <input></input>
-              </div>
-              <div>
-                <label>
-                  <span>Add a note</span>
-                  <span>Optional</span>
-                </label>
-                <input></input>
+                <OptionalInputField></OptionalInputField>
               </div>
             </div>
-            <button>Share</button>
+            <ShareButtonWrapper>
+              <ShareButton>Share</ShareButton>
+            </ShareButtonWrapper>
           </div>
         </div>
       </Modal>

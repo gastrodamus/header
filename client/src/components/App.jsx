@@ -71,21 +71,21 @@ class App extends React.Component {
     this.closeSaveModal = this.closeSaveModal.bind(this);
   }
 
-  openDetailsModal () {
+  openDetailsModal() {
     const state = Object.assign({}, this.state);
     state.detailsModalIsOpen = true;
     state.modalStyle = detailsStyle;
     this.setState(state);
   }
 
-  openShareModal () {
+  openShareModal() {
     const state = Object.assign({}, this.state);
     state.shareModalIsOpen = true;
     state.modalStyle = shareStyle;
     this.setState(state);
   }
 
-  openSaveModal () {
+  openSaveModal() {
     const state = Object.assign({}, this.state);
     state.saveModalIsOpen = true;
     state.modalStyle = saveStyle;
