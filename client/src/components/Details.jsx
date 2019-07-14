@@ -30,6 +30,10 @@ const YearsTitle = styled.span`
   font-family: 'Helvetica Neue', Helvetica, Arial, sans serif;
   color: #666666;
   font-size: 14px;
+  &:hover {
+    border-bottom: 3px solid #D43E29;
+    cursor: pointer;
+  }
 `;
 
 const GraphAxisTitle = styled.text`
@@ -62,6 +66,42 @@ const DetailsFooter = styled.small`
   font-size: 12px;
 `;
 
+const FiveStarBar = styled.rect`
+  fill: #FCD6D3;
+`;
+
+const FourStarBar = styled.rect`
+  fill: #FCD6D3;
+`;
+
+const ThreeStarBar = styled.rect`
+  fill: #FCD6D3;
+`;
+
+const TwoStarBar = styled.rect`
+  fill: #FFF7CC;
+`;
+
+const OneStarBar = styled.rect`
+  fill: #FFF7CC;
+`;
+
+const Link = styled.a`
+  color: #0073bb;
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const StarBarFont = styled.text`
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans serif;
+  color: #666666;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+
 const detailsStyle = {
   content: {
     top: '50%',
@@ -72,6 +112,9 @@ const detailsStyle = {
     transform: 'translate(-50%, -50%)',
     height: 630,
     width: 500,
+  },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.7)",
   },
 };
 
@@ -91,9 +134,60 @@ const yearStyle = {
   height: 30,
 };
 
-const checkStyle = {
-  width: '5px'
+const yearSelected = {
+  padding: 10,
+  height: 30,
+  fontWeight: 'bold',
+  color: 'black',
 }
+
+const xAxis = {
+  jan: '20',
+  feb: '60',
+  mar: '100',
+  apr: '140',
+  may: '180',
+  jun: '220',
+  jul: '260',
+  aug: '300',
+  sep: '340',
+  oct: '380',
+  nov: '420',
+  dec: '460',
+};
+
+const yAxis = {
+  one: '130',
+  oneHalf: '115',
+  two: '100',
+  twoHalf: '85',
+  three: '70',
+  threeHalf: '55',
+  four: '40',
+  fourHalf: '25',
+  five: '10',
+};
+
+const reviewData = {
+  total: 2129,
+  fiveStar: 788,
+  fourStar: 653,
+  threeStar: 364,
+  twoStar: 198,
+  oneStar: 126,
+};
+
+const five = Math.trunc(reviewData.fiveStar / reviewData.total * 100);
+const four = Math.trunc(reviewData.fourStar / reviewData.total * 100);
+const three = Math.trunc(reviewData.threeStar / reviewData.total * 100);
+const two = Math.trunc(reviewData.twoStar / reviewData.total * 100);
+const one = Math.trunc(reviewData.oneStar / reviewData.total * 100);
+
+// let lastYearCoordinates = [(xAxis.jan.concat(',', yAxis.four)), (xAxis.feb.concat(',', yAxis.threeHalf)), (xAxis.mar.concat(',', yAxis.fourHalf)), (xAxis.apr.concat(',', yAxis.fourHalf)), (xAxis.may.concat(',', yAxis.threeHalf)), (xAxis.jun.concat(',', yAxis.fourHalf)), (xAxis.jul.concat(',', yAxis.fourHalf)), (xAxis.aug.concat(',', yAxis.four)), (xAxis.sep.concat(',', yAxis.four)), (xAxis.oct.concat(',', yAxis.fourHalf)), (xAxis.nov.concat(',', yAxis.four)), (xAxis.dec.concat(',', yAxis.threeHalf))];
+let currentYearCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
+let lastYearCoordinates = [xAxis.jan.concat(',', yAxis.four), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.fourHalf), xAxis.apr.concat(',', yAxis.fourHalf), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.fourHalf), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.fourHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
+let twoYearsAgoCoordinates = [xAxis.jan.concat(',', yAxis.three), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.threeHalf), xAxis.apr.concat(',', yAxis.four), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.four), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.threeHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
+
 
 class Details extends React.Component {
   constructor(props) {
@@ -105,9 +199,24 @@ class Details extends React.Component {
       twoYearsAgoToggled: false,
       threeYearsAgoToggled: false,
       fourYearsAgoToggled: false,
+      currentYearClicked: true,
+      lastYearClicked: false,
+      twoYearsAgoClicked: false,
+      threeYearsAgoClicked: false,
+      fourYearsAgoClicked: false,
+      fiveYearsAgoClicked: false,
     };
 
+    this.lineCoordinates = currentYearCoordinates;
+
+    this.barWidth = this.barWidth.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
+
+
+
     this.toggleState = this.toggleState.bind(this);
+
   }
 
   toggleState(e) {
@@ -125,6 +234,55 @@ class Details extends React.Component {
       state.fourYearsAgoToggled = !state.fourYearsAgoToggled;
     }
     this.setState(state);
+  }
+
+  handleClick(e) {
+    const classname = e.target.className.split(' ')[0];
+    const state = Object.assign({}, this.state);
+    for (var key in state) {
+      state[key] = false;
+    }
+    if (classname === 'current-year') {
+      state.currentYearClicked = !state.currentYearClicked;
+      if (state.currentYearClicked) {
+        this.lineCoordinates = currentYearCoordinates;
+      }
+    }
+    if (classname === 'last-year')  {
+      state.lastYearClicked = !state.lastYearClicked;
+      if (state.lastYearClicked) {
+        this.lineCoordinates = lastYearCoordinates;
+      }
+    }
+    if (classname === 'two-years-ago')  {
+      state.twoYearsAgoClicked = !state.twoYearsAgoClicked;
+      if (state.twoYearsAgoClicked) {
+        this.lineCoordinates = twoYearsAgoCoordinates;
+      }
+    }
+    if (classname === 'three-years-ago')  {
+      state.threeYearsAgoClicked = !state.threeYearsAgoClicked;
+      if (state.threeYearsAgoClicked) {
+        this.lineCoordinates = lastYearCoordinates;
+      }
+    }
+    if (classname === 'four-years-ago')  {
+      state.fourYearsAgoClicked = !state.fourYearsAgoClicked;
+      if (state.fourYearsAgoClicked) {
+        this.lineCoordinates = lastYearCoordinates;
+      }
+    }
+    this.setState(state);
+  }
+
+  barWidth(number) {
+    // debugger;
+    var result = number
+    if (result > 38) {
+      result = 38;
+    }
+    result = (result * 10) + 60;
+    return result;
   }
 
   render () {
@@ -149,13 +307,14 @@ class Details extends React.Component {
               <div className="month-trend" style={monthlyTrendStyle}>
                 <MonthTrendTitle>Monthly Trend</MonthTrendTitle>
                 <div style={yearContainer}>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={yearStyle}>2019</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={yearStyle}>2018</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={yearStyle}>2017</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.threeYearsAgoToggled.toString()} className="three-years-ago" style={yearStyle}>2016</YearsTitle>
-                  <YearsTitle onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={yearStyle}>2015</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.currentYearToggled.toString()} className="current-year" style={this.state.currentYearClicked ? yearSelected : yearStyle}>2019</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.lastYearToggled.toString()} className="last-year" style={this.state.lastYearClicked ? yearSelected : yearStyle}>2018</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.twoYearsAgoToggled.toString()} className="two-years-ago" style={this.state.twoYearsAgoClicked ? yearSelected : yearStyle}>2017</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.threeYearsAgoToggled.toString()} className="three-years-ago" style={this.state.threeYearsAgoClicked ? yearSelected : yearStyle}>2016</YearsTitle>
+                  <YearsTitle onClick={this.handleClick} onMouseOver={this.toggleState} onMouseOut={this.toggleState} id={this.state.fourYearsAgoToggled.toString()} className="four-years-ago" style={this.state.fourYearsAgoClicked ? yearSelected : yearStyle}>2015</YearsTitle>
                 </div>
               </div>
+              <hr/>
               <div>
                 <div>
                   <svg className="graph" height="195" width="490">
@@ -188,37 +347,35 @@ class Details extends React.Component {
                       <GraphAxisTitle x="4" y="15">5</GraphAxisTitle>
                     </g>
                     <g className="data" data-setname="average-monthly-star">
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="20" cy="70" data-value="3" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="60" cy="55" data-value="3.5" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="100" cy="40" data-value="4" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="140" cy="40" data-value="4" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="180" cy="25" data-value="4.5" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="220" cy="55" data-value="4" r="5"></circle>
-                      <circle stroke="#C53926" fill="white" strokeWidth="2" cx="260" cy="70" data-value="3" r="5"></circle>
+                      {
+                        this.lineCoordinates.map((value, index) => (
+                          <circle stroke="#C53926" fill="white" strokeWidth="2" cx={value.split(',')[0]} cy={value.split(',')[1]} r="5" key={index}></circle>
+                        ))
+                      }
                     </g>
-                    <polyline points="20,70 60,55 100,40 140,40 180,25 220,55 260,70" fill="#F5D9D6" fillOpacity="0.8" stroke="#C53926" strokeWidth="2"/>
-                    <polyline points="20,160 460,160" fill="none" stroke="grey"/>
-                    <polyline points="20,130 460,130" fill="none" stroke="grey"/>
-                    <polyline points="20,100 460,100" fill="none" stroke="grey"/>
-                    <polyline points="20,70 460,70" fill="none" stroke="grey"/>
-                    <polyline points="20,40 460,40" fill="none" stroke="grey"/>
-                    <polyline points="20,10 460,10" fill="none" stroke="grey"/>
-                    <polyline points="20,160 20,10" fill="none" stroke="grey"/>
-                    <polyline points="60,160 60,10" fill="none" stroke="grey"/>
-                    <polyline points="100,160 100,10" fill="none" stroke="grey"/>
-                    <polyline points="140,160 140,10" fill="none" stroke="grey"/>
-                    <polyline points="180,160 180,10" fill="none" stroke="grey"/>
-                    <polyline points="220,160 220,10" fill="none" stroke="grey"/>
-                    <polyline points="260,160 260,10" fill="none" stroke="grey"/>
-                    <polyline points="300,160 300,10" fill="none" stroke="grey"/>
-                    <polyline points="340,160 340,10" fill="none" stroke="grey"/>
-                    <polyline points="380,160 380,10" fill="none" stroke="grey"/>
-                    <polyline points="420,160 420,10" fill="none" stroke="grey"/>
-                    <polyline points="460,160 460,10" fill="none" stroke="grey"/>
+                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0.5" stroke="#C53926" strokeWidth="2"/>
+                    <polyline points="20,160 460,160" fill="none" stroke="#ddd"/>
+                    <polyline points="20,130 460,130" fill="none" stroke="#ddd"/>
+                    <polyline points="20,100 460,100" fill="none" stroke="#ddd"/>
+                    <polyline points="20,70 460,70" fill="none" stroke="#ddd"/>
+                    <polyline points="20,40 460,40" fill="none" stroke="#ddd"/>
+                    <polyline points="20,10 460,10" fill="none" stroke="#ddd"/>
+                    <polyline points="20,160 20,10" fill="none" stroke="#ddd"/>
+                    <polyline points="60,160 60,10" fill="none" stroke="#ddd"/>
+                    <polyline points="100,160 100,10" fill="none" stroke="#ddd"/>
+                    <polyline points="140,160 140,10" fill="none" stroke="#ddd"/>
+                    <polyline points="180,160 180,10" fill="none" stroke="#ddd"/>
+                    <polyline points="220,160 220,10" fill="none" stroke="#ddd"/>
+                    <polyline points="260,160 260,10" fill="none" stroke="#ddd"/>
+                    <polyline points="300,160 300,10" fill="none" stroke="#ddd"/>
+                    <polyline points="340,160 340,10" fill="none" stroke="#ddd"/>
+                    <polyline points="380,160 380,10" fill="none" stroke="#ddd"/>
+                    <polyline points="420,160 420,10" fill="none" stroke="#ddd"/>
+                    <polyline points="460,160 460,10" fill="none" stroke="#ddd"/>
                   </svg>
                 </div>
               </div>
-              <DetailsMonthlyChanges>Understand how a business' rating changes month-to-month. Learn More</DetailsMonthlyChanges>
+              <DetailsMonthlyChanges>Understand how a business' rating changes month-to-month. <Link>Learn More</Link> </DetailsMonthlyChanges>
             </div>
             <OverallRatingTitle>Overall Rating</OverallRatingTitle>
             <hr/>
@@ -227,28 +384,33 @@ class Details extends React.Component {
               <svg className="chart" width="470" height="170" role="img">
                 <title className="title">star bar chart</title>
                 <g className="bar-star-5">
-                  <rect width="370" height="30"></rect>
-                  <text x="375" y="15" dy=".35em">788</text>
+                  <FiveStarBar width={this.barWidth(five)} height="30"></FiveStarBar>
+                  <StarBarFont x="10" y="15" dy=".35em">5 stars</StarBarFont>
+                  <text x={this.barWidth(five) + 5} y="15" dy=".35em">788</text>
                 </g>
                 <g className="bar-star-4">
-                  <rect width="300" height="30" y="33"></rect>
-                  <text x="305" y="48" dy=".35em">653</text>
+                  <FourStarBar width={this.barWidth(four)} height="30" y="33"></FourStarBar>
+                  <StarBarFont x="10" y="48" dy=".35em">4 stars</StarBarFont>
+                  <text x={this.barWidth(four) + 5} y="48" dy=".35em">653</text>
                 </g>
                 <g className="bar-star-3">
-                  <rect width="250" height="30" y="65"></rect>
-                  <text x="255" y="80" dy=".35em">364</text>
+                  <ThreeStarBar width={this.barWidth(three)} height="30" y="65"></ThreeStarBar>
+                  <StarBarFont x="10" y="80" dy=".35em">3 stars</StarBarFont>
+                  <text x={this.barWidth(three) + 5} y="80" dy=".35em">364</text>
                 </g>
                 <g className="bar-star-2">
-                  <rect width="200" height="30" y="97"></rect>
-                  <text x="205" y="112" dy=".35em">198</text>
+                  <TwoStarBar width={this.barWidth(two)} height="30" y="97"></TwoStarBar>
+                  <StarBarFont x="10" y="112" dy=".35em">2 stars</StarBarFont>
+                  <text x={this.barWidth(two) + 5} y="112" dy=".35em">198</text>
                 </g>
                 <g className="bar-star-1">
-                  <rect width="100" height="30" y="130"></rect>
-                  <text x="105" y="145" dy=".35em">126</text>
+                  <OneStarBar width={this.barWidth(one)} height="30" y="130"></OneStarBar>
+                  <StarBarFont x="10" y="145" dy=".35em">1 star</StarBarFont>
+                  <text x={this.barWidth(one) + 5} y="145" dy=".35em">126</text>
                 </g>
               </svg>
             </div>
-            <DetailsFooter>We calculate the overall star rating using only reviews that our automated software currently recommends. Learn More</DetailsFooter>
+            <DetailsFooter>We calculate the overall star rating using only reviews that our automated software currently recommends. <Link>Learn More</Link></DetailsFooter>
           </div>
         </Modal>
       </div>
