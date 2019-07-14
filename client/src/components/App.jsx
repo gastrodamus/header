@@ -36,6 +36,7 @@ const detailsStyle = {
 
 const saveStyle = {
   content: {
+    textAlign: 'center',
     top: '50%',
     left: '50%',
     right: 'auto',
