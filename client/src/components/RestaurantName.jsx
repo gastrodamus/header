@@ -21,12 +21,18 @@ const ClaimedTitle = styled.div`
   vertical-align: baseline;
 `;
 
+const CheckButton = styled.div`
+  color: #0073bb;
+  margin-right: 5px;
+`;
+
 const RestaurantName = () => (
   <div className="restaurant-name">
     <RestaurantTitle>
       5A5 Steak Lounge
     </RestaurantTitle>
     <ClaimedTitle>
+      <CheckButton className="fas fa-check-circle"></CheckButton>
       Claimed
     </ClaimedTitle>
   </div>

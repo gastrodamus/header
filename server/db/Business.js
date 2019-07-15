@@ -11,6 +11,7 @@ const businessSchema = new mongoose.Schema({
   categories: String,
   reviews: [{
     star: Number,
+    date: { type: Date, default: Date.now },
   }],
 });
 

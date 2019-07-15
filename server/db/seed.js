@@ -11,16 +11,25 @@ const makeRestaurantName = () => {
 };
 
 const createData = () => {
+
+  const month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  const year = ['2015', '2016', '2017', '2018', '2019'];
   for (let i = 0; i < 100; i += 1) { // Generates 100 random entries
-    const randomCount = faker.random.number({ min: 10, max: 30 });
     const reviews = [];
-    for (let j = 0; j < randomCount; j += 1) { //  Generates random number of reviews
-      reviews.push({ star: faker.random.number({ min: 1, max: 5 }) });
+    for (var j = 0; j < year.length; j += 1) { // Generates a random review from each month for the past 5 years
+      for (var k = 0; k < month.length; k += 1) {
+        reviews.push({ star: faker.random.number({ min: 1, max: 5 }), date: month[k].concat('-', faker.random.number({min: 1, max: 28}).toString().concat('-' , year[j])) });
+      }
     }
+    let average = 0;
+    reviews.forEach((value) => {
+      average += value.star;
+    });
+    average = Math.round((average / reviews.length) * 2) / 2;
     Business.create({
       name: makeRestaurantName(),
-      avg_stars: faker.random.number(5),
-      price: faker.random.number({ min: 1, max: 3 }),
+      avg_stars: average,
+      price: faker.random.number({ min: 1, max: 4 }),
       categories: faker.random.words(),
       reviews,
     }).then(() => {

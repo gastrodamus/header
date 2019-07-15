@@ -343,7 +343,7 @@ class Details extends React.Component {
                         ))
                       }
                     </g>
-                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0" stroke="#C53926" strokeWidth="2"/>
+                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0.8" stroke="#C53926" strokeWidth="2"/>
                     <polyline points="20,160 460,160" fill="none" stroke="#ddd"/>
                     <polyline points="20,130 460,130" fill="none" stroke="#ddd"/>
                     <polyline points="20,100 460,100" fill="none" stroke="#ddd"/>
