@@ -95,12 +95,11 @@ const Link = styled.a`
 `;
 
 const StarBarFont = styled.text`
+  font-color: #666;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans serif;
-  color: #666666;
   font-size: 12px;
   font-weight: bold;
 `;
-
 
 const detailsStyle = {
   content: {
@@ -181,11 +180,6 @@ const three = Math.trunc(reviewData.threeStar / reviewData.total * 100);
 const two = Math.trunc(reviewData.twoStar / reviewData.total * 100);
 const one = Math.trunc(reviewData.oneStar / reviewData.total * 100);
 
-const currentYearCoordinates = ['20,70', '60,55', '100,40', '140,40', '180,25', '220,55', '260,40'];
-const lastYearCoordinates = [xAxis.jan.concat(',', yAxis.four), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.fourHalf), xAxis.apr.concat(',', yAxis.fourHalf), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.fourHalf), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.fourHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
-const twoYearsAgoCoordinates = [xAxis.jan.concat(',', yAxis.three), xAxis.feb.concat(',', yAxis.threeHalf), xAxis.mar.concat(',', yAxis.threeHalf), xAxis.apr.concat(',', yAxis.four), xAxis.may.concat(',', yAxis.threeHalf), xAxis.jun.concat(',', yAxis.fourHalf), xAxis.jul.concat(',', yAxis.four), xAxis.aug.concat(',', yAxis.four), xAxis.sep.concat(',', yAxis.four), xAxis.oct.concat(',', yAxis.threeHalf), xAxis.nov.concat(',', yAxis.four), xAxis.dec.concat(',', yAxis.threeHalf)];
-
-
 class Details extends React.Component {
   constructor(props) {
     super(props);
@@ -204,23 +198,33 @@ class Details extends React.Component {
       fiveYearsAgoClicked: false,
     };
 
-
     this.currentYear = [];
     this.lastYear = [];
     this.twoYearsAgo = [];
     this.threeYearsAgo = [];
     this.fourYearsAgo = [];
 
+    this.fiveStar = 0;
+    this.fourStar = 0;
+    this.threeStar = 0;
+    this.twoStar = 0;
+    this.oneStar = 0;
+
     this.lineCoordinates = this.currentYear;
     this.barWidth = this.barWidth.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.toggleState = this.toggleState.bind(this);
     this.setLineGraph = this.setLineGraph.bind(this);
+    this.countStars = this.countStars.bind(this);
   }
 
   componentWillReceiveProps() {
     this.setLineGraph();
+    this.countStars();
+    // this.barWidth
   }
+
+
 
   setLineGraph() {
     const stars = ['one', 'two', 'three', 'four', 'five'];
@@ -249,7 +253,22 @@ class Details extends React.Component {
       }
     }
   }
-
+  
+  countStars() {
+    this.props.reviews.forEach(val => {
+      if (val.star === 1) {
+        this.oneStar++;
+      } else if (val.star === 2) {
+        this.twoStar++;
+      } else if (val.star === 3) {
+        this.threeStar++;
+      } else if (val.star === 4) {
+        this.fourStar++;
+      } else if (val.star === 5) {
+        this.fiveStar++;
+      }
+    })
+  }
 
   toggleState(e) {
     const classname = e.target.className;
@@ -410,34 +429,34 @@ class Details extends React.Component {
             </div>
             <OverallRatingTitle>Overall Rating</OverallRatingTitle>
             <hr/>
-            <DetailsReviewCount>Munching since 2009 with 2129 reviews</DetailsReviewCount>
+            <DetailsReviewCount>Munching since 2015 with {this.props.reviewCount} reviews</DetailsReviewCount>
             <div>
               <svg className="chart" width="470" height="170" role="img">
                 <title className="title">star bar chart</title>
                 <g className="bar-star-5">
-                  <FiveStarBar width={this.barWidth(five)} height="30"></FiveStarBar>
+                  <FiveStarBar width={this.barWidth(this.fiveStar)} height="30"></FiveStarBar>
                   <StarBarFont x="10" y="15" dy=".35em">5 stars</StarBarFont>
-                  <text x={this.barWidth(five) + 5} y="15" dy=".35em">788</text>
+                  <StarBarFont x={this.barWidth(this.fiveStar) + 5} y="15" dy=".35em">788</StarBarFont>
                 </g>
                 <g className="bar-star-4">
-                  <FourStarBar width={this.barWidth(four)} height="30" y="33"></FourStarBar>
+                  <FourStarBar width={this.barWidth(this.fourStar)} height="30" y="33"></FourStarBar>
                   <StarBarFont x="10" y="48" dy=".35em">4 stars</StarBarFont>
-                  <text x={this.barWidth(four) + 5} y="48" dy=".35em">653</text>
+                  <StarBarFont x={this.barWidth(this.fourStar) + 5} y="48" dy=".35em">653</StarBarFont>
                 </g>
                 <g className="bar-star-3">
-                  <ThreeStarBar width={this.barWidth(three)} height="30" y="65"></ThreeStarBar>
+                  <ThreeStarBar width={this.barWidth(this.threeStar)} height="30" y="65"></ThreeStarBar>
                   <StarBarFont x="10" y="80" dy=".35em">3 stars</StarBarFont>
-                  <text x={this.barWidth(three) + 5} y="80" dy=".35em">364</text>
+                  <StarBarFont x={this.barWidth(this.threeStar) + 5} y="80" dy=".35em">364</StarBarFont>
                 </g>
                 <g className="bar-star-2">
-                  <TwoStarBar width={this.barWidth(two)} height="30" y="97"></TwoStarBar>
+                  <TwoStarBar width={this.barWidth(this.twoStar)} height="30" y="97"></TwoStarBar>
                   <StarBarFont x="10" y="112" dy=".35em">2 stars</StarBarFont>
-                  <text x={this.barWidth(two) + 5} y="112" dy=".35em">198</text>
+                  <StarBarFont x={this.barWidth(this.twoStar) + 5} y="112" dy=".35em">198</StarBarFont>
                 </g>
                 <g className="bar-star-1">
-                  <OneStarBar width={this.barWidth(one)} height="30" y="130"></OneStarBar>
+                  <OneStarBar width={this.barWidth(this.oneStar)} height="30" y="130"></OneStarBar>
                   <StarBarFont x="10" y="145" dy=".35em">1 star</StarBarFont>
-                  <text x={this.barWidth(one) + 5} y="145" dy=".35em">126</text>
+                  <StarBarFont x={this.barWidth(this.oneStar) + 5} y="145" dy=".35em">126</StarBarFont>
                 </g>
               </svg>
             </div>

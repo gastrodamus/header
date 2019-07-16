@@ -35,6 +35,7 @@ const StarsReviewsDetails = props => (
         openDetailsModal={props.openDetailsModal}
         detailStyle={props.detailStyle}
         reviews={props.reviews}
+        reviewCount={props.reviewCount}
       />
     </div>
   </div>
