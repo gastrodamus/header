@@ -82,7 +82,7 @@ class App extends React.Component {
     console.log('axios request to server')
     axios.get('/munch/header').then(res => {
       const state = Object.assign({}, this.state);
-      state.currentView = res.data[0];
+      state.currentView = res.data[2];
       this.setState(state);
     })
     .catch(err => {

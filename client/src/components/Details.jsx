@@ -165,21 +165,6 @@ const yAxis = {
   five: '10',
 };
 
-const reviewData = {
-  total: 2129,
-  fiveStar: 788,
-  fourStar: 653,
-  threeStar: 364,
-  twoStar: 198,
-  oneStar: 126,
-};
-
-const five = Math.trunc(reviewData.fiveStar / reviewData.total * 100);
-const four = Math.trunc(reviewData.fourStar / reviewData.total * 100);
-const three = Math.trunc(reviewData.threeStar / reviewData.total * 100);
-const two = Math.trunc(reviewData.twoStar / reviewData.total * 100);
-const one = Math.trunc(reviewData.oneStar / reviewData.total * 100);
-
 class Details extends React.Component {
   constructor(props) {
     super(props);
@@ -209,6 +194,8 @@ class Details extends React.Component {
     this.threeStar = 0;
     this.twoStar = 0;
     this.oneStar = 0;
+
+    this.lastXCoordinate = '';
 
     this.lineCoordinates = this.currentYear;
     this.barWidth = this.barWidth.bind(this);
@@ -297,6 +284,9 @@ class Details extends React.Component {
       state.currentYearClicked = !state.currentYearClicked;
       if (state.currentYearClicked) {
         this.lineCoordinates = this.currentYear;
+        // var temp = this.lineCoordinates[this.lineCoordinates.length-1];
+        // this.lastXCoordinate = temp.split(',')[0];
+        // console.log(temp)
       }
     }
     if (classname === 'last-year')  {
@@ -422,6 +412,7 @@ class Details extends React.Component {
                     <polyline points="380,160 380,10" fill="none" stroke="#ddd"/>
                     <polyline points="420,160 420,10" fill="none" stroke="#ddd"/>
                     <polyline points="460,160 460,10" fill="none" stroke="#ddd"/>
+                    <polygon points={`20,160 `.concat(',', this.lineCoordinates.join()).concat(`,`, ` 460,160`)} fill="#f5d9d6" fillOpacity="0.6"></polygon>
                   </svg>
                 </div>
               </div>
@@ -436,27 +427,27 @@ class Details extends React.Component {
                 <g className="bar-star-5">
                   <FiveStarBar width={this.barWidth(this.fiveStar)} height="30"></FiveStarBar>
                   <StarBarFont x="10" y="15" dy=".35em">5 stars</StarBarFont>
-                  <StarBarFont x={this.barWidth(this.fiveStar) + 5} y="15" dy=".35em">788</StarBarFont>
+                  <StarBarFont x={this.barWidth(this.fiveStar) + 5} y="15" dy=".35em">{this.fiveStar}</StarBarFont>
                 </g>
                 <g className="bar-star-4">
                   <FourStarBar width={this.barWidth(this.fourStar)} height="30" y="33"></FourStarBar>
                   <StarBarFont x="10" y="48" dy=".35em">4 stars</StarBarFont>
-                  <StarBarFont x={this.barWidth(this.fourStar) + 5} y="48" dy=".35em">653</StarBarFont>
+                  <StarBarFont x={this.barWidth(this.fourStar) + 5} y="48" dy=".35em">{this.fourStar}</StarBarFont>
                 </g>
                 <g className="bar-star-3">
                   <ThreeStarBar width={this.barWidth(this.threeStar)} height="30" y="65"></ThreeStarBar>
                   <StarBarFont x="10" y="80" dy=".35em">3 stars</StarBarFont>
-                  <StarBarFont x={this.barWidth(this.threeStar) + 5} y="80" dy=".35em">364</StarBarFont>
+                  <StarBarFont x={this.barWidth(this.threeStar) + 5} y="80" dy=".35em">{this.threeStar}</StarBarFont>
                 </g>
                 <g className="bar-star-2">
                   <TwoStarBar width={this.barWidth(this.twoStar)} height="30" y="97"></TwoStarBar>
                   <StarBarFont x="10" y="112" dy=".35em">2 stars</StarBarFont>
-                  <StarBarFont x={this.barWidth(this.twoStar) + 5} y="112" dy=".35em">198</StarBarFont>
+                  <StarBarFont x={this.barWidth(this.twoStar) + 5} y="112" dy=".35em">{this.twoStar}</StarBarFont>
                 </g>
                 <g className="bar-star-1">
                   <OneStarBar width={this.barWidth(this.oneStar)} height="30" y="130"></OneStarBar>
                   <StarBarFont x="10" y="145" dy=".35em">1 star</StarBarFont>
-                  <StarBarFont x={this.barWidth(this.oneStar) + 5} y="145" dy=".35em">126</StarBarFont>
+                  <StarBarFont x={this.barWidth(this.oneStar) + 5} y="145" dy=".35em">{this.oneStar}</StarBarFont>
                 </g>
               </svg>
             </div>
