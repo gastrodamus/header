@@ -3,8 +3,6 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import Details from './Details.jsx'
 
-// Modal.setAppElement(document.getElementById('app'));
-
 const StarTitle = styled.span`
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
@@ -29,13 +27,14 @@ const SRDWrapper = {
 const StarsReviewsDetails = props => (
   <div className="srd-wrapper">
     <div style={SRDWrapper}>
-      <StarTitle>* * * *</StarTitle>
-      <ReviewCountTitle>2129 reviews</ReviewCountTitle>
+      <StarTitle>{props.averageStars} stars</StarTitle>
+      <ReviewCountTitle>{props.reviewCount} reviews</ReviewCountTitle>
       <Details
         detailsModalStatus={props.detailsModalStatus}
         closeDetailsModal={props.closeDetailsModal}
         openDetailsModal={props.openDetailsModal}
         detailStyle={props.detailStyle}
+        reviews={props.reviews}
       />
     </div>
   </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
+import axios from 'axios';
 
 const shareStyle = {
   content: {
@@ -60,6 +61,12 @@ class App extends React.Component {
       shareModalIsOpen: false,
       saveModalIsOpen: false,
       modalStyle: '',
+      currentView: {
+        avg_stars: 0,
+        categories: '',
+        name: '',
+        reviews: [],
+      },
     };
 
     this.openDetailsModal = this.openDetailsModal.bind(this);
@@ -69,6 +76,19 @@ class App extends React.Component {
     this.closeDetailsModal = this.closeDetailsModal.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.closeSaveModal = this.closeSaveModal.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('axios request to server')
+    axios.get('/munch/header').then(res => {
+      const state = Object.assign({}, this.state);
+      state.currentView = res.data[0];
+      this.setState(state);
+    })
+    .catch(err => {
+      console.log(err)
+    });
+
   }
 
   openDetailsModal() {
@@ -119,6 +139,11 @@ class App extends React.Component {
             openDetailsModal={this.openDetailsModal}
             closeDetailsModal={this.closeDetailsModal}
             detailStyle={this.state.modalStyle}
+            restaurantName={this.state.currentView.name}
+            categoryNames={this.state.currentView.categories}
+            reviewCount={this.state.currentView.reviews.length}
+            averageStars={this.state.currentView.avg_stars}
+            reviews={this.state.currentView.reviews}
           />
         </div>
         <div>

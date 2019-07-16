@@ -17,7 +17,7 @@ app.get('/munch/header', (req, res) => {
     } else {
       res.send(docs)
     }
-  })
-})
+  });
+});
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

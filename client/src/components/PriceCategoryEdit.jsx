@@ -26,14 +26,14 @@ const PCEWrapper = {
   marginRight: 190,
 };
 
-const PriceCategoryEdit = () => {
+const PriceCategoryEdit = (props) => {
   return (
     <div style={PCEWrapper} className="price-category-edit">
       <div>
         <PriceTitle>$$$</PriceTitle>
       </div>
       <div>
-        <CategoryTitle>Steakhouses</CategoryTitle>
+        <CategoryTitle>{props.categoryNames}</CategoryTitle>
       </div>
       <div>
         <Button>Edit</Button>

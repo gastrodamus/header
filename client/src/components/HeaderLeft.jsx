@@ -10,7 +10,9 @@ const headerLeftStyle = {
 const HeaderLeft = props => (
   <div style={headerLeftStyle}>
     <div className="restaurant-name">
-      <RestaurantName />
+      <RestaurantName 
+        restaurantName={props.restaurantName}
+      />
     </div>
     <div className="stars-reviews-details">
       <StarsReviewsDetails
@@ -18,10 +20,15 @@ const HeaderLeft = props => (
         openDetailsModal={props.openDetailsModal}
         closeDetailsModal={props.closeDetailsModal}
         detailStyle={props.detailStyle}
+        reviewCount={props.reviewCount}
+        averageStars={props.averageStars}
+        reviews={props.reviews}
       />
     </div>
     <div>
-      <PriceCategoryEdit />
+      <PriceCategoryEdit 
+        categoryNames={props.categoryNames}
+      />
     </div>
   </div>
 );

@@ -26,10 +26,10 @@ const CheckButton = styled.div`
   margin-right: 5px;
 `;
 
-const RestaurantName = () => (
+const RestaurantName = (props) => (
   <div className="restaurant-name">
     <RestaurantTitle>
-      5A5 Steak Lounge
+      {props.restaurantName}
     </RestaurantTitle>
     <ClaimedTitle>
       <CheckButton className="fas fa-check-circle"></CheckButton>

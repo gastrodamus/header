@@ -204,11 +204,52 @@ class Details extends React.Component {
       fiveYearsAgoClicked: false,
     };
 
-    this.lineCoordinates = currentYearCoordinates;
+
+    this.currentYear = [];
+    this.lastYear = [];
+    this.twoYearsAgo = [];
+    this.threeYearsAgo = [];
+    this.fourYearsAgo = [];
+
+    this.lineCoordinates = this.currentYear;
     this.barWidth = this.barWidth.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.toggleState = this.toggleState.bind(this);
+    this.setLineGraph = this.setLineGraph.bind(this);
   }
+
+  componentWillReceiveProps() {
+    this.setLineGraph();
+  }
+
+  setLineGraph() {
+    const stars = ['one', 'two', 'three', 'four', 'five'];
+    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+    const reviews = this.props.reviews;
+    for (var i = 0; i < reviews.length; i++) {
+      var star = reviews[i].star - 1;
+      star = stars[star];
+      var month = parseFloat(reviews[i].date.split('-')[1]) - 1;
+      month = months[month];
+      if (i < 12) {
+        this.currentYear.push(xAxis[month].concat(',', yAxis[star]));
+      }
+      if (i >= 12 && i < 24) {
+        this.lastYear.push(xAxis[month].concat(',', yAxis[star]));
+      }
+      if (i >= 24 && i < 36) {
+        this.twoYearsAgo.push(xAxis[month].concat(',', yAxis[star]));
+      }
+      if (i >= 36 && i < 48) {
+        this.threeYearsAgo.push(xAxis[month].concat(',', yAxis[star]));
+      }
+      if (i >= 48 && i < 60) {
+        this.fourYearsAgo.push(xAxis[month].concat(',', yAxis[star]));
+      }
+    }
+  }
+
 
   toggleState(e) {
     const classname = e.target.className;
@@ -236,31 +277,31 @@ class Details extends React.Component {
     if (classname === 'current-year') {
       state.currentYearClicked = !state.currentYearClicked;
       if (state.currentYearClicked) {
-        this.lineCoordinates = currentYearCoordinates;
+        this.lineCoordinates = this.currentYear;
       }
     }
     if (classname === 'last-year')  {
       state.lastYearClicked = !state.lastYearClicked;
       if (state.lastYearClicked) {
-        this.lineCoordinates = lastYearCoordinates;
+        this.lineCoordinates = this.lastYear;
       }
     }
     if (classname === 'two-years-ago')  {
       state.twoYearsAgoClicked = !state.twoYearsAgoClicked;
       if (state.twoYearsAgoClicked) {
-        this.lineCoordinates = twoYearsAgoCoordinates;
+        this.lineCoordinates = this.twoYearsAgo;
       }
     }
     if (classname === 'three-years-ago')  {
       state.threeYearsAgoClicked = !state.threeYearsAgoClicked;
       if (state.threeYearsAgoClicked) {
-        this.lineCoordinates = lastYearCoordinates;
+        this.lineCoordinates = this.threeYearsAgo;
       }
     }
     if (classname === 'four-years-ago')  {
       state.fourYearsAgoClicked = !state.fourYearsAgoClicked;
       if (state.fourYearsAgoClicked) {
-        this.lineCoordinates = lastYearCoordinates;
+        this.lineCoordinates = this.fourYearsAgo;
       }
     }
     this.setState(state);
@@ -343,7 +384,7 @@ class Details extends React.Component {
                         ))
                       }
                     </g>
-                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0.8" stroke="#C53926" strokeWidth="2"/>
+                    <polyline points={this.lineCoordinates.join()} fill="#F5D9D6" fillOpacity="0" stroke="#C53926" strokeWidth="2"/>
                     <polyline points="20,160 460,160" fill="none" stroke="#ddd"/>
                     <polyline points="20,130 460,130" fill="none" stroke="#ddd"/>
                     <polyline points="20,100 460,100" fill="none" stroke="#ddd"/>
