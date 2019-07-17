@@ -8,7 +8,7 @@ const ShareTitle = styled.button`
   height: 31px;
   font-size: 12px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 4px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #666666;
   background: #FFFFFF;
@@ -121,7 +121,7 @@ const Share = (props) => {
       <ShareTitle
         className="share"
         onClick={props.openShareModal}
-      ><i class="fas fa-share-square"></i> Share
+      ><i className="fas fa-share-square"></i> Share
       </ShareTitle>
       <Modal
         isOpen={props.shareModalStatus}
@@ -135,8 +135,8 @@ const Share = (props) => {
           <div className="space-div-notsureifneeded"></div>
           <div>
             <ButtonWrapper>
-              <FBButton><i class="fab fa-facebook-square"></i> Share on Facebook</FBButton>
-              <TwitterButton><i class="fab fa-twitter"></i> Share on Twitter</TwitterButton>
+              <FBButton><i className="fab fa-facebook-square"></i> Share on Facebook</FBButton>
+              <TwitterButton><i className="fab fa-twitter"></i> Share on Twitter</TwitterButton>
             </ButtonWrapper>
             <div>
               <ShareLink></ShareLink>

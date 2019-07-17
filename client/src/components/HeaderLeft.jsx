@@ -3,13 +3,9 @@ import RestaurantName from './RestaurantName.jsx';
 import StarsReviewsDetails from './StarsReviewsDetails.jsx';
 import PriceCategoryEdit from './PriceCategoryEdit.jsx';
 
-const headerLeftStyle = {
-  marginLeft: 110,
-};
-
 const HeaderLeft = props => {
   return (
-  <div style={headerLeftStyle}>
+  <div>
     <div className="restaurant-name">
       <RestaurantName 
         restaurantName={props.restaurantName}

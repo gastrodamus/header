@@ -6,28 +6,29 @@ const RestaurantTitle = styled.div`
   font-weight: Bold;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #333333;
-  margin: 0px 0px 6px;
-  padding: 6px 0px 0px
 `;
 
 const ClaimedTitle = styled.div`
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   display: inline-block;
-  margin: 0;
-  border: 0;
-  padding-top: 12px;
-  padding-left: 10px;
-  vertical-align: baseline;
+  margin-top: 22px;
+  margin-left: 5px;
 `;
 
 const CheckButton = styled.div`
   color: #0073bb;
-  margin-right: 5px;
+  margin-right: 7px
+`;
+
+const RestaurantNameDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
 `;
 
 const RestaurantName = (props) => (
-  <div className="restaurant-name">
+  <RestaurantNameDiv>
     <RestaurantTitle>
       {props.restaurantName}
     </RestaurantTitle>
@@ -35,7 +36,7 @@ const RestaurantName = (props) => (
       <CheckButton className="fas fa-check-circle"></CheckButton>
       Claimed
     </ClaimedTitle>
-  </div>
+  </RestaurantNameDiv>
 );
 
 export default RestaurantName;

@@ -8,7 +8,9 @@ const Button = styled.button`
   font-size: 12px;
   color: #999999;
   padding: 0 6px;
-  margin-left: 10px; 
+  margin-left: 10px;
+  height: 20px;
+  border-radius: 2px;
 `;
 
 const DetailsHeaderTitle = styled.h2`
@@ -137,6 +139,10 @@ const yearSelected = {
   fontWeight: 'bold',
   color: 'black',
 };
+
+const DetailDiv = styled.div`
+  display: inline-block;
+`;
 
 const xAxis = {
   jan: '20',
@@ -328,11 +334,11 @@ class Details extends React.Component {
 
   render () {
     return (
-      <div>
+      <DetailDiv>
         <Button
           className="details"
           onClick={this.props.openDetailsModal}
-        ><i class="far fa-chart-bar"></i> Details
+        ><i className="far fa-chart-bar"></i> Details
         </Button>
         <Modal
           isOpen={this.props.detailsModalStatus}
@@ -455,7 +461,7 @@ class Details extends React.Component {
             <DetailsFooter>We calculate the overall star rating using only reviews that our automated software currently recommends. <Link>Learn More</Link></DetailsFooter>
           </div>
         </Modal>
-      </div>
+      </DetailDiv>
     );
   }
 }

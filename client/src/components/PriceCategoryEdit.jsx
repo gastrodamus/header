@@ -5,30 +5,30 @@ const PriceTitle = styled.span`
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #333333;
-  margin: 0 10px;
 `;
 
 const CategoryTitle = styled.span`
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #0073BB;
-  margin: 0 10px;
+  margin-left: 10px;
 `;
 
 const Button = styled.button`
   font-size: 12px;
   color: #999999;
+  margin-left: 10px;
+  height: 20px;
+  border-radius: 2px;
 `;
 
-const PCEWrapper = {
-  height: 1,
-  marginTop: -20,
-  marginRight: 190,
-};
+const PriceCategoryEditDiv = styled.div`
+  display: flex;
+`;
 
 const PriceCategoryEdit = (props) => {
   return (
-    <div style={PCEWrapper} className="price-category-edit">
+    <PriceCategoryEditDiv>
       <div>
         <PriceTitle>$$$</PriceTitle>
       </div>
@@ -38,7 +38,7 @@ const PriceCategoryEdit = (props) => {
       <div>
         <Button>Edit</Button>
       </div>
-    </div>
+    </PriceCategoryEditDiv>
   );
 };
 

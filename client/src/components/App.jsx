@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
 import axios from 'axios';
+import styled from 'styled-components';
 
 const shareStyle = {
   content: {
@@ -51,6 +52,23 @@ const saveStyle = {
     background: "rgba(0, 0, 0, 0.7)",
   },
 };
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const HeaderLeftDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-right: 3%;
+`;
+
+const HeaderRighttDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 3%;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -132,8 +150,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="flex-container">
-        <div className="header-left">
+      <FlexContainer>
+        <HeaderLeftDiv>
           <HeaderLeft
             detailsModalStatus={this.state.detailsModalIsOpen}
             openDetailsModal={this.openDetailsModal}
@@ -145,8 +163,8 @@ class App extends React.Component {
             averageStars={this.state.currentView.avg_stars}
             reviews={this.state.currentView.reviews}
           />
-        </div>
-        <div>
+        </HeaderLeftDiv>
+        <HeaderRighttDiv>
           <HeaderRight
             shareModalStatus={this.state.shareModalIsOpen}
             openShareModal={this.openShareModal}
@@ -157,8 +175,8 @@ class App extends React.Component {
             closeSaveModal={this.closeSaveModal}
             saveStyle={this.state.modalStyle}
           />
-        </div>
-      </div>
+        </HeaderRighttDiv>
+      </FlexContainer>
     );
   }
 }

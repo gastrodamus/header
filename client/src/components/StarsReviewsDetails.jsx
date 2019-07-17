@@ -7,46 +7,46 @@ const StarTitle = styled.span`
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #333333;
-  margin: 0px 6px 0px 0px;
 `;
 
 const ReviewCountTitle = styled.span`
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #666666;
+  margin-left: 5px;
 `;
 
-const SRDWrapper = {
-  height: 50,
-  marginTop: -15,
-  marginRight: 170,
-  display: 'flex',
-  justifyContent: 'center',
-};
+const SRDWrapper = styled.div`
+  display: inline-block;
+  `;
 
 const StarSymbolFull = styled.i`
+  text-align: center;
   font-size: 15px;
   height: 20px;
   width: 26px; 
   background-color: #EE5B4F;
   color: #FFF;
-  margin: 2px;
   border-radius: 3px;
-  padding-top: 4px;
-  vertical-align: center;
+  padding-top: 3px;
+  margin: 2px;
 `;
 
 const StarSymbolBlank = styled.i`
+  text-align: center;
   font-size: 15px
   height: 20px;
   width: 26px; 
   background-color: #333;
   opacity: 0.5;
   color: #FFF;
-  margin: 2px;
   border-radius: 3px;
-  padding-top: 4px;
-  vertical-align: center;
+  padding-top: 3px;
+  margin: 2px;
+`;
+
+const StarsReviewsDetailsDiv = styled.div`
+  margin-bottom: 7px;
 `;
 
 const fullStar = <StarSymbolFull className="fas fa-star"></StarSymbolFull>;
@@ -81,10 +81,10 @@ class StarsReviewsDetails extends React.Component {
 
   render() {
     return(
-      <div className="srd-wrapper">
-        <div style={SRDWrapper}>
+      <StarsReviewsDetailsDiv>
+        <SRDWrapper>
           <StarTitle>{[...this.state.stars]}</StarTitle>
-          <ReviewCountTitle> reviews</ReviewCountTitle>
+          <ReviewCountTitle>{this.props.reviewCount} reviews</ReviewCountTitle>
           <Details
             detailsModalStatus={this.props.detailsModalStatus}
             closeDetailsModal={this.props.closeDetailsModal}
@@ -93,8 +93,8 @@ class StarsReviewsDetails extends React.Component {
             reviews={this.props.reviews}
             reviewCount={this.props.reviewCount}
           />
-        </div>
-      </div>
+        </SRDWrapper>
+      </StarsReviewsDetailsDiv>
     )
   };
 }
