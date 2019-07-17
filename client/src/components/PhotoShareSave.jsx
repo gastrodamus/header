@@ -20,7 +20,7 @@ const PhotoTitle = styled.button`
 const PhotoShareSave = props => (
   <div className="photo-share-save">
     <div>
-      <PhotoTitle>Add photo</PhotoTitle>
+      <PhotoTitle><i class="fas fa-camera"></i> Add photo</PhotoTitle>
     </div>
     <div>
       <Share

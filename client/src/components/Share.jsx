@@ -121,7 +121,7 @@ const Share = (props) => {
       <ShareTitle
         className="share"
         onClick={props.openShareModal}
-      >Share
+      ><i class="fas fa-share-square"></i> Share
       </ShareTitle>
       <Modal
         isOpen={props.shareModalStatus}
@@ -135,8 +135,8 @@ const Share = (props) => {
           <div className="space-div-notsureifneeded"></div>
           <div>
             <ButtonWrapper>
-              <FBButton>Share on Facebook</FBButton>
-              <TwitterButton>Share on Twitter</TwitterButton>
+              <FBButton><i class="fab fa-facebook-square"></i> Share on Facebook</FBButton>
+              <TwitterButton><i class="fab fa-twitter"></i> Share on Twitter</TwitterButton>
             </ButtonWrapper>
             <div>
               <ShareLink></ShareLink>

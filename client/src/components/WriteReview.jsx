@@ -15,7 +15,7 @@ const ReviewTitle = styled.button`
 
 const WriteReview = () => (
   <div>
-    <ReviewTitle>Write a Review</ReviewTitle>
+    <ReviewTitle><i class="fas fa-star"></i> Write a Review</ReviewTitle>
   </div>
 );
 
