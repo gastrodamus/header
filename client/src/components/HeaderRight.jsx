@@ -3,7 +3,7 @@ import WriteReview from './WriteReview.jsx';
 import PhotoShareSave from './PhotoShareSave.jsx';
 import styled from 'styled-components';
 
-const headerRightStyle = styled.div`
+const HeaderRightStyle = styled.div`
   display: inline-block;
 `;
 
@@ -22,7 +22,7 @@ const PhotoShareSaveDiv = styled.div`
 
 const HeaderRight = props => (
   <HeaderRightDiv>
-    <headerRightStyle>
+    <HeaderRightStyle>
       <WriteReviewDiv>
         <WriteReview />
       </WriteReviewDiv>
@@ -38,7 +38,7 @@ const HeaderRight = props => (
           saveStyle={props.saveStyle}
         />
       </PhotoShareSaveDiv>
-    </headerRightStyle>
+    </HeaderRightStyle>
   </HeaderRightDiv>
 );
 

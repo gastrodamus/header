@@ -16,7 +16,7 @@ const shareStyle = {
     width: 450,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
 
@@ -32,7 +32,7 @@ const detailsStyle = {
     width: 500,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
 
@@ -49,7 +49,7 @@ const saveStyle = {
     width: 500,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
 
@@ -97,16 +97,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('axios request to server')
-    axios.get('/munch/header').then(res => {
-      const state = Object.assign({}, this.state);
-      state.currentView = res.data[2];
-      this.setState(state);
-    })
-    .catch(err => {
-      console.log(err)
-    });
-
+    console.log('axios request to server');
+    let urlStrings = location.href.split('/');
+    let num = urlStrings [urlStrings.length - 2]; 
+    axios.get(`/header/:${num}`)
+      .then(res => {
+        const state = Object.assign({}, this.state);
+        state.currentView = res.data[0];
+        this.setState(state);
+      })
+      .catch(err => {
+       console.log(err)
+      });
   }
 
   openDetailsModal() {

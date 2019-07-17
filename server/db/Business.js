@@ -5,6 +5,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 const businessSchema = new mongoose.Schema({
+  id: String,
   name: String,
   avg_stars: Number,
   price: Number,

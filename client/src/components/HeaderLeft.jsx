@@ -3,7 +3,7 @@ import RestaurantName from './RestaurantName.jsx';
 import StarsReviewsDetails from './StarsReviewsDetails.jsx';
 import PriceCategoryEdit from './PriceCategoryEdit.jsx';
 
-const HeaderLeft = props => {
+const HeaderLeft = (props) => {
   return (
   <div>
     <div className="restaurant-name">

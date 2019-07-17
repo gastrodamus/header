@@ -27,7 +27,7 @@ const RestaurantNameDiv = styled.div`
   margin-bottom: 5px;
 `;
 
-const RestaurantName = (props) => (
+const RestaurantName = props => (
   <RestaurantNameDiv>
     <RestaurantTitle>
       {props.restaurantName}

@@ -6,18 +6,20 @@ const path = require('path');
 
 const Business = require('./db/Business.js');
 
-app.use('/', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
+// app.use('/', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
+app.use('/:id', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 
-app.get('/munch/header', (req, res) => {
-  console.log('get request received')
-  var query = Business.find();
+app.get('/header/:id', (req, res) => {
+  console.log('getting: ', req.params.id)
+  let query = Business.find({id: req.params.id});
   query.exec((err, docs) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-      res.send(docs)
+      res.send(docs);
     }
   });
 });
+
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

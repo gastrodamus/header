@@ -215,7 +215,6 @@ class Details extends React.Component {
     const state = Object.assign({}, this.state)
     if (this.props.reviewCount !== newProps.reviewCount) {
       state.props = newProps
-      console.log(state)
       this.setState(state, () => {this.setLineGraph(); this.countStars()});
     }
   }
