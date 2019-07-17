@@ -20,6 +20,12 @@ const Button = styled.button`
   margin-left: 10px;
   height: 20px;
   border-radius: 2px;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+    background: rgb(245, 245, 245);
+    color: #333;
+  }
 `;
 
 const PriceCategoryEditDiv = styled.div`

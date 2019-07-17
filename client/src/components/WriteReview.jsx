@@ -11,6 +11,11 @@ const ReviewTitle = styled.button`
   background: #D32323;
   margin: 0px 12px 0px 0px;
   padding: 8px 19px 9px 12px;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+    background: #dc4f4f;
+  }
 `;
 
 const WriteReview = () => (

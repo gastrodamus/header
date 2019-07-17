@@ -13,6 +13,11 @@ const ShareTitle = styled.button`
   color: #666666;
   background: #FFFFFF;
   padding: 5px 8px;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+    background: rgb(245, 245, 245);
+  }
 `;
 
 const ShareBusinessHeader = styled.h2`
