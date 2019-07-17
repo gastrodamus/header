@@ -8,7 +8,7 @@ const SaveTitle = styled.button`
   height: 31px;
   font-size: 12px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 4px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #666666;
   background: #FFFFFF;
@@ -141,7 +141,7 @@ const Save = (props) => {
       <SaveTitle
         className="save"
         onClick={props.openSaveModal}
-      >Save
+      ><i className="fas fa-bookmark"></i> Save
       </SaveTitle>
       <Modal
         isOpen={props.saveModalStatus}
@@ -152,8 +152,8 @@ const Save = (props) => {
           <SignUpMunch>Sign Up for Munch</SignUpMunch>
           <ConnectWithMunch>Connect with great local businesses</ConnectWithMunch>
           <LegalMunch>By continuing, you agree to Munch's Terms Of Service and acknowledge Munch's Privacy Policy.</LegalMunch>
-          <FBButton>Sign Up with Facebook</FBButton>
-          <GoogleButton>Sign Up with Google</GoogleButton>
+          <FBButton><i className="fab fa-facebook-square"></i> Sign Up with Facebook</FBButton>
+          <GoogleButton><i className="fab fa-google"></i> Sign Up with Google</GoogleButton>
           <LegalMunch>Don't worry, we never post without your permission.</LegalMunch>
           <hr></hr>
         </div>

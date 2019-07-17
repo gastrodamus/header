@@ -10,17 +10,22 @@ const PhotoTitle = styled.button`
   height: 31px;
   font-size: 12px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 4px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #666666;
   background: #FFFFFF;
   padding: 5px 8px;
 `;
 
+const PhotoShareSaveDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const PhotoShareSave = props => (
-  <div className="photo-share-save">
+  <PhotoShareSaveDiv>
     <div>
-      <PhotoTitle>Add photo</PhotoTitle>
+      <PhotoTitle><i className="fas fa-camera"></i> Add photo</PhotoTitle>
     </div>
     <div>
       <Share
@@ -38,7 +43,7 @@ const PhotoShareSave = props => (
         saveStyle={props.saveStyle}
       />
     </div>
-  </div>
+  </PhotoShareSaveDiv>
 );
 
 export default PhotoShareSave;

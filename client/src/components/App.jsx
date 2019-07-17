@@ -1,6 +1,8 @@
 import React from 'react';
 import HeaderLeft from './HeaderLeft.jsx';
 import HeaderRight from './HeaderRight.jsx';
+import axios from 'axios';
+import styled from 'styled-components';
 
 const shareStyle = {
   content: {
@@ -14,7 +16,7 @@ const shareStyle = {
     width: 450,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
 
@@ -30,7 +32,7 @@ const detailsStyle = {
     width: 500,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
 
@@ -47,9 +49,26 @@ const saveStyle = {
     width: 500,
   },
   overlay: {
-    background: "rgba(0, 0, 0, 0.7)",
+    background: 'rgba(0, 0, 0, 0.7)',
   },
 };
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const HeaderLeftDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-right: 3%;
+`;
+
+const HeaderRighttDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 3%;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -60,6 +79,12 @@ class App extends React.Component {
       shareModalIsOpen: false,
       saveModalIsOpen: false,
       modalStyle: '',
+      currentView: {
+        avg_stars: 0,
+        categories: '',
+        name: '',
+        reviews: [],
+      },
     };
 
     this.openDetailsModal = this.openDetailsModal.bind(this);
@@ -69,6 +94,21 @@ class App extends React.Component {
     this.closeDetailsModal = this.closeDetailsModal.bind(this);
     this.closeShareModal = this.closeShareModal.bind(this);
     this.closeSaveModal = this.closeSaveModal.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('axios request to server');
+    let urlStrings = location.href.split('/');
+    let num = urlStrings [urlStrings.length - 2]; 
+    axios.get(`/header/:${num}`)
+      .then(res => {
+        const state = Object.assign({}, this.state);
+        state.currentView = res.data[0];
+        this.setState(state);
+      })
+      .catch(err => {
+       console.log(err)
+      });
   }
 
   openDetailsModal() {
@@ -112,16 +152,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="flex-container">
-        <div className="header-left">
+      <FlexContainer>
+        <HeaderLeftDiv>
           <HeaderLeft
             detailsModalStatus={this.state.detailsModalIsOpen}
             openDetailsModal={this.openDetailsModal}
             closeDetailsModal={this.closeDetailsModal}
             detailStyle={this.state.modalStyle}
+            restaurantName={this.state.currentView.name}
+            categoryNames={this.state.currentView.categories}
+            reviewCount={this.state.currentView.reviews.length}
+            averageStars={this.state.currentView.avg_stars}
+            reviews={this.state.currentView.reviews}
           />
-        </div>
-        <div>
+        </HeaderLeftDiv>
+        <HeaderRighttDiv>
           <HeaderRight
             shareModalStatus={this.state.shareModalIsOpen}
             openShareModal={this.openShareModal}
@@ -132,8 +177,8 @@ class App extends React.Component {
             closeSaveModal={this.closeSaveModal}
             saveStyle={this.state.modalStyle}
           />
-        </div>
-      </div>
+        </HeaderRighttDiv>
+      </FlexContainer>
     );
   }
 }

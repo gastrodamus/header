@@ -5,7 +5,7 @@ const ReviewTitle = styled.button`
   height: 36px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 4px;
   font-family: "Helvetica Neue", Helvetica, Arial;
   color: #FFFFFF;
   background: #D32323;
@@ -15,7 +15,7 @@ const ReviewTitle = styled.button`
 
 const WriteReview = () => (
   <div>
-    <ReviewTitle>Write a Review</ReviewTitle>
+    <ReviewTitle><i className="fas fa-star"></i> Write a Review</ReviewTitle>
   </div>
 );
 

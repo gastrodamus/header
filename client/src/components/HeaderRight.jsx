@@ -1,24 +1,32 @@
 import React from 'react';
 import WriteReview from './WriteReview.jsx';
 import PhotoShareSave from './PhotoShareSave.jsx';
+import styled from 'styled-components';
 
-const RPSSWrapper = {
-  height: 50,
-  marginTop: 30,
-  marginRight: 80,
-};
+const HeaderRightStyle = styled.div`
+  display: inline-block;
+`;
 
-const headerRightStyle = {
-  marginRight: 100,
-};
+const WriteReviewDiv = styled.div`
+  display: inline-block;
+`;
+
+const HeaderRightDiv = styled.div`
+  display: inline-block;
+  padding-top: 30px;
+`;
+
+const PhotoShareSaveDiv = styled.div`
+  display: inline-block;
+`;
 
 const HeaderRight = props => (
-  <div style={headerRightStyle}>
-    <div className="header-right" style={RPSSWrapper}>
-      <div className="write-review">
+  <HeaderRightDiv>
+    <HeaderRightStyle>
+      <WriteReviewDiv>
         <WriteReview />
-      </div>
-      <div>
+      </WriteReviewDiv>
+      <PhotoShareSaveDiv>
         <PhotoShareSave
           shareModalStatus={props.shareModalStatus}
           openShareModal={props.openShareModal}
@@ -29,9 +37,9 @@ const HeaderRight = props => (
           closeSaveModal={props.closeSaveModal}
           saveStyle={props.saveStyle}
         />
-      </div>
-    </div>
-  </div>
+      </PhotoShareSaveDiv>
+    </HeaderRightStyle>
+  </HeaderRightDiv>
 );
 
 export default HeaderRight;
