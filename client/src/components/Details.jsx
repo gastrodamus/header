@@ -205,13 +205,24 @@ class Details extends React.Component {
     this.countStars = this.countStars.bind(this);
   }
 
-  componentWillReceiveProps() {
-    this.setLineGraph();
-    this.countStars();
-    // this.barWidth
+  // componentWillReceiveProps() {
+  //   this.setLineGraph();
+  //   this.countStars();
+  // }
+
+  componentWillReceiveProps(newProps) {
+    const state = Object.assign({}, this.state)
+    if (this.props.reviewCount !== newProps.reviewCount) {
+      // this.fiveStar = 0;
+      // this.fourStar = 0;
+      // this.threeStar = 0;
+      // this.twoStar = 0;
+      // this.oneStar = 0;
+      state.props = newProps
+      console.log(state)
+      this.setState(state, () => {this.setLineGraph(); this.countStars()});
+    }
   }
-
-
 
   setLineGraph() {
     const stars = ['one', 'two', 'three', 'four', 'five'];

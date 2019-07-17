@@ -7,7 +7,8 @@ const headerLeftStyle = {
   marginLeft: 110,
 };
 
-const HeaderLeft = props => (
+const HeaderLeft = props => {
+  return (
   <div style={headerLeftStyle}>
     <div className="restaurant-name">
       <RestaurantName 
@@ -31,6 +32,6 @@ const HeaderLeft = props => (
       />
     </div>
   </div>
-);
-
+  );
+}
 export default HeaderLeft;

@@ -1,12 +1,12 @@
 const express = require('express')
 
 const app = express();
-const port = 3000;
+const port = 3003;
 const path = require('path');
 
 const Business = require('./db/Business.js');
 
-app.use(express.static(path.resolve(__dirname, '..', 'client', 'dist')));
+app.use('/', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 
 app.get('/munch/header', (req, res) => {
   console.log('get request received')
