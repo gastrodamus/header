@@ -224,10 +224,10 @@ class Details extends React.Component {
     const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
     const reviews = this.props.reviews;
-    for (var i = 0; i < reviews.length; i++) {
-      var star = reviews[i].star - 1;
+    for (let i = 0; i < reviews.length; i++) {
+      let star = reviews[i].star - 1;
       star = stars[star];
-      var month = parseFloat(reviews[i].date.split('-')[1]) - 1;
+      let month = parseFloat(reviews[i].date.split('-')[1]) - 1;
       month = months[month];
       if (i < 12) {
         this.currentYear.push(xAxis[month].concat(',', yAxis[star]));
@@ -283,16 +283,13 @@ class Details extends React.Component {
   handleClick(e) {
     const classname = e.target.className.split(' ')[0];
     const state = Object.assign({}, this.state);
-    for (var key in state) {
+    for (let key in state) {
       state[key] = false;
     }
     if (classname === 'current-year') {
       state.currentYearClicked = !state.currentYearClicked;
       if (state.currentYearClicked) {
         this.lineCoordinates = this.currentYear;
-        // var temp = this.lineCoordinates[this.lineCoordinates.length-1];
-        // this.lastXCoordinate = temp.split(',')[0];
-        // console.log(temp)
       }
     }
     if (classname === 'last-year')  {
