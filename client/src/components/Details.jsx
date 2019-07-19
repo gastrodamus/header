@@ -150,6 +150,12 @@ const DetailDiv = styled.div`
   display: inline-block;
 `;
 
+// const XButton = styled.i`
+//   float: right
+// `;
+
+{/* <XButton className="fas fa-times"></XButton> */}
+
 const xAxis = {
   jan: '20',
   feb: '60',

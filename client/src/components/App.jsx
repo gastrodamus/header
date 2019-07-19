@@ -17,7 +17,6 @@ const shareStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 2,
   },
 };
 
@@ -34,7 +33,6 @@ const detailsStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 2,
   },
 };
 
@@ -52,7 +50,6 @@ const saveStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 2,
   },
 };
 
@@ -115,6 +112,7 @@ class App extends React.Component {
   }
 
   openDetailsModal() {
+    document.body.style.overflow = 'hidden'
     const state = Object.assign({}, this.state);
     state.detailsModalIsOpen = true;
     state.modalStyle = detailsStyle;
@@ -122,6 +120,7 @@ class App extends React.Component {
   }
 
   openShareModal() {
+    document.body.style.overflow = 'hidden'
     const state = Object.assign({}, this.state);
     state.shareModalIsOpen = true;
     state.modalStyle = shareStyle;
@@ -129,6 +128,7 @@ class App extends React.Component {
   }
 
   openSaveModal() {
+    document.body.style.overflow = 'hidden'
     const state = Object.assign({}, this.state);
     state.saveModalIsOpen = true;
     state.modalStyle = saveStyle;
@@ -136,18 +136,21 @@ class App extends React.Component {
   }
 
   closeDetailsModal() {
+    document.body.style.overflow = 'auto'
     const state = Object.assign({}, this.state);
     state.detailsModalIsOpen = false;
     this.setState(state);
   }
 
   closeShareModal() {
+    document.body.style.overflow = 'auto'
     const state = Object.assign({}, this.state);
     state.shareModalIsOpen = false;
     this.setState(state);
   }
 
   closeSaveModal() {
+    document.body.style.overflow = 'auto'
     const state = Object.assign({}, this.state);
     state.saveModalIsOpen = false;
     this.setState(state);
