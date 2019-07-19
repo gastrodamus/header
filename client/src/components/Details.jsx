@@ -123,6 +123,7 @@ const detailsStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
+    zIndex: 3,
   },
 };
 
