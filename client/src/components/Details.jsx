@@ -19,11 +19,12 @@ const Button = styled.button`
   }
 `;
 
-const DetailsHeaderTitle = styled.h2`
+const DetailsHeaderTitle = styled.div`
   font-family: 'Helvetica Neue', Helvetica, Arial, sans serif;
   color: #D32323;
   font-weight: bold;
   font-size: 21px;
+  display: inline-block;
 `;
 
 const MonthTrendTitle = styled.div`
@@ -150,11 +151,21 @@ const DetailDiv = styled.div`
   display: inline-block;
 `;
 
-// const XButton = styled.i`
-//   float: right
-// `;
+const XButton = styled.div`
+  float: right;
+  color: #CCC;
+  &:hover {
+    cursor: pointer;
+    color: #333;
+  }
+`;
 
-{/* <XButton className="fas fa-times"></XButton> */}
+const DetailModalHeader = styled.div`
+  display: inline-block;
+  width: 500px;
+  margin-bottom: 20px;
+`;
+
 
 const xAxis = {
   jan: '20',
@@ -353,9 +364,10 @@ class Details extends React.Component {
           onRequestClose={this.props.closeDetailsModal}
           style={detailsStyle}
         >
-          <div>
+          <DetailModalHeader>
             <DetailsHeaderTitle>Rating Details</DetailsHeaderTitle>
-          </div>
+            <XButton onClick={this.props.closeDetailsModal} className="fas fa-times"></XButton>
+          </DetailModalHeader>
           <hr/>
           <div className="modal-body">
             <div className="graph">
