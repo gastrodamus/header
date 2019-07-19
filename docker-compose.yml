@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: mongo:latest
+    ports: 
+      - '27017:27017'
+
+  header:
+    image: kennyhojinlee/header_header:header
+    depends_on:
+      - 'db'
+    ports:
+      - '3003:3003'
+

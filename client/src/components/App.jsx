@@ -17,6 +17,7 @@ const shareStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
+    zIndex: 2,
   },
 };
 
@@ -33,6 +34,7 @@ const detailsStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
+    zIndex: 2,
   },
 };
 
@@ -50,6 +52,7 @@ const saveStyle = {
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.7)',
+    zIndex: 2,
   },
 };
 

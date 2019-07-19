@@ -36,6 +36,7 @@ const createData = () => {
     }).then(() => {
       db.close();
     }).catch(() => {
+      console.log('test');
       db.close();
     });
   }
