@@ -417,7 +417,7 @@ class Details extends React.Component {
                     <g className="data" data-setname="average-monthly-star">
                       {
                         this.lineCoordinates.map((value, index) => (
-                          <circle stroke="#C53926" fill="white" strokeWidth="2" cx={value.split(',')[0]} cy={value.split(',')[1]} r="5" key={index}></circle>
+                          <circle stroke="#C53926" key={index} fill="white" strokeWidth="2" cx={value.split(',')[0]} cy={value.split(',')[1]} r="5" key={index}></circle>
                         ))
                       }
                     </g>
