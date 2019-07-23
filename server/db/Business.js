@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoUri = 'mongodb://localhost/munch';
+const mongoUri = 'mongodb://db:27017/munch';
 mongoose.connect(mongoUri, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 

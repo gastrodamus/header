@@ -7,7 +7,7 @@ services:
       - '27017:27017'
 
   header:
-    image: kennyhojinlee/header_header:header
+    build: .
     depends_on:
       - 'db'
     ports:
