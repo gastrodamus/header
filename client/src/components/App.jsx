@@ -1,8 +1,8 @@
 import React from 'react';
-import HeaderLeft from './HeaderLeft.jsx';
-import HeaderRight from './HeaderRight.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
+import HeaderLeft from './HeaderLeft.jsx';
+import HeaderRight from './HeaderRight.jsx';
 
 const shareStyle = {
   content: {
@@ -102,20 +102,18 @@ class App extends React.Component {
   componentDidMount() {
     console.log('axios request to server');
     let urlStrings = location.href.split('/');
-    let num = urlStrings [urlStrings.length - 2]; 
-    axios.get(`/header/:${num}`)
-      .then(res => {
+    let num = urlStrings [urlStrings.length - 2];
+    axios.get(`/header/${num}`)
+      .then((res) => {
         const state = Object.assign({}, this.state);
         state.currentView = res.data[0];
         this.setState(state);
       })
-      .catch(err => {
-       console.log(err)
-      });
+      .catch(err => console.log(err));
   }
 
   openDetailsModal() {
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden';
     const state = Object.assign({}, this.state);
     state.detailsModalIsOpen = true;
     state.modalStyle = detailsStyle;
@@ -123,7 +121,7 @@ class App extends React.Component {
   }
 
   openShareModal() {
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden';
     const state = Object.assign({}, this.state);
     state.shareModalIsOpen = true;
     state.modalStyle = shareStyle;
@@ -131,7 +129,7 @@ class App extends React.Component {
   }
 
   openSaveModal() {
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden';
     const state = Object.assign({}, this.state);
     state.saveModalIsOpen = true;
     state.modalStyle = saveStyle;
@@ -139,21 +137,21 @@ class App extends React.Component {
   }
 
   closeDetailsModal() {
-    document.body.style.overflow = 'auto'
+    document.body.style.overflow = 'auto';
     const state = Object.assign({}, this.state);
     state.detailsModalIsOpen = false;
     this.setState(state);
   }
 
   closeShareModal() {
-    document.body.style.overflow = 'auto'
+    document.body.style.overflow = 'auto';
     const state = Object.assign({}, this.state);
     state.shareModalIsOpen = false;
     this.setState(state);
   }
 
   closeSaveModal() {
-    document.body.style.overflow = 'auto'
+    document.body.style.overflow = 'auto';
     const state = Object.assign({}, this.state);
     state.saveModalIsOpen = false;
     this.setState(state);
