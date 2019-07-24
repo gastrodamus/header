@@ -44,3 +44,8 @@ npm run build
 | POST         | /api/header            |
 | PUT          | /api/:listingid/header |
 | DELETE       | /api/:listingid/header |
+
+## Starting with PostgreSQL
+pgsq postgres
+\i './server/dbNew/schema.sql'
+
