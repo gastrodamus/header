@@ -100,14 +100,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('axios request to server');
     let urlStrings = location.href.split('/');
     let num = urlStrings [urlStrings.length - 2];
     axios.get(`/header/${num}`)
-      .then((res) => {
-        const state = Object.assign({}, this.state);
-        state.currentView = res.data[0];
-        this.setState(state);
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({
+          currentView: data[0],
+        });
       })
       .catch(err => console.log(err));
   }

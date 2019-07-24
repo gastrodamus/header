@@ -21,8 +21,8 @@ app.use('/:id', express.static(path.resolve(__dirname, '..', 'client', 'dist')))
 // }));
 
 app.get('/header/:id', (req, res) => {
-  console.log('getting: ', req.params.id)
-  let query = Business.find({id: req.params.id});
+  console.log('getting: ', req.params.id);
+  let query = Business.find({ id: req.params.id });
   query.exec((err, docs) => {
     if (err) {
       console.log(err);
@@ -31,8 +31,5 @@ app.get('/header/:id', (req, res) => {
     }
   });
 });
-
-
-
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

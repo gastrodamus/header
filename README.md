@@ -36,4 +36,11 @@ npm install -g webpack
 npm install
 npm run build
 ```
+## Descriptions API Reference
 
+| HTTP Method  | Endpoint               |
+| -----------  | ---------------------- |
+| GET          | /api/:listingid/header |
+| POST         | /api/header            |
+| PUT          | /api/:listingid/header |
+| DELETE       | /api/:listingid/header |
