@@ -40,10 +40,10 @@ npm run build
 
 | HTTP Method  | Endpoint               |
 | -----------  | ---------------------- |
-| GET          | /api/:listingid/header |
+| GET          | /api/header/:listingid |
 | POST         | /api/header            |
-| PUT          | /api/:listingid/header |
-| DELETE       | /api/:listingid/header |
+| PUT          | /api/header/:listingid |
+| DELETE       | /api/header/:listingid |
 
 ## Starting with PostgreSQL
 pgsq postgres
