@@ -8,17 +8,27 @@ CREATE DATABASE business;
 DROP SCHEMA IF EXISTS business_schema CASCADE;
 CREATE SCHEMA IF NOT EXISTS business_schema AUTHORIZATION "root";
 
-CREATE TABLE business_schema.items (
+CREATE TABLE business_schema.restaurant (
   id SERIAL PRIMARY KEY,
   name TEXT,
   avg_stars FLOAT(4),
   price INTEGER,
-  categories TEXT
 );
 
-CREATE TABLE business_schema.reviews (
+CREATE TABLE business_schema.review (
   id INTEGER NOT NULL PRIMARY KEY,
-  item_id INTEGER REFERENCES business_schema.items(id),
+  restaurant_id INTEGER REFERENCES business_schema.restaurant(id),
   star INTEGER,
   "date" DATE
 );
+
+CREATE TABLE business_schema.category (
+  id SERIAL PRIMARY KEY,
+  category TEXT,
+)
+
+CREATE TABLE business_schema.restaurant_category (
+  id SERIAL PRIMARY KEY,
+  restaurant_id INTEGER,
+  category_id INTEGER
+)
