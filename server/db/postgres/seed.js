@@ -11,7 +11,7 @@ const makeRestaurantName = () => {
   return `${adjective} ${foodTypes[Math.floor(Math.random() * foodTypes.length)]} ${foodPlaces[Math.floor(Math.random() * foodPlaces.length)]}`;
 };
 
-const createReviews = (i, ) => {
+const createReviews = (i, writeStreamReview) => {
   const month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   const year = ['2015', '2016', '2017', '2018', '2019'];
   const stars = [];
@@ -27,79 +27,47 @@ const createReviews = (i, ) => {
       writeStreamReview.write(data, 'utf-8');
     }
   }
-}
+};
 
 writeOneMillionTimes();
 
 function writeOneMillionTimes() {
-  let i = 100000;
+  let i = 10000000;
   const encoding = 'utf-8';
+  const writeStream = fs.createWriteStream('./server/csv/business.csv');
   const writeStreamReview = fs.createWriteStream('./server/csv/review.csv');
 
   write();
   function write() {
     let ok = true;
+    let okReview = true;
     do {
       i--;
-      let dataReview = [
+      let dataItem = [
         makeRestaurantName(),
         // average,
         faker.random.number({ min: 1, max: 4 }),
         faker.lorem.words(),
       ].join(',');
-      dataReview += '\n';
+      dataItem += '\n';
       if (i === 0) {
         // Last time!
-        writeStreamReview.write(dataReview, encoding);
+        writeStream.write(dataItem, encoding);
+        createReviews(i, writeStreamReview);
       } else {
         // See if we should continue, or wait.
         // Don't pass the callback, because we're not done yet.
-        ok = writeStreamReview.write(dataReview, encoding);
+        ok = writeStream.write(dataItem, encoding);
+        okReview = createReviews(i, writeStreamReview);
       }
-    } while (i > 0 && ok);
+    } while (i > 0 && ok && okReview);
     if (i > 0) {
       // Had to stop early!
       // Write some more once it drains.
-      writeStreamReview.once('drain', write);
+      writeStream.once('drain', write);
     }
   }
 }
-
-const createData = () => {
-  const month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-  const year = ['2015', '2016', '2017', '2018', '2019'];
-
-  const writeStream = fs.createWriteStream('./server/csv/business.csv');
-  const writeStreamReview = fs.createWriteStream('./server/csv/review.csv');
-  for (let i = 0; i < 1000000; i += 1) { // Generates 1000 random entries
-    const stars = [];
-
-    for (let j = 0; j < year.length; j += 1) { // Generates a random review from each month for the past 5 years
-      for (let k = 0; k < month.length; k += 1) {
-        const id = i + 1;
-        const star = faker.random.number({ min: 1, max: 5 });
-        stars.push(star);
-        const date = month[k].concat('-', faker.random.number({ min: 1, max: 28 }).toString().concat('-', year[j]));
-        let data = [id, star, date].join(',');
-        data += '\n';
-        writeStreamReview.write(data, 'utf-8');
-      }
-    }
-    const average = mean(stars);
-    let dataReview = [
-      makeRestaurantName(),
-      average,
-      faker.random.number({ min: 1, max: 4 }),
-      faker.lorem.words(),
-    ].join(',');
-    dataReview += '\n';
-    writeStream.write(dataReview, 'utf-8');
-  }
-  writeStream.end();
-  writeStreamReview.end();
-};
-
-// createData();
 
 // const pool = new Pool({
 //   user: 'root',
