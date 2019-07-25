@@ -46,6 +46,5 @@ npm run build
 | DELETE       | /api/header/:listingid |
 
 ## Starting with PostgreSQL
-pgsq postgres
-\i './server/dbNew/schema.sql'
-
+psql postgres
+\i './server/db/postgres/schema.sql'
