@@ -1,22 +1,24 @@
-DROP DATABASE IF EXISTS Business;
+CREATE ROLE root WITH SUPERUSER;
 
-CREATE DATABASE Business;
+DROP DATABASE IF EXISTS business;
 
-DROP SCHEMA IF EXISTS businessSchema CASCADE;
+CREATE DATABASE business;
+\connect business;
 
-CREATE SCHEMA IF NOT EXISTS businessSchema;
+DROP SCHEMA IF EXISTS business_schema CASCADE;
+CREATE SCHEMA IF NOT EXISTS business_schema AUTHORIZATION "root";
 
-CREATE TABLE businessSchema.items (
-  id INTEGER NOT NULL PRIMARY KEY,
+CREATE TABLE business_schema.items (
+  id SERIAL PRIMARY KEY,
   name TEXT,
-  avg_stars INTEGER,
+  avg_stars FLOAT(4),
   price INTEGER,
   categories TEXT
 );
 
-CREATE TABLE businessSchema.reviews (
+CREATE TABLE business_schema.reviews (
   id INTEGER NOT NULL PRIMARY KEY,
-  item_id INTEGER REFERENCES businessSchema.items(id),
+  item_id INTEGER REFERENCES business_schema.items(id),
   star INTEGER,
   "date" DATE
 );
