@@ -1,3 +1,7 @@
 node_modules
 client/dist/bundle.js
 coverage
+server/db/csv/business.csv
+server/db/csv/category.csv
+server/db/csv/join.csv
+server/db/csv/review.csv
