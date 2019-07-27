@@ -1,4 +1,4 @@
-CREATE ROLE root WITH SUPERUSER;
+-- CREATE ROLE root WITH SUPERUSER;
 
 DROP DATABASE IF EXISTS business;
 
@@ -9,26 +9,28 @@ DROP SCHEMA IF EXISTS business_schema CASCADE;
 CREATE SCHEMA IF NOT EXISTS business_schema AUTHORIZATION "root";
 
 CREATE TABLE business_schema.restaurant (
-  id SERIAL PRIMARY KEY,
-  name TEXT,
-  avg_stars FLOAT(4),
-  price INTEGER,
+  restaurant_id INTEGER PRIMARY KEY,
+  restaurant_name TEXT,
+  avg_star FLOAT(4),
+  price INTEGER
+);
+
+CREATE TABLE business_schema.category (
+  category_id INTEGER PRIMARY KEY,
+  category TEXT
+);
+
+CREATE TABLE business_schema.restaurant_category (
+  restaurant_category_id INTEGER PRIMARY KEY,
+  restaurant_id INTEGER,
+  category_id INTEGER
 );
 
 CREATE TABLE business_schema.review (
-  id INTEGER NOT NULL PRIMARY KEY,
-  restaurant_id INTEGER REFERENCES business_schema.restaurant(id),
+  review_id INTEGER PRIMARY KEY,
+  restaurant_id INTEGER,
   star INTEGER,
   "date" DATE
 );
 
-CREATE TABLE business_schema.category (
-  id SERIAL PRIMARY KEY,
-  category TEXT,
-)
-
-CREATE TABLE business_schema.restaurant_category (
-  id SERIAL PRIMARY KEY,
-  restaurant_id INTEGER,
-  category_id INTEGER
-)
+-- ALTER TABLE REFERENCES business_schema.restaurant(restaurant_id),
