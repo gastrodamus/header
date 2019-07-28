@@ -3,7 +3,7 @@
 DROP DATABASE IF EXISTS business;
 
 CREATE DATABASE business;
-\connect business;
+\connect business root;
 
 DROP SCHEMA IF EXISTS business_schema CASCADE;
 CREATE SCHEMA IF NOT EXISTS business_schema AUTHORIZATION "root";
