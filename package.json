@@ -7,8 +7,14 @@
     "test": "jest",
     "react-dev": "webpack -d --watch",
     "server": "nodemon server/index.js",
-    "seed": " node server/db/seed.js",
-    "start": "npm run seed && npm run server"
+    "server-cassandra": "nodemon server/server2.js",
+    "server-postgres": "nodemon server/server1.js",
+    "seed": "node server/db/seed.js",
+    "start": "npm run seed && npm run server",
+    "cassandra-loader-restaurant": "./cassandra-loader -f ./server/db/csv/restaurant.csv -host localhost -schema 'business.restaurant(restaurant_id, restaurant_name, avg_star, price)'",
+    "gzip-restaurant": "node ./server/db/csv/restaurant.csv| gzip -c > ./server/db/csv/restaurant.gz",
+    "schema-cassandra": "cqlsh -f ./server/db/cassandra/schema.cql",
+    "schema-postgres": "psql postgres -f ./server/db/postgres/schema.sql"
   },
   "repository": {
     "type": "git",
@@ -51,6 +57,7 @@
     "fs": "0.0.1-security",
     "jest": "^24.8.0",
     "mathjs": "^6.0.3",
+    "moment": "^2.24.0",
     "mongodb": "^3.2.7",
     "mongoose": "^5.6.3",
     "pg": "^7.11.0",

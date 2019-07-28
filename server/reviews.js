@@ -54,7 +54,7 @@ function generateReviews(i) {
 app.get('/api/reviews/:id', (req, res) => {
 	console.log('getting: ', req.params.id);
 	const reviews = generateReviews(req.params.id);
-	console.log(reviews.length, 'len')
+	console.log(reviews.length, 'len');
 	res.send(reviews);
 });
 
