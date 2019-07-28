@@ -40,6 +40,6 @@ CREATE TABLE restaurant_to_reviews (
   restaurant_id int,
   review_id int,
   star int,
-  "date" date,
+  "date" text,
   PRIMARY KEY (restaurant_id, review_id)
 );
