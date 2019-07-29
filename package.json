@@ -11,6 +11,8 @@
     "server-cassandra": "nodemon server/server2.js",
     "server-postgres": "nodemon server/server1.js",
     "seed": "node server/db/seed.js",
+    "seed-postgres": "node server/db/postgres/seed.js",
+    "seed-cassandra": "node server/db/cassandra/seed.js",
     "start": "node server/db/mongo/seed.js && npm run server",
     "cassandra-loader-restaurant": "./cassandra-loader -f ./server/db/csv/restaurant.csv -host localhost -schema 'business.restaurant(restaurant_id, restaurant_name, avg_star, price)'",
     "gzip-restaurant": "node ./server/db/csv/restaurant.csv| gzip -c > ./server/db/csv/restaurant.gz",
