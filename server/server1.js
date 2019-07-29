@@ -22,17 +22,17 @@ pool.on('error', (err, client) => {
 app.get('/api/:id/header', async (req, res) => {
   const client = await pool.connect();
   try {
-    // const restaurant = await client.query(`SELECT * FROM business_schema.restaurant WHERE restaurant_id = ${req.params.id}`);
+    const restaurant = await client.query(`SELECT * FROM business_schema.restaurant WHERE restaurant_id = ${req.params.id}`);
 
-    // const categoryIds = await client.query(`SELECT category_id FROM business_schema.restaurant_category WHERE restaurant_id = ${req.params.id}`);
-    // const arr1 = categoryIds.rows.map(el => el.category_id);
-    // const categories = await client.query(`SELECT * FROM business_schema.category WHERE category_id in (${arr1[0]}, ${arr1[1]}, ${arr1[2]})`);
+    const categoryIds = await client.query(`SELECT category_id FROM business_schema.restaurant_category WHERE restaurant_id = ${req.params.id}`);
+    const arr1 = categoryIds.rows.map(el => el.category_id);
+    const category = await client.query(`SELECT * FROM business_schema.category WHERE category_id in (${arr1[0]}, ${arr1[1]}, ${arr1[2]})`);
 
     const review = await axios.get(`http://localhost:4000/api/${req.params.id}/review`);
 
     const result = {
-      // restaurant: restaurant.rows,
-      // categories: categories.rows,
+      restaurant: restaurant.rows,
+      category: category.rows,
       review: review.data,
     };
     res.send(result);
@@ -79,11 +79,11 @@ app.post('/api/:id/header', async (req, res) => {
   }
 });
 
-app.patch('/api/header/:id/categories', async (req, res) => {
+app.patch('/api/header/:id/category', async (req, res) => {
 
 });
 
-app.delete('/api/header/:id/categories', async (req, res) => {
+app.delete('/api/header/:id/category', async (req, res) => {
 
 });
 
