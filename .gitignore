@@ -1,5 +1,6 @@
 node_modules
 client/dist/bundle.js
 coverage
-server/db/csv
+server/db/postgres/csv
+server/db/cassandra/csv
 cassandra-loader
