@@ -13,6 +13,9 @@
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
+1. [API](#api)
+1. [Authors](#authors)
+1. [License](#license)
 
 ## Usage
 
@@ -23,7 +26,6 @@
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
 
 ## Development
 
@@ -36,15 +38,17 @@ npm install -g webpack
 npm install
 npm run build
 ```
-## Descriptions API Reference
+## API
 
 | HTTP Method  | Endpoint               |
 | -----------  | ---------------------- |
 | GET          | /api/header/:listingid |
 | POST         | /api/header            |
-| PUT          | /api/header/:listingid |
-| DELETE       | /api/header/:listingid |
+| PUT          | /api/header/           |
+| DELETE       | /api/header/           |
 
-## Starting with PostgreSQL
-psql postgres
-\i './server/db/postgres/schema.sql'
+## Authors
+Esme
+
+## License
+MIT
