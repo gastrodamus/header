@@ -81,26 +81,31 @@ const createData = (
   let reviewData = '';
   const restaurantId = i + 1;
 
-  for (let m = 0; m < 3; m += 1) { // Generates reviews for past 3 months
-    const reviewsPerMth = faker.random.number({ min: 1, max: 5 });
-    for (let j = 0; j < reviewsPerMth; j += 1) { // Generates random review stars for each month
-      const date = month[m].concat('-', faker.random.number({ min: 1, max: 28 }).toString().concat('-', '2019'));
-      const star = faker.random.number({ min: 1, max: 5 });
-      starArr.push(star);
-      reviewData += [reviewId, restaurantId, star, date].join(',');
-      reviewData += '\n';
+  // -----------
+  // Reviews
+  // -----------
 
-      reviewId += 1; // Increment reviewId by one
-    }
-  }
-  writeStreamReview.write(reviewData, 'utf-8');
+  // for (let m = 0; m < 3; m += 1) { // Generates reviews for past 3 months
+  //   const reviewsPerMth = faker.random.number({ min: 1, max: 5 });
+  //   for (let j = 0; j < reviewsPerMth; j += 1) { // Generates random review stars for each month
+  //     const date = month[m].concat('-', faker.random.number({ min: 1, max: 28 }).toString().concat('-', '2019'));
+  //     const star = faker.random.number({ min: 1, max: 5 });
+  //     starArr.push(star);
+  //     reviewData += [reviewId, restaurantId, star, date].join(',');
+  //     reviewData += '\n';
+
+  //     reviewId += 1; // Increment reviewId by one
+  //   }
+  // }
+  // writeStreamReview.write(reviewData, 'utf-8');
 
   // Create table restaurant (restaurant_id, restaurant_name, avg_star, price)
   const restaurantName = makeRestaurantName();
   let restaurantData = [
     restaurantId,
     restaurantName,
-    Math.round(mean(starArr) * 10) / 10,
+    // Math.round(mean(starArr) * 10) / 10,
+    faker.random.number({ min: 1, max: 5 }), // placeholder for average review stars
     faker.random.number({ min: 10, max: 100 }),
   ].join(',');
   restaurantData += '\n';
@@ -120,7 +125,8 @@ function writeData() {
   const writeStream = fs.createWriteStream(path.resolve(__dirname, './csv/restaurant.csv'));
   const writeStreamJoin = fs.createWriteStream(path.resolve(__dirname, './csv/restaurant_category.csv'));
   const writeStreamResByCategory = fs.createWriteStream(path.resolve(__dirname, './csv/restaurant_by_category.csv'));
-  const writeStreamReview = fs.createWriteStream(path.resolve(__dirname, './csv/review.csv'));
+  // const writeStreamReview = fs.createWriteStream(path.resolve(__dirname, './csv/review.csv'));
+  const writeStreamReview = null;
   const writeStreamCategory = fs.createWriteStream(path.resolve(__dirname, './csv/category.csv'));
 
   createCategories(writeStreamCategory);

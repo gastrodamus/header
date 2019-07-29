@@ -4,7 +4,7 @@ const app = express();
 const port = 3003;
 const path = require('path');
 
-const Business = require('./db/Business.js');
+const Business = require('./db/mongo/Business.js');
 
 
 // const expressStaticGzip = require("express-static-gzip");
