@@ -46,19 +46,25 @@ app.get('/api/:id/header', async (req, res) => {
   }
 });
 
-app.post('/api/header', async (req, res) => {
+app.post('/api/:id/header', async (req, res) => {
   const client = await pool.connect();
   try {
-    if (req.body) {
-      // req.body example: {"catId": 2, "resId": 1}
+    // req.body example: {"catId": 2}
+    if (req.body.catId) {
       // update with new category id
       await client.query(
         `INSERT INTO restaurant_category (restaurant_id, category_id) 
-        VALUES (${req.body.resId}, ${req.body.catId})`,
+        VALUES (${req.params.id}, ${req.body.catId})`,
       );
       res.send('successfully added category');
-    } else {
-      res.sendStatus(404);
+    }
+    // req.body example: {"resName": "Seafood", "resPrice": 35}
+    if (req.body.resName) {
+      await client.query(
+        `INSERT INTO restaurant (restaurant_name, price) 
+        VALUES (${req.body.resName}, ${req.body.resPrice})`,
+      );
+      res.send('successfully added restaurant');
     }
   } catch (e) {
     res.status(404).send('restaurant not found');
@@ -68,18 +74,18 @@ app.post('/api/header', async (req, res) => {
   }
 });
 
-app.patch('/api/header', async (req, res) => {
+app.patch('/api/:id/header', async (req, res) => {
   const client = await pool.connect();
   try {
-    if (req.body) {
-      // req.body example: {"oldCatId": 2, "resId": 1, "newCat": "Singaporean"}
+    // req.body example: {"oldCatId": 2, "newCat": "Singaporean"}
+    if (req.body.newCat) {
       // retrieve new category id
-      // update with new category id
       const newCat = await client.query(`SELECT category_id FROM category WHERE category_name = '${req.body.newCat}'`);
+      // update with new category id
       await client.query(
         `UPDATE restaurant_category 
         SET category_id = ${newCat.rows[0].category_id}
-        WHERE restaurant_id = ${req.body.resId}
+        WHERE restaurant_id = ${req.params.id}
         AND category_id = ${req.body.oldCatId}`,
       );
       res.send('successfully updated category');
@@ -94,15 +100,16 @@ app.patch('/api/header', async (req, res) => {
   }
 });
 
-app.delete('/api/header', async (req, res) => {
+app.delete('/api/:id/header', async (req, res) => {
   const client = await pool.connect();
   try {
-    if (req.body) {
-      // req.body example: {"catId": 2, "resId": 1}
+    // req.body example: {"catId": 2, "resId": 1}
+    if (req.body.catId) {
       // delete category
       await client.query(
         `DELETE FROM restaurant_category 
-        WHERE category_id = '${req.body.catId}'`,
+        WHERE restaurant_id = '${req.params.id}' 
+        AND category_id = '${req.body.catId}'`,
       );
       res.send('successfully deleted category');
     } else {

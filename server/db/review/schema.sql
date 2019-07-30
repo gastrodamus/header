@@ -1,5 +1,9 @@
--- CREATE ROLE root WITH SUPERUSER;
+-- STEPS:
+-- 1. npm run seed-review
+-- 2. npm run gzip-review
+-- 3. psql postgres -f ./server/db/review/schema.sql
 
+-- CREATE ROLE root WITH SUPERUSER;
 \connect header root;
 
 -- relationship

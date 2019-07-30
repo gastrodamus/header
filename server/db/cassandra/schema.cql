@@ -1,3 +1,5 @@
+-- Run schema using command: cqlsh -f ./server/db/cassandra/schema.cql
+
 DROP KEYSPACE IF EXISTS business;
 CREATE KEYSPACE IF NOT EXISTS business
   WITH REPLICATION = { 
@@ -38,3 +40,6 @@ CREATE TABLE restaurant_by_category (
 --   PRIMARY KEY (restaurant_id, review_id)
 -- );
 
+-- ./cassandra-loader -f ./server/db/cassandra/restaurant.csv -host localhost -numThreads 2 -schema "business.restaurant(restaurant_id, restaurant_name, avg_star, price)"
+-- ./cassandra-loader -f ./server/db/cassandra/restaurant_by_category.csv -host localhost -numThreads 2 -schema "business.restaurant_by_category(restaurant_id, restaurant_name, category_id, category)"
+-- ./cassandra-loader -f ./server/db/cassandra/review.csv -host localhost -numThreads 2 -schema "business.restaurant_to_reviews(review_id, restaurant_id, star, date)"
