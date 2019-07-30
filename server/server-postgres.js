@@ -52,11 +52,10 @@ app.post('/api/header', async (req, res) => {
     if (req.body) {
       // req.body example: {"catId": 2, "resId": 1}
       // update with new category id
-      const result = await client.query(
+      await client.query(
         `INSERT INTO restaurant_category (restaurant_id, category_id) 
         VALUES (${req.body.resId}, ${req.body.catId})`,
       );
-      console.log(result);
       res.send('successfully added category');
     } else {
       res.sendStatus(404);
@@ -77,14 +76,13 @@ app.patch('/api/header', async (req, res) => {
       // retrieve new category id
       // update with new category id
       const newCat = await client.query(`SELECT category_id FROM category WHERE category_name = '${req.body.newCat}'`);
-      const result = await client.query(
+      await client.query(
         `UPDATE restaurant_category 
         SET category_id = ${newCat.rows[0].category_id}
         WHERE restaurant_id = ${req.body.resId}
         AND category_id = ${req.body.oldCatId}`,
       );
-      console.log(result);
-      res.send('successfully added category');
+      res.send('successfully updated category');
     } else {
       res.sendStatus(404);
     }
@@ -102,11 +100,10 @@ app.delete('/api/header', async (req, res) => {
     if (req.body) {
       // req.body example: {"catId": 2, "resId": 1}
       // delete category
-      const result = await client.query(
+      await client.query(
         `DELETE FROM restaurant_category 
         WHERE category_id = '${req.body.catId}'`,
       );
-      console.log(result);
       res.send('successfully deleted category');
     } else {
       res.sendStatus(404);

@@ -25,8 +25,8 @@ CREATE INDEX dish_index ON review_dish(dish_id);
 \timing
 
 -- run from root directory
-\copy review(review, restaurant_id, star, date) FROM PROGRAM 'gzip -dc ./server/db/review/csv/review.csv.gz' DELIMITER ',' CSV;
-\copy review_dish(review_id, dish_id) FROM PROGRAM 'gzip -dc ./server/db/review/csv/review_dish.csv.gz' DELIMITER ',' CSV;
+\copy review(review, restaurant_id, star, date) FROM PROGRAM 'gzip -dc ./server/db/review/review.csv.gz' DELIMITER ',' CSV;
+\copy review_dish(review_id, dish_id) FROM PROGRAM 'gzip -dc ./server/db/review/review_dish.csv.gz' DELIMITER ',' CSV;
 
 ALTER TABLE review_dish
 ADD CONSTRAINT fk_review_id FOREIGN KEY (review_id) REFERENCES review (review_id);

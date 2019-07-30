@@ -80,9 +80,9 @@ function writeData() {
   console.log(chalk.blue(`write ${i} times`));
   console.log(chalk.green(moment().format('LLLL')));
 
-  const writeStream = fs.createWriteStream(path.resolve(__dirname, './csv/restaurant.csv'));
-  const writeStreamJoin = fs.createWriteStream(path.resolve(__dirname, './csv/restaurant_category.csv'));
-  const writeStreamCategory = fs.createWriteStream(path.resolve(__dirname, './csv/category.csv'));
+  const writeStream = fs.createWriteStream(path.resolve(__dirname, 'restaurant.csv'));
+  const writeStreamJoin = fs.createWriteStream(path.resolve(__dirname, 'restaurant_category.csv'));
+  const writeStreamCategory = fs.createWriteStream(path.resolve(__dirname, 'category.csv'));
 
   createCategories(writeStreamCategory);
 

@@ -32,9 +32,9 @@ CREATE INDEX cat_index ON restaurant_category(category_id);
 \timing
 
 -- run from root directory
-\copy restaurant(restaurant_name, avg_star, price) FROM PROGRAM 'gzip -dc ./server/db/postgres/csv/restaurant.csv.gz' DELIMITER ',' CSV;
-\copy category(category_name) FROM PROGRAM 'gzip -dc ./server/db/postgres/csv/category.csv.gz' DELIMITER ',' CSV;
-\copy restaurant_category(restaurant_id, category_id) FROM PROGRAM 'gzip -dc ./server/db/postgres/csv/restaurant_category.csv.gz' DELIMITER ',' CSV;
+\copy restaurant(restaurant_name, avg_star, price) FROM PROGRAM 'gzip -dc ./server/db/postgres/restaurant.csv.gz' DELIMITER ',' CSV;
+\copy category(category_name) FROM PROGRAM 'gzip -dc ./server/db/postgres/category.csv.gz' DELIMITER ',' CSV;
+\copy restaurant_category(restaurant_id, category_id) FROM PROGRAM 'gzip -dc ./server/db/postgres/restaurant_category.csv.gz' DELIMITER ',' CSV;
 
 ALTER TABLE restaurant_category
 ADD CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id);
