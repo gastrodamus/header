@@ -17,6 +17,12 @@ const getReview = async (req, res) => {
   res.send(review.rows);
 };
 
+const getDishReview = async (req, res) => {
+  const reviewId = await pool.query(`SELECT review_id FROM review_dish WHERE dish_id = ${req.params.dishid}`);
+  const review = await pool.query(`SELECT * FROM review WHERE restaurant_id = ${reviewId}`);
+  res.send(review.rows);
+};
+
 const postReview = async (req, res) => {
   await pool.query(
     `INSERT INTO review (review, restaurant_id, price, star, date)
@@ -27,5 +33,6 @@ const postReview = async (req, res) => {
 
 module.exports = {
   getReview,
+  getDishReview,
   postReview,
 };
