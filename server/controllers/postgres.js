@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const axios = require('axios');
 
 const pool = new Pool({
   user: 'root',
@@ -25,7 +26,8 @@ const getCategory = async (req, res) => {
 };
 
 const getReview = async (req, res) => {
-
+  const review = await axios.get(`http://localhost:4000/api/${req.params.id}/review`);
+  res.send(review);
 };
 
 const postCategory = async (req, res) => {
@@ -45,6 +47,14 @@ const postHeader = async (req, res) => {
     VALUES (${req.body.resName}, ${req.body.resPrice})`,
   );
   res.send('successfully added restaurant');
+};
+
+const patchHeader = async (req, res) => {
+  await pool.query(
+    `UPDATE restaurant
+    SET restaurant_name = ${req.body.newHeader.resName}
+    WHERE restaurant_id = ${req.params.id}`,
+  );
 };
 
 const patchCategory = async (req, res) => {
@@ -85,6 +95,7 @@ module.exports = {
   getReview,
   postCategory,
   postHeader,
+  patchHeader,
   patchCategory,
   deleteHeader,
   deleteCategory,
