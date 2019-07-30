@@ -26,15 +26,15 @@ const createData = (i, writeStreamReview, writeStreamReviewDish) => {
   for (let m = 0; m < 3; m += 1) { // Generates reviews for past 3 months
     let reviewsPerMth; // Number of reviews per month
     if (i < 500000) {
-      reviewsPerMth = faker.random.number({ min: 50, max: 100 });
-    } else if (i < 1000000) {
       reviewsPerMth = faker.random.number({ min: 10, max: 50 });
+    } else if (i < 1000000) {
+      reviewsPerMth = faker.random.number({ min: 5, max: 10 });
     } else {
-      reviewsPerMth = faker.random.number({ min: 0, max: 10 });
+      reviewsPerMth = faker.random.number({ min: 0, max: 5 });
     }
     for (let j = 0; j < reviewsPerMth; j += 1) { // Generates random review stars for each month
       let review;
-      if (i < 100000) {
+      if (i < 10000) {
         review = faker.lorem.sentence();
       } else {
         review = faker.lorem.word();

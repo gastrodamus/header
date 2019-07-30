@@ -1,5 +1,9 @@
--- CREATE ROLE root WITH SUPERUSER;
+-- STEPS:
+-- 1. npm run seed-postgres
+-- 2. npm run gzip-postgres
+-- 3. psql postgres -f ./server/db/postgres/schema.sql
 
+-- CREATE ROLE root WITH SUPERUSER;
 DROP DATABASE IF EXISTS header;
 
 CREATE DATABASE header;

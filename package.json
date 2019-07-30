@@ -13,10 +13,9 @@
     "seed-cassandra": "node server/db/cassandra/seed.js",
     "seed-postgres": "node server/db/postgres/seed.js",
     "seed-review": "node server/db/review/seed.js",
-    "gzip-postgres": "gzip server/db/postgres/csv/restaurant_category.csv && gzip server/db/postgres/csv/category.csv && gzip server/db/postgres/csv/restaurant.csv",
-    "gzip-review": "gzip server/db/review/csv/review.csv && gzip server/db/review/csv/review_dish.csv",
+    "gzip-postgres": "gzip server/db/postgres/restaurant_category.csv && gzip server/db/postgres/category.csv && gzip server/db/postgres/restaurant.csv",
+    "gzip-review": "gzip server/db/review/review.csv && gzip server/db/review/review_dish.csv",
     "start": "node server/db/mongo/seed.js && npm run server",
-    "cassandra-loader-restaurant": "./cassandra-loader -f ./server/db/csv/restaurant.csv -host localhost -schema 'business.restaurant(restaurant_id, restaurant_name, avg_star, price)'",
     "schema-cassandra": "cqlsh -f ./server/db/cassandra/schema.cql",
     "schema-postgres": "psql postgres -f ./server/db/postgres/schema.sql"
   },
