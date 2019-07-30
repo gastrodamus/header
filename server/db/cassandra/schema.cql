@@ -37,3 +37,4 @@ CREATE TABLE restaurant_by_category (
 --   "date" text,
 --   PRIMARY KEY (restaurant_id, review_id)
 -- );
+

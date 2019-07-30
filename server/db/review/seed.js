@@ -69,8 +69,8 @@ function writeData() {
   console.log(chalk.blue(`write ${i} listings`));
   console.log(chalk.green(moment().format('LLLL')));
 
-  const writeStreamReview = fs.createWriteStream(path.resolve(__dirname, './csv/review.csv'));
-  const writeStreamReviewDish = fs.createWriteStream(path.resolve(__dirname, './csv/review_dish.csv'));
+  const writeStreamReview = fs.createWriteStream(path.resolve(__dirname, 'review.csv'));
+  const writeStreamReviewDish = fs.createWriteStream(path.resolve(__dirname, 'review_dish.csv'));
 
   function write() {
     let ok = true;
