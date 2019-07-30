@@ -19,26 +19,33 @@ pool.on('error', (err, client) => {
   process.exit(-1);
 });
 
-app.get('/api/:id/header', async (req, res) => {
+app.get('/api/:id/review', async (req, res) => {
   const client = await pool.connect();
   try {
-    const restaurant = await client.query(`SELECT * FROM review_schema.review WHERE restaurant_id = ${req.params.id}`);
-
-    const categoryIds = await client.query(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
-    const arr1 = categoryIds.rows.map(el => el.category_id);
-    const category = await client.query(`SELECT * FROM category WHERE category_id in (${arr1[0]}, ${arr1[1]}, ${arr1[2]})`);
-
-    const review = await axios.get(`http://localhost:4000/api/${req.params.id}/review`);
+    const review = await client.query(`SELECT * FROM review WHERE restaurant_id = ${req.params.id}`);
 
     const result = {
-      restaurant: restaurant.rows,
-      category: category.rows,
-      review: review.data,
+      review: review.rows,
     };
     res.send(result);
   } catch (e) {
-    res.status(404).send('restaurant not found');
-    console.log(e.stack);
+    res.status(404).send('review not found', e.stack);
+  } finally {
+    client.release();
+  }
+});
+
+app.post('/api/:id/review', async (req, res) => {
+  const client = await pool.connect();
+  try {
+    if (req.body.review) {
+      await client.query(
+        `INSERT INTO review (review, restaurant_id, price, star, date)
+        VALUES (${req.body.review}, ${req.params.id}, ${req.body.star}, ${req.body.date})`,
+      );
+    }
+  } catch (e) {
+    res.status(404).send('restaurant not found', e.stack);
   } finally {
     client.release();
   }
