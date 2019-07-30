@@ -13,9 +13,9 @@ pool.on('error', (err, client) => {
   process.exit(-1);
 });
 
-const getHeader = async (req, res) => {
-  const header = await pool.query(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
-  res.send(header.rows);
+const getRestaurant = async (req, res) => {
+  const restaurant = await pool.query(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
+  res.send(restaurant.rows);
 };
 
 const getCategory = async (req, res) => {
@@ -40,7 +40,7 @@ const postCategory = async (req, res) => {
   res.send('successfully added category');
 };
 
-const postHeader = async (req, res) => {
+const postRestaurant = async (req, res) => {
   // req.body example: {"resName": "Seafood", "resPrice": 35}
   await pool.query(
     `INSERT INTO restaurant (restaurant_name, price) 
@@ -49,12 +49,13 @@ const postHeader = async (req, res) => {
   res.send('successfully added restaurant');
 };
 
-const patchHeader = async (req, res) => {
+const patchRestaurant = async (req, res) => {
   await pool.query(
     `UPDATE restaurant
-    SET restaurant_name = ${req.body.newHeader.resName}
+    SET restaurant_name = ${req.body.newRestaurant.resName}
     WHERE restaurant_id = ${req.params.id}`,
   );
+  res.send('successfully patched restaurant');
 };
 
 const patchCategory = async (req, res) => {
@@ -68,15 +69,15 @@ const patchCategory = async (req, res) => {
     WHERE restaurant_id = ${req.params.id}
     AND category_id = ${req.body.oldCatId}`,
   );
-  res.send('successfully updated category');
+  res.send('successfully patched category');
 };
 
-const deleteHeader = async (req, res) => {
+const deleteRestaurant = async (req, res) => {
   await pool.query(
     `DELETE FROM restaurant 
     WHERE restaurant_id = ${req.body.resId})`,
   );
-  res.send('successfully added restaurant');
+  res.send('successfully deleted restaurant');
 };
 
 const deleteCategory = async (req, res) => {
@@ -90,13 +91,13 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  getHeader,
+  getRestaurant,
   getCategory,
   getReview,
   postCategory,
-  postHeader,
-  patchHeader,
+  postRestaurant,
+  patchRestaurant,
   patchCategory,
-  deleteHeader,
+  deleteRestaurant,
   deleteCategory,
 };
