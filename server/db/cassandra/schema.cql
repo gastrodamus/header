@@ -8,20 +8,14 @@ CREATE KEYSPACE IF NOT EXISTS business
 USE business;
 
 CREATE TABLE restaurant (
-  restaurant_id int primary key,
+  restaurant_id uuid primary key,
   restaurant_name text,
   avg_star float,
   price int,
 );
 
--- dont need category table anymore
--- CREATE TABLE category (
---   category_id int primary key,
---   category text,
--- );
-
 CREATE TABLE restaurant_by_category (
-  restaurant_id int,
+  restaurant_id uuid,
   restaurant_name text,
   category_id int,
   category text,
@@ -36,10 +30,10 @@ CREATE TABLE restaurant_by_category (
 --   PRIMARY KEY (category_id, restaurant_id)
 -- );
 
-CREATE TABLE restaurant_to_reviews (
-  restaurant_id int,
-  review_id int,
-  star int,
-  "date" text,
-  PRIMARY KEY (restaurant_id, review_id)
-);
+-- CREATE TABLE restaurant_to_reviews (
+--   restaurant_id uuid,
+--   review_id uuid,
+--   star int,
+--   "date" text,
+--   PRIMARY KEY (restaurant_id, review_id)
+-- );
