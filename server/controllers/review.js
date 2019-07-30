@@ -22,6 +22,7 @@ const postReview = async (req, res) => {
     `INSERT INTO review (review, restaurant_id, price, star, date)
     VALUES (${req.body.review}, ${req.params.id}, ${req.body.star}, ${req.body.date})`,
   );
+  res.send('successfully posted review');
 };
 
 module.exports = {
