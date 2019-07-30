@@ -1,7 +1,6 @@
 -- STEPS:
 -- 1. npm run seed-postgres
--- 2. npm run gzip-postgres
--- 3. psql postgres -f ./server/db/postgres/schema.sql
+-- 2. psql postgres -f ./server/db/postgres/schema.sql
 
 -- CREATE ROLE root WITH SUPERUSER;
 DROP DATABASE IF EXISTS header;
@@ -44,5 +43,3 @@ ALTER TABLE restaurant_category
 ADD CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id);
 ALTER TABLE restaurant_category
 ADD CONSTRAINT fk_cateory_id FOREIGN KEY (category_id) REFERENCES category (category_id);
-
-ANALYZE;
