@@ -43,9 +43,9 @@ npm run build
 | HTTP Method  | Endpoint               |
 | -----------  | ---------------------- |
 | GET          | /api/header/:listingid |
-| POST         | /api/header            |
+| POST         | /api/header/           |
 | PUT          | /api/header/           |
-| DELETE       | /api/header/           |
+| DELETE       | /api/header/:id        |
 
 ## Authors
 Esme
