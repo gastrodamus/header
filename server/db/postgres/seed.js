@@ -28,7 +28,7 @@ function createJoin(i, restaurantName, writeStreamJoin) {
   const categoryIdsObj = {};
 
   const generateUniqueId = () => {
-    const result = faker.random.number({ min: 0, max: categoryArr.length - 1 });
+    const result = faker.random.number({ min: 1, max: categoryArr.length });
     if (categoryIdsObj[result]) {
       generateUniqueId();
     } else {

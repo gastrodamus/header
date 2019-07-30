@@ -14,12 +14,6 @@ CREATE TABLE restaurant (
   price int,
 );
 
--- dont need category table anymore
--- CREATE TABLE category (
---   category_id int primary key,
---   category text,
--- );
-
 CREATE TABLE restaurant_by_category (
   restaurant_id uuid,
   restaurant_name text,
