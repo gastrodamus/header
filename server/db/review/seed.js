@@ -54,7 +54,7 @@ const createData = (i, writeStreamReview, writeStreamReviewDish) => {
   const dishes = faker.random.number({ min: 1, max: 3 }); // Dishes for 1 review
   for (let k = 0; k < dishes; k += 1) {
     const dishId = faker.random.number({ min: 0, max: i * 2 });
-    dishData += [i, dishId].join(',');
+    dishData += [restaurantId, dishId].join(',');
     dishData += '\n';
   }
 
