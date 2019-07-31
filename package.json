@@ -7,6 +7,8 @@
     "test": "jest",
     "react-dev": "webpack -d --watch",
     "server": "nodemon server/index.js",
+    "query-cassandra": "cqlsh -f ./server/db/cassandra/query.cql",
+    "query-postgres": "psql postgres -f ./server/db/postgres/query.sql",
     "server-review": "nodemon server/server-review.js",
     "server-cassandra": "nodemon server/server-cassandra.js",
     "server-postgres": "nodemon server/server-postgres.js",

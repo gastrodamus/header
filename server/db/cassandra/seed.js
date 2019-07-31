@@ -3,7 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 const chalk = require('chalk');
-const Uuid = require('cassandra-driver').types.Uuid;
+const { types } = require('cassandra-driver');
+
+const { Uuid } = types;
 
 const makeRestaurantName = () => {
   const foodTypes = ['Pizza', 'Steak', 'Brunch', 'Seafood', 'Italian', 'Chinese', 'Japanese', 'Korean', 'Seafood', 'Fish', 'Pho', 'Noodle', 'Ramen'];

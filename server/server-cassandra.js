@@ -1,23 +1,25 @@
 const express = require('express');
 const controllers = require('./controllers/cassandra');
 
+const router = express.Router();
 const app = express();
 const port = 3003;
 
+app.use('/api', router);
 app.use(express.json());
 
-app.get('/api/header', controllers.getRestaurantList);
-app.get('/api/:id/header', controllers.getRestaurant);
-app.get('/api/:id/category', controllers.getCategory);
-app.get('/api/:id/review', controllers.getReview);
+router.get('/header', controllers.getRestaurantList);
+router.get('/:id/header', controllers.getRestaurant);
+router.get('/:id/category', controllers.getCategories);
+router.get('/:id/review', controllers.getReviews);
 
-app.post('/api/:id/header', controllers.postRestaurant);
-app.post('/api/:id/category', controllers.postCategory);
+router.post('/:id/header', controllers.postRestaurant);
+router.post('/:id/category/:catId', controllers.postCategory);
 
-app.patch('/api/:id/header', controllers.patchRestaurant);
-app.patch('/api/:id/category', controllers.patchCategory);
+router.patch('/:id/header', controllers.patchRestaurant);
+router.patch('/:id/category', controllers.patchCategory);
 
-app.delete('/api/:id/header', controllers.deleteRestaurant);
-app.delete('/api/:id/category', controllers.deleteCategory);
+router.delete('/:id/header', controllers.deleteRestaurant);
+router.delete('/:id/category/:catId', controllers.deleteCategory);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
