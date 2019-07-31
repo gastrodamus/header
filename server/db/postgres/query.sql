@@ -7,7 +7,7 @@ CREATE INDEX res_index ON restaurant_category(restaurant_id);
 CREATE INDEX cat_index ON restaurant_category(category_id);
 
 EXPLAIN ANALYZE SELECT category_id FROM restaurant_category WHERE restaurant_id = 10000000;
-EXPLAIN ANALYZE SELECT restaurant_id FROM restaurant_category WHERE category_id in (6, 7, 14);
+EXPLAIN ANALYZE SELECT * FROM restaurant_category WHERE category_id in (6, 7, 14);
 
 -- EXPLAIN ANALYZE INSERT INTO restaurant_category (restaurant_id, category_id) 
 --   VALUES (1, 3);

@@ -42,4 +42,4 @@ CREATE INDEX cat_index ON restaurant_category(category_id);
 ALTER TABLE restaurant_category
 ADD CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id);
 ALTER TABLE restaurant_category
-ADD CONSTRAINT fk_cateory_id FOREIGN KEY (category_id) REFERENCES category (category_id);
+ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES category (category_id);
