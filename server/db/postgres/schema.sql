@@ -8,9 +8,6 @@ DROP DATABASE IF EXISTS header;
 CREATE DATABASE header;
 \connect header root;
 
--- DROP SCHEMA IF EXISTS header_schema CASCADE;
--- CREATE SCHEMA IF NOT EXISTS header_schema AUTHORIZATION "root";
-
 CREATE TABLE restaurant (
   restaurant_id SERIAL PRIMARY KEY,
   restaurant_name TEXT,

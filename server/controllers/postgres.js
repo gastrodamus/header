@@ -41,19 +41,37 @@ const getReviews = async (req, res) => {
 
 const postCategory = async (req, res) => {
   // update with new category id
-  const result = await queryDb(
-    `INSERT INTO restaurant_category (restaurant_id, category_id) 
+  const check = await queryDb(
+    `SELECT * FROM restaurant_category (restaurant_id, category_id)
     VALUES (${req.params.id}, ${req.params.catId})`,
   );
+  let result;
+  if (!check) {
+    result = await queryDb(
+      `INSERT INTO restaurant_category (restaurant_id, category_id)
+      VALUES (${req.params.id}, ${req.params.catId})`,
+    );
+  } else {
+    return res.send('category already exists');
+  }
   return (result ? res.send('successfully added category') : res.sendStatus(404));
 };
 
 const postRestaurant = async (req, res) => {
   // req.body example: {"resName": "Seafood", "resPrice": 35}
-  const result = await queryDb(
-    `INSERT INTO restaurant (restaurant_name, price) 
-    VALUES (${req.body.resName}, ${req.body.resPrice})`,
+  const check = await queryDb(
+    `SELECT * FROM restaurant (restaurant_name)
+    VALUES (${req.body.resName})`,
   );
+  let result;
+  if (!check) {
+    result = await queryDb(
+      `INSERT INTO restaurant (restaurant_name, price) 
+      VALUES (${req.body.resName}, ${req.body.resPrice})`,
+    );
+  } else {
+    return (res.send('restaurant already exists'));
+  }
   return (result ? res.send('successfully added restaurant') : res.sendStatus(404));
 };
 
@@ -82,6 +100,9 @@ const patchCategory = async (req, res) => {
 
 const deleteRestaurant = async (req, res) => {
   const result = await queryDb(
+    `DELETE FROM restaurant_category
+    WHERE restaurant_id = ${req.body.resId})`,
+  ) && await queryDb(
     `DELETE FROM restaurant 
     WHERE restaurant_id = ${req.body.resId})`,
   );
