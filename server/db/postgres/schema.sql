@@ -1,16 +1,12 @@
 -- STEPS:
 -- 1. npm run seed-postgres
--- 2. npm run gzip-postgres
--- 3. psql postgres -f ./server/db/postgres/schema.sql
+-- 2. psql postgres -f ./server/db/postgres/schema.sql
 
 -- CREATE ROLE root WITH SUPERUSER;
 DROP DATABASE IF EXISTS header;
 
 CREATE DATABASE header;
 \connect header root;
-
--- DROP SCHEMA IF EXISTS header_schema CASCADE;
--- CREATE SCHEMA IF NOT EXISTS header_schema AUTHORIZATION "root";
 
 CREATE TABLE restaurant (
   restaurant_id SERIAL PRIMARY KEY,
@@ -43,6 +39,4 @@ CREATE INDEX cat_index ON restaurant_category(category_id);
 ALTER TABLE restaurant_category
 ADD CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id);
 ALTER TABLE restaurant_category
-ADD CONSTRAINT fk_cateory_id FOREIGN KEY (category_id) REFERENCES category (category_id);
-
-ANALYZE;
+ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES category (category_id);
