@@ -13,87 +13,95 @@ pool.on('error', (err, client) => {
   process.exit(-1);
 });
 
+const queryDb = async (q) => {
+  try {
+    const result = await pool.query(q);
+    return result.rows;
+  } catch (err) {
+    console.log(err.stack);
+    return null;
+  }
+};
+
 const getRestaurant = async (req, res) => {
-  const restaurant = await pool.query(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
-  res.send(restaurant.rows);
+  const result = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
+  return (result ? res.send(result) : res.sendStatus(404));
 };
 
-const getCategory = async (req, res) => {
-  const categoryIds = await pool.query(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
-  const arr1 = categoryIds.rows.map(el => el.category_id);
-  const category = await pool.query(`SELECT * FROM category WHERE category_id in (${arr1[0]}, ${arr1[1]}, ${arr1[2]})`);
-  res.send(category.rows);
+const getCategories = async (req, res) => {
+  const categoryIds = await queryDb(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
+  const result = await Promise.all(categoryIds.map(el => queryDb(`SELECT * FROM category WHERE category_id in (${el.category_id})`)));
+  return (result ? res.send(result) : res.sendStatus(404));
 };
 
-const getReview = async (req, res) => {
-  const review = await axios.get(`http://localhost:4000/api/${req.params.id}/review`);
-  res.send(review);
+const getReviews = async (req, res) => {
+  const result = await axios.get(`http://localhost:4000/api/${req.params.id}/review`);
+  return (result ? res.send(result) : res.sendStatus(404));
 };
 
 const postCategory = async (req, res) => {
-  // req.body example: {"catId": 2}
   // update with new category id
-  await pool.query(
+  const result = await queryDb(
     `INSERT INTO restaurant_category (restaurant_id, category_id) 
-    VALUES (${req.params.id}, ${req.body.catId})`,
+    VALUES (${req.params.id}, ${req.params.catId})`,
   );
-  res.send('successfully added category');
+  return (result ? res.send('successfully added category') : res.sendStatus(404));
 };
 
 const postRestaurant = async (req, res) => {
   // req.body example: {"resName": "Seafood", "resPrice": 35}
-  await pool.query(
+  const result = await queryDb(
     `INSERT INTO restaurant (restaurant_name, price) 
     VALUES (${req.body.resName}, ${req.body.resPrice})`,
   );
-  res.send('successfully added restaurant');
+  return (result ? res.send('successfully added restaurant') : res.sendStatus(404));
 };
 
 const patchRestaurant = async (req, res) => {
-  await pool.query(
+  const result = await queryDb(
     `UPDATE restaurant
     SET restaurant_name = ${req.body.newRestaurant.resName}
     WHERE restaurant_id = ${req.params.id}`,
   );
-  res.send('successfully patched restaurant');
+  return (result ? res.send('successfully patched restaurant') : res.sendStatus(404));
 };
 
+// new category id
+
 const patchCategory = async (req, res) => {
-  // req.body example: {"oldCatId": 2, "newCat": "Singaporean"}
-  // retrieve new category id
-  const newCat = await pool.query(`SELECT category_id FROM category WHERE category_name = '${req.body.newCat}'`);
+  // req.body example: {"oldCatId": 2, "newCatId": "5"}
   // update with new category id
-  await pool.query(
+  const result = await queryDb(
     `UPDATE restaurant_category 
-    SET category_id = ${newCat.rows[0].category_id}
+    SET category_id = ${req.body.newCatId}
     WHERE restaurant_id = ${req.params.id}
     AND category_id = ${req.body.oldCatId}`,
   );
-  res.send('successfully patched category');
+  return (result ? res.send('successfully patched category') : res.sendStatus(404));
 };
 
 const deleteRestaurant = async (req, res) => {
-  await pool.query(
+  const result = await queryDb(
     `DELETE FROM restaurant 
     WHERE restaurant_id = ${req.body.resId})`,
   );
-  res.send('successfully deleted restaurant');
+  return (result ? res.send('successfully deleted restaurant') : res.sendStatus(404));
 };
 
 const deleteCategory = async (req, res) => {
-  // req.body example: {"catId": 2, "resId": 1}
-  await pool.query(
+  console.log(req.params);
+  const result = await queryDb(
     `DELETE FROM restaurant_category 
     WHERE restaurant_id = '${req.params.id}' 
-    AND category_id = '${req.body.catId}'`,
+    AND category_id = '${req.params.catId}'`,
   );
-  res.send('successfully deleted category');
+  return (result ? res.send('successfully deleted category') : res.sendStatus(404));
 };
 
 module.exports = {
   getRestaurant,
-  getCategory,
-  getReview,
+  getCategories,
+  getReviews,
   postCategory,
   postRestaurant,
   patchRestaurant,
