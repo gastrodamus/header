@@ -21,7 +21,7 @@ const createData = (i, writeStreamReview, writeStreamReviewDish) => {
 
   // Create table review (review, restaurant_id, star, date)
   let reviewData = '';
-  const restaurantId = i + 1;
+  const restaurantId = i;
 
   for (let m = 0; m < 3; m += 1) { // Generates reviews for past 3 months
     let reviewsPerMth; // Number of reviews per month
@@ -76,7 +76,7 @@ function writeData() {
     let ok = true;
     do {
       i -= 1;
-      if (i === 0) {
+      if (i === 1) {
         // Last time!
         createData(i, writeStreamReview, writeStreamReviewDish);
         console.log(chalk.blue(`write ${reviewId} reviews`));

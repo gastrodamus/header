@@ -45,7 +45,7 @@ function createJoin(i, restaurantName, writeStreamJoin) {
   for (let k = 3; k > 0; k -= 1) { // Generates 3 categories for one restaurant
     // Create table restaurant_category (restaurant_category_id, restaurant_id, category_id)
     joinData += [
-      i + 1,
+      i,
       categoryIdsArr[k - 1],
     ].join(',');
     joinData += '\n';
@@ -90,7 +90,7 @@ function writeData() {
     let ok = true;
     do {
       i -= 1;
-      if (i === 0) {
+      if (i === 1) {
         // Last time!
         console.log(chalk.green(moment().format('LLLL')));
         console.timeEnd('calculationTime');
