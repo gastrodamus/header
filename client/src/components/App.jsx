@@ -102,11 +102,11 @@ class App extends React.Component {
   componentDidMount() {
     let urlStrings = location.href.split('/');
     let num = urlStrings [urlStrings.length - 2];
-    axios.get(`/header/${num}`)
+    axios.get(`/api/header/${num}`)
       .then(({ data }) => {
         console.log(data);
         this.setState({
-          currentView: data[0],
+          currentView: data,
         });
       })
       .catch(err => console.log(err));
@@ -166,10 +166,10 @@ class App extends React.Component {
             openDetailsModal={this.openDetailsModal}
             closeDetailsModal={this.closeDetailsModal}
             detailStyle={this.state.modalStyle}
-            restaurantName={this.state.currentView.name}
+            restaurantName={this.state.currentView.restaurant_name}
             categoryNames={this.state.currentView.categories}
-            reviewCount={this.state.currentView.reviews.length}
-            averageStars={this.state.currentView.avg_stars}
+            reviewCount={this.state.currentView.reviewCount}
+            averageStars={this.state.currentView.avg_star}
             reviews={this.state.currentView.reviews}
           />
         </HeaderLeftDiv>

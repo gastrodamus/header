@@ -1,4 +1,5 @@
 const newrelic = require('newrelic');
+const path = require('path');
 const express = require('express');
 const controllers = require('./controllers/postgres');
 
@@ -6,13 +7,15 @@ const router = express.Router();
 const app = express();
 const port = 3003;
 
+app.use('/:id', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 app.use('/api/header', router);
 app.use(express.json());
 
-router.get('/', controllers.getRestaurantList);
+router.get('/restaurants', controllers.getRestaurantList);
+router.get('/:id', controllers.getRestaurantInfo);
 router.get('/:id/restaurant', controllers.getRestaurant);
 router.get('/:id/category', controllers.getCategories);
-router.get('/:id/reviews', controllers.getReviews);
+router.get('/:id/review', controllers.getAvgStars);
 
 router.post('/:id/restaurant', controllers.postRestaurant);
 router.post('/:id/category/:catId', controllers.postCategory);

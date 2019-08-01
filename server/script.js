@@ -14,16 +14,22 @@ let VUsRequired = Math.round(desiredRPS / RPSperVU);
 
 export let options = {
   vus: VUsRequired,
-  duration: "5m",
+  duration: "30s",
 };
 
 export default function() {
   let iterationStart = new Date().getTime(); // timestamp in ms
-  
-  for (let i of Array(RPSperVU).keys()) {
+
+  for (let i = 0; i < RPSperVU; i++) {
     let id = faker.random.number({ min: 1, max: 10000000 });
     let baseUrl = `http://localhost:3003/api/header/${id}/category`;
-    http.get(`${baseUrl}`);
+    let userRes = http.get(`${baseUrl}`);
+
+    check(userRes, {
+      "user retrieval successful": (r) => r.status === 200
+    }) || errorRate.add(1);
+
+    return userRes.json();
   }
 
   let iterationDuration = (new Date().getTime() - iterationStart) / 1000;

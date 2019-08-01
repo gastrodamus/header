@@ -28,6 +28,22 @@ const getRestaurantList = async (req, res) => {
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
+const getRestaurantInfo = async (req, res) => {
+  const info = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
+  const categoryIds = await queryDb(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
+  const categories = await Promise.all(categoryIds.map(el => queryDb(`SELECT * FROM category WHERE category_id in (${el.category_id})`)));
+  const response = await axios.get(`http://localhost:4000/api/review/avg/${req.params.id}`);
+  const avgStars = response.data;
+  const response1 = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
+  const reviewCount = response1.data.length;
+  const cat = categories.reduce((a, b) => a.concat(b));
+  const result = info[0];
+  result.reviewCount = reviewCount;
+  result.categories = cat;
+  result.avgStars = avgStars;
+  return (result ? res.send(result) : res.sendStatus(404));
+};
+
 const getRestaurant = async (req, res) => {
   const result = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
   return (result ? res.send(result) : res.sendStatus(404));
@@ -39,8 +55,8 @@ const getCategories = async (req, res) => {
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
-const getReviews = async (req, res) => {
-  const result = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
+const getAvgStars = async (req, res) => {
+  const result = await axios.get(`http://localhost:4000/api/review/avg/${req.params.id}`);
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
@@ -126,9 +142,10 @@ const deleteCategory = async (req, res) => {
 
 module.exports = {
   getRestaurantList,
+  getRestaurantInfo,
   getRestaurant,
   getCategories,
-  getReviews,
+  getAvgStars,
   postCategory,
   postRestaurant,
   patchRestaurant,

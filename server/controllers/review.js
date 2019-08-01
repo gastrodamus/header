@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const { mean } = require('mathjs');
 
 const pool = new Pool({
   user: 'root',
@@ -14,7 +15,7 @@ pool.on('error', (err, client) => {
 
 const queryDb = async (q) => {
   try {
-    const result = await queryDb(q);
+    const result = await pool.query(q);
     return result.rows;
   } catch (err) {
     console.log(err.stack);
@@ -22,8 +23,29 @@ const queryDb = async (q) => {
   }
 };
 
-const getReview = async (req, res) => {
+const getReviews = async (req, res) => {
   const result = await queryDb(`SELECT * FROM review WHERE restaurant_id = ${req.params.id}`);
+  return (result ? res.send(result) : res.sendStatus(404));
+};
+
+const getAvgStars = async (req, res) => {
+  const avgStars = {};
+  const reviews = await queryDb(`SELECT star, date FROM review WHERE restaurant_id = ${req.params.id}`);
+  reviews.forEach((review) => {
+    // console.log(review.date);
+    const reviewMth = review.date.split('-')[0];
+    const reviewYr = review.date.split('-')[2];
+    const reviewDate = reviewMth.concat('-', reviewYr);
+    if (!avgStars[reviewDate]) {
+      avgStars[reviewDate] = [review.star];
+    } else {
+      avgStars[reviewDate].push(review.star);
+    }
+  });
+  const result = {};
+  for (let i = 0; i < Object.keys(avgStars).length; i++) {
+    result[Object.keys(avgStars)[i]] = Math.round(mean(avgStars[Object.keys(avgStars)[i]]) * 10) / 10;
+  }
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
@@ -42,7 +64,8 @@ const postReview = async (req, res) => {
 };
 
 module.exports = {
-  getReview,
+  getReviews,
+  getAvgStars,
   getDishReview,
   postReview,
 };

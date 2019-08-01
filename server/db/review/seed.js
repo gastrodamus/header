@@ -23,7 +23,7 @@ const createData = (i, writeStreamReview, writeStreamReviewDish) => {
   let reviewData = '';
   const restaurantId = i;
 
-  for (let m = 0; m < 3; m += 1) { // Generates reviews for past 3 months
+  for (let m = 0; m < 6; m += 1) { // Generates reviews for past 3 months
     let reviewsPerMth; // Number of reviews per month
     if (i < 500000) {
       reviewsPerMth = faker.random.number({ min: 10, max: 50 });
