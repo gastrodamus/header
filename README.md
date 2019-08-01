@@ -39,12 +39,20 @@ npm run build
 ```
 ## API
 
-| HTTP Method  | Endpoint               |
-| -----------  | ---------------------- |
-| GET          | /api/:id/header        |
-| POST         | /api/:id/header        |
-| PATCH        | /api/:id/header        |
-| DELETE       | /api/:id/header        |
+| HTTP Method  | Endpoint                        |
+| -----------  | ------------------------------- |
+| GET          | /api/header/:id/restaurant      |
+|              | /api/header/:id/category        |
+|              | /api/header/:id/reviews         |
+| POST         | /api/header/:id/restaurant      |
+|              | /api/:id/category/:catId        |
+| PATCH        | /api/header/:id/restaurant      |
+|              | /api/header/:id/category        |
+| DELETE       | /api/header/:id/restaurant      |
+| DELETE       | /api/header/:id/category/:catId |
+
+Routes
+
 
 ## Authors
 Esme

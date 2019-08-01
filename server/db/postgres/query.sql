@@ -3,6 +3,7 @@
 -- DROP INDEX res_index;
 -- DROP INDEX cat_index;
 
+CREATE INDEX res_name on restaurant(restaurant_name);
 CREATE INDEX res_index ON restaurant_category(restaurant_id);
 CREATE INDEX cat_index ON restaurant_category(category_id);
 
