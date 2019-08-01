@@ -23,6 +23,11 @@ const queryDb = async (q) => {
   }
 };
 
+const getRestaurantList = async (req, res) => {
+  const result = await queryDb('SELECT * FROM restaurant LIMIT 100');
+  return (result ? res.send(result) : res.sendStatus(404));
+};
+
 const getRestaurant = async (req, res) => {
   const result = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
   return (result ? res.send(result) : res.sendStatus(404));
@@ -35,7 +40,7 @@ const getCategories = async (req, res) => {
 };
 
 const getReviews = async (req, res) => {
-  const result = await axios.get(`http://localhost:4000/api/${req.params.id}/review`);
+  const result = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
@@ -120,6 +125,7 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
+  getRestaurantList,
   getRestaurant,
   getCategories,
   getReviews,
