@@ -1,5 +1,9 @@
 const { Pool } = require('pg');
 const axios = require('axios');
+const CacheService = require('../cache');
+
+const ttl = 60 * 60 * 1; // cache for 1 Hour
+const cache = new CacheService(ttl); // Create a new cache service instance
 
 const pool = new Pool({
   user: 'root',
@@ -13,10 +17,13 @@ pool.on('error', (err, client) => {
   process.exit(-1);
 });
 
-const queryDb = async (q) => {
+const queryDb = (q) => {
   try {
-    const result = await pool.query(q);
-    return result.rows;
+    return cache.get(q, async () => {
+      const result = await pool.query(q);
+      return result.rows;
+    })
+      .then(result => result);
   } catch (err) {
     console.log(err.stack);
     return null;
