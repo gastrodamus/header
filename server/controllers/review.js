@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const { mean } = require('mathjs');
+const { client } = require('../cacheService');
 
 const pool = new Pool({
   user: 'root',
@@ -25,6 +26,7 @@ const queryDb = async (q) => {
 
 const getReviews = async (req, res) => {
   const result = await queryDb(`SELECT * FROM review WHERE restaurant_id = ${req.params.id}`);
+  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
@@ -46,12 +48,14 @@ const getAvgStars = async (req, res) => {
   for (let i = 0; i < Object.keys(avgStars).length; i++) {
     result[Object.keys(avgStars)[i]] = Math.round(mean(avgStars[Object.keys(avgStars)[i]]) * 10) / 10;
   }
+  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
 const getDishReview = async (req, res) => {
   const reviewId = await queryDb(`SELECT review_id FROM review_dish WHERE dish_id = ${req.params.dishid}`);
   const result = await queryDb(`SELECT * FROM review WHERE restaurant_id = ${reviewId}`);
+  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
@@ -60,6 +64,7 @@ const postReview = async (req, res) => {
     `INSERT INTO review (review, restaurant_id, price, star, date)
     VALUES (${req.body.review}, ${req.params.id}, ${req.body.star}, ${req.body.date})`,
   );
+  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
   return (result ? res.send('successfully posted review') : res.sendStatus(404));
 };
 
