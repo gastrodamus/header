@@ -13,9 +13,9 @@
     "server-review": "nodemon server/server-review.js",
     "server-cassandra": "nodemon server/server-cassandra.js",
     "server-postgres": "nodemon server/server-postgres.js",
-    "seed-cassandra": "node server/db/cassandra/seed.js",
-    "seed-postgres": "node server/db/postgres/seed.js && npm run gzip postgres",
-    "seed-review": "node server/db/review/seed.js && npm run gzip review",
+    "seed-cassandra": "nodemon server/db/cassandra/seed.js",
+    "seed-postgres": "nodemon server/db/postgres/seed.js && npm run gzip postgres",
+    "seed-review": "nodemon server/db/review/seed.js && npm run gzip review",
     "gzip-postgres": "gzip server/db/postgres/restaurant_category.csv && gzip server/db/postgres/category.csv && gzip server/db/postgres/restaurant.csv",
     "gzip-review": "gzip server/db/review/review.csv && gzip server/db/review/review_dish.csv",
     "start": "npm run server-postgres",
@@ -56,6 +56,7 @@
     "brotli-webpack-plugin": "^1.1.0",
     "cassandra-driver": "^4.1.0",
     "chalk": "^2.4.2",
+    "cluster": "^0.7.7",
     "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",
     "express-static-gzip": "^1.1.3",
@@ -66,6 +67,7 @@
     "moment": "^2.24.0",
     "mongodb": "^3.2.7",
     "mongoose": "^5.6.3",
+    "morgan": "^1.9.1",
     "newrelic": "^5.11.0",
     "node-cache": "^4.2.1",
     "pg": "^7.11.0",
@@ -73,6 +75,7 @@
     "react-dom": "^16.8.6",
     "react-modal": "^3.8.2",
     "react-test-renderer": "^16.8.6",
+    "redis": "^2.8.0",
     "styled-components": "^4.3.2"
   }
 }
