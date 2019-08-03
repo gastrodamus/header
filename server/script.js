@@ -8,7 +8,7 @@ import faker from 'cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js';
 export let options = {
   rps: 1000,
   vus: 150,
-  duration: '3m',
+  duration: '45s',
 };
 
 export default function () {

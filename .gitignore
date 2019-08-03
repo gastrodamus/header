@@ -3,4 +3,5 @@ client/dist/bundle.js
 coverage
 cassandra-loader
 *.csv.gz
+newrelic.js
 newrelic_agent.log

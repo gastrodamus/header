@@ -27,7 +27,7 @@ const queryDb = async (q) => {
 const getRestaurantList = async (req, res) => {
   const result = await queryDb('SELECT * FROM restaurant LIMIT 100');
   console.log('result', result);
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
