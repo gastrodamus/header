@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use('/api/header', router);
 app.use(express.json());
 
-router.get('/restaurants', controllers.getRestaurantList);
+router.get('/restaurants', cache, controllers.getRestaurantList);
 router.get('/:id', cache, controllers.getRestaurantInfo);
 router.get('/:id/restaurant', cache, controllers.getRestaurant);
 router.get('/:id/category', cache, controllers.getCategories);

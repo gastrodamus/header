@@ -4,6 +4,7 @@ const redis = require('redis');
 const client = redis.createClient();
 
 function cache(req, res, next) {
+  console.log('cache');
   const key = req.method + req.originalUrl;
   client.get(key, (err, data) => {
     if (err) throw err;

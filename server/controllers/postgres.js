@@ -51,27 +51,27 @@ const getRestaurantInfo = async (req, res) => {
     result.reviewCount = reviewCount;
     result.avgStars = avgStars;
   }
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
 const getRestaurant = async (req, res) => {
   const result = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
 const getCategories = async (req, res) => {
   const categoryIds = await queryDb(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
   const result = await Promise.all(categoryIds.map(el => queryDb(`SELECT * FROM category WHERE category_id in (${el.category_id})`)));
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
 const getAvgStars = async (req, res) => {
   const response = await axios.get(`http://localhost:4000/api/review/avg/${req.params.id}`);
   const result = response.data;
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
@@ -90,7 +90,7 @@ const postCategory = async (req, res) => {
   } else {
     return res.send('category already exists');
   }
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully added category') : res.sendStatus(404));
 };
 
@@ -109,7 +109,7 @@ const postRestaurant = async (req, res) => {
   } else {
     return (res.send('restaurant already exists'));
   }
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully added restaurant') : res.sendStatus(404));
 };
 
@@ -119,7 +119,7 @@ const patchRestaurant = async (req, res) => {
     SET restaurant_name = ${req.body.newRestaurant.resName}
     WHERE restaurant_id = ${req.params.id}`,
   );
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully patched restaurant') : res.sendStatus(404));
 };
 
@@ -134,7 +134,7 @@ const patchCategory = async (req, res) => {
     WHERE restaurant_id = ${req.params.id}
     AND category_id = ${req.body.oldCatId}`,
   );
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully patched category') : res.sendStatus(404));
 };
 
@@ -146,7 +146,7 @@ const deleteRestaurant = async (req, res) => {
     `DELETE FROM restaurant 
     WHERE restaurant_id = ${req.body.resId})`,
   );
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully deleted restaurant') : res.sendStatus(404));
 };
 
@@ -157,7 +157,7 @@ const deleteCategory = async (req, res) => {
     WHERE restaurant_id = '${req.params.id}' 
     AND category_id = '${req.params.catId}'`,
   );
-  client.setex(req.method + req.originalUrl, 7200, JSON.stringify(result));
+  client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully deleted category') : res.sendStatus(404));
 };
 
