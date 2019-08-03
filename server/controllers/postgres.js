@@ -6,11 +6,11 @@ const pool = new Pool({
   // localhost config
   // user: 'root',
   // host: 'localhost',
-  // password: 'password',
   // ec2 config
   host: 'ec2-54-67-51-251.us-west-1.compute.amazonaws.com',
   port: 5432,
   user: 'power_user',
+  password: 'password',
   database: 'header',
 });
 
