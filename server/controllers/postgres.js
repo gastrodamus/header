@@ -56,7 +56,9 @@ const getRestaurantInfo = async (req, res) => {
 };
 
 const getRestaurant = async (req, res) => {
+  console.log('get', req.originalUrl);
   const result = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
+  console.log('get', result);
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
