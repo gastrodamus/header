@@ -3,10 +3,15 @@ const axios = require('axios');
 const { client } = require('../cacheService');
 
 const pool = new Pool({
-  user: 'root',
-  host: 'localhost',
+  // localhost config
+  // user: 'root',
+  // host: 'localhost',
+  // password: 'password',
+  // ec2 config
+  host: 'ec2-54-67-51-251.us-west-1.compute.amazonaws.com',
+  port: 5432,
+  user: 'poweruser',
   database: 'header',
-  password: 'password',
 });
 
 pool.on('error', (err, client) => {
