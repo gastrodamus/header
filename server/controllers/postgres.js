@@ -10,7 +10,7 @@ const pool = new Pool({
   // ec2 config
   host: 'ec2-54-67-51-251.us-west-1.compute.amazonaws.com',
   port: 5432,
-  user: 'poweruser',
+  user: 'power_user',
   database: 'header',
 });
 
