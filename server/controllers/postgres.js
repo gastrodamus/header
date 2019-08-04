@@ -4,12 +4,12 @@ const { client } = require('../cacheService');
 
 const pool = new Pool({
   // localhost config
-  // user: 'root',
-  // host: 'localhost',
+  user: 'root',
+  host: 'localhost',
   // ec2 config
-  host: 'ec2-54-67-51-251.us-west-1.compute.amazonaws.com',
-  port: 5432,
-  user: 'power_user',
+  // host: 'ec2-54-67-51-251.us-west-1.compute.amazonaws.com',
+  // port: 5432,
+  // user: 'power_user',
   password: 'password',
   database: 'header',
 });
@@ -40,25 +40,21 @@ const getRestaurantInfo = async (req, res) => {
   const info = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
   const categoryIds = await queryDb(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
   const categories = await Promise.all(categoryIds.map(el => queryDb(`SELECT * FROM category WHERE category_id in (${el.category_id})`)));
-  const response = await axios.get(`http://localhost:4000/api/review/avg/${req.params.id}`);
-  const avgStars = response.data;
-  const response1 = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
-  const reviewCount = response1.data.length;
+  const response = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
+  const reviewCount = response.data.length;
   let result;
   if (categories.length) {
     result = info[0];
     result.categories = categories.reduce((a, b) => a.concat(b));
     result.reviewCount = reviewCount;
-    result.avgStars = avgStars;
+    result.reviews = response.data;
   }
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
 const getRestaurant = async (req, res) => {
-  console.log('get', req.originalUrl);
   const result = await queryDb(`SELECT * FROM restaurant WHERE restaurant_id = ${req.params.id}`);
-  console.log('get', result);
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
@@ -70,8 +66,8 @@ const getCategories = async (req, res) => {
   return (result ? res.send(result) : res.sendStatus(404));
 };
 
-const getAvgStars = async (req, res) => {
-  const response = await axios.get(`http://localhost:4000/api/review/avg/${req.params.id}`);
+const getReviews = async (req, res) => {
+  const response = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
   const result = response.data;
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
@@ -168,7 +164,7 @@ module.exports = {
   getRestaurantInfo,
   getRestaurant,
   getCategories,
-  getAvgStars,
+  getReviews,
   postCategory,
   postRestaurant,
   patchRestaurant,

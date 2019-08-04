@@ -249,7 +249,7 @@ class Details extends React.Component {
 
     const reviews = this.props.reviews;
     for (let i = 0; i < reviews.length; i++) {
-      let star = reviews[i].star - 1;
+      let star = Math.ceil(reviews[i].star) - 1;
       star = stars[star];
       let month = parseFloat(reviews[i].date.split('-')[1]) - 1;
       month = months[month];
@@ -272,16 +272,18 @@ class Details extends React.Component {
   }
   
   countStars() {
-    this.props.reviews.forEach(val => {
-      if (val.star === 1) {
+    const { reviews } = this.props;
+    reviews.forEach((el) => {
+      const star = Math.ceil(el.star);
+      if (star === 1) {
         this.oneStar++;
-      } else if (val.star === 2) {
+      } else if (star === 2) {
         this.twoStar++;
-      } else if (val.star === 3) {
+      } else if (star === 3) {
         this.threeStar++;
-      } else if (val.star === 4) {
+      } else if (star === 4) {
         this.fourStar++;
-      } else if (val.star === 5) {
+      } else if (star === 5) {
         this.fiveStar++;
       }
     })

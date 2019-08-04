@@ -1,5 +1,7 @@
 node_modules
 client/dist/bundle.js
+client/dist/bundle.js.br
+client/dist/bundle.js.gz
 coverage
 cassandra-loader
 *.csv.gz

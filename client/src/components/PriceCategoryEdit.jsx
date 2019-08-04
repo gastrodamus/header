@@ -33,13 +33,24 @@ const PriceCategoryEditDiv = styled.div`
 `;
 
 const PriceCategoryEdit = (props) => {
+  const { categoryNames } = props || null;
+  let categoryTitle = null;
+  if (categoryNames.length) {
+    categoryTitle = (
+      <div>
+        <CategoryTitle>{categoryNames[0].category_name},</CategoryTitle>
+        <CategoryTitle>{categoryNames[1].category_name},</CategoryTitle>
+        <CategoryTitle>{categoryNames[2].category_name}</CategoryTitle>
+      </div>
+    );
+  }
   return (
     <PriceCategoryEditDiv>
       <div>
         <PriceTitle>$$$</PriceTitle>
       </div>
       <div>
-        <CategoryTitle>{props.categoryNames}</CategoryTitle>
+        {categoryTitle}
       </div>
       <div>
         <Button>Edit</Button>
