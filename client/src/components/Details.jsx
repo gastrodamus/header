@@ -236,9 +236,10 @@ class Details extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const state = Object.assign({}, this.state)
-    if (this.props.reviewCount !== newProps.reviewCount) {
-      state.props = newProps
+    const { reviewCount } = this.props;
+    const state = Object.assign({}, this.state);
+    if (reviewCount !== newProps.reviewCount) {
+      state.props = newProps;
       this.setState(state, () => {this.setLineGraph(); this.countStars()});
     }
   }
@@ -247,7 +248,7 @@ class Details extends React.Component {
     const stars = ['one', 'two', 'three', 'four', 'five'];
     const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-    const reviews = this.props.reviews;
+    const { reviews } = this.props;
     for (let i = 0; i < reviews.length; i++) {
       let star = Math.ceil(reviews[i].star) - 1;
       star = stars[star];
