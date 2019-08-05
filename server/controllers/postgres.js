@@ -31,7 +31,6 @@ const queryDb = async (q) => {
 
 const getRestaurantList = async (req, res) => {
   const result = await queryDb('SELECT * FROM restaurant LIMIT 100');
-  console.log('result', result);
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));
 };
@@ -41,7 +40,7 @@ const getRestaurantInfo = async (req, res) => {
   const categoryIds = await queryDb(`SELECT category_id FROM restaurant_category WHERE restaurant_id = ${req.params.id}`);
   const categories = await Promise.all(categoryIds.map(el => queryDb(`SELECT * FROM category WHERE category_id in (${el.category_id})`)));
   const response = await axios.get(`http://localhost:4000/api/review/${req.params.id}`);
-  const reviewCount = response.data.length;
+  const reviewCount = response.data.reviews.length;
   let result;
   if (categories.length) {
     result = info[0];
@@ -150,7 +149,6 @@ const deleteRestaurant = async (req, res) => {
 };
 
 const deleteCategory = async (req, res) => {
-  console.log(req.params);
   const result = await queryDb(
     `DELETE FROM restaurant_category 
     WHERE restaurant_id = '${req.params.id}' 
