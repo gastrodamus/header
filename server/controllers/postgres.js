@@ -47,7 +47,8 @@ const getRestaurantInfo = async (req, res) => {
     result = info[0];
     result.categories = categories.reduce((a, b) => a.concat(b));
     result.reviewCount = reviewCount;
-    result.reviews = response.data;
+    result.reviews = response.data.reviews;
+    result.stars = response.data.stars;
   }
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send(result) : res.sendStatus(404));

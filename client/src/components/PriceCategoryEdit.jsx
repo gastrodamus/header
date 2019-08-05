@@ -36,13 +36,15 @@ const PriceCategoryEdit = (props) => {
   const { categoryNames } = props || null;
   let categoryTitle = null;
   if (categoryNames.length) {
-    categoryTitle = (
-      <div>
-        <CategoryTitle>{categoryNames[0].category_name},</CategoryTitle>
-        <CategoryTitle>{categoryNames[1].category_name},</CategoryTitle>
-        <CategoryTitle>{categoryNames[2].category_name}</CategoryTitle>
-      </div>
-    );
+    categoryTitle = categoryNames.slice(0, categoryNames.length - 1).map((el) => {
+      return (
+        <CategoryTitle>
+          {el.category_name}
+          ,
+        </CategoryTitle>
+      );
+    });
+    categoryTitle.push(<CategoryTitle>{categoryNames[categoryNames.length - 1].category_name}</CategoryTitle>);
   }
   return (
     <PriceCategoryEditDiv>
