@@ -3,10 +3,13 @@ const { mean } = require('mathjs');
 const { client } = require('../cacheService');
 
 const pool = new Pool({
-  user: 'root',
-  host: 'localhost',
-  database: 'header',
+  // user: 'root',
+  // host: 'localhost',
+  host: 'ec2-54-215-249-46.us-west-1.compute.amazonaws.com',
+  user: 'power_user',
+  port: 5432,
   password: 'password',
+  database: 'header',
 });
 
 pool.on('error', (err, client) => {
