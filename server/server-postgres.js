@@ -3,16 +3,20 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const controllers = require('./controllers/postgres');
-const { cache } = require('./cacheService');
+// const { cache } = require('./cacheService');
 
 const router = express.Router();
 const app = express();
 const port = 3003;
 
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use('/:id', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 app.use('/api/header', router);
 app.use(express.json());
+
+const cache = (req, res, next) => {
+  next();
+};
 
 router.get('/restaurants', cache, controllers.getRestaurantList);
 router.get('/:id', cache, controllers.getRestaurantInfo);

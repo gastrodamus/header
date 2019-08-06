@@ -6,7 +6,7 @@
 DROP DATABASE IF EXISTS header;
 
 CREATE DATABASE header;
-\connect header root;
+\connect header;
 
 CREATE TABLE restaurant (
   restaurant_id SERIAL PRIMARY KEY,

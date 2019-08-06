@@ -4,14 +4,21 @@ const { client } = require('../cacheService');
 
 const pool = new Pool({
   // localhost config
-  user: 'root',
-  host: 'localhost',
+  // user: 'root',
+  // host: 'localhost',
   // ec2 config
-  // host: 'ec2-54-67-51-251.us-west-1.compute.amazonaws.com',
-  // port: 5432,
-  // user: 'power_user',
+  host: 'ec2-54-215-249-46.us-west-1.compute.amazonaws.com',
+  user: 'power_user',
+  port: 5432,
   password: 'password',
   database: 'header',
+});
+
+pool.connect((err) => {
+  if (err) {
+    return console.error('Error acquiring client', err.stack);
+  }
+  console.log('connected to postgres');
 });
 
 pool.on('error', (err, client) => {
@@ -22,6 +29,7 @@ pool.on('error', (err, client) => {
 const queryDb = async (q) => {
   try {
     const result = await pool.query(q);
+    // console.log(result.rows, 'rows');
     return result.rows;
   } catch (err) {
     console.log(err.stack);
