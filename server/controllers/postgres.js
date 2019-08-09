@@ -1,12 +1,8 @@
-const { Pool } = require('pg');
-const axios = require('axios');
-const { client } = require('../cacheService');
+import { Pool } from 'pg';
+import axios from 'axios';
+import { client } from '../cacheService';
 
 const pool = new Pool({
-  // localhost config
-  // user: 'root',
-  // host: 'localhost',
-  // ec2 config
   host: 'ec2-54-215-249-46.us-west-1.compute.amazonaws.com',
   user: 'power_user',
   port: 5432,
@@ -166,7 +162,7 @@ const deleteCategory = async (req, res) => {
   return (result ? res.send('successfully deleted category') : res.sendStatus(404));
 };
 
-module.exports = {
+export {
   getRestaurantList,
   getRestaurantInfo,
   getRestaurant,

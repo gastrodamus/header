@@ -3,7 +3,7 @@
 -- 2. psql postgres -f ./server/db/review/schema.sql
 
 -- CREATE ROLE root WITH SUPERUSER;
-\connect header root;
+\connect header;
 
 -- relationship
 -- one review to many restaurants

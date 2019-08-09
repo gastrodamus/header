@@ -1,5 +1,5 @@
 // cache service
-const redis = require('redis');
+import redis from 'redis';
 
 const client = redis.createClient();
 
@@ -15,7 +15,7 @@ function cache(req, res, next) {
   });
 }
 
-module.exports = {
+export {
   client,
   cache,
 };

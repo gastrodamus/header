@@ -6,3 +6,5 @@ coverage
 cassandra-loader
 *.csv.gz
 newrelic_agent.log
+server/db/review/review.csv
+server/db/review/review_dish.csv

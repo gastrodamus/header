@@ -57,23 +57,25 @@ const getReviews = async (req, res) => {
   const avgStars = {};
   const stars = [];
   const data = await queryDb(`SELECT * FROM review WHERE restaurant_id = ${req.params.id}`);
-  data.forEach((el) => {
-    const reviewMth = el.date.split('-')[0];
-    const reviewYr = el.date.split('-')[2];
-    const reviewDate = reviewMth.concat('-10-', reviewYr);
-    if (!avgStars[reviewDate]) {
-      avgStars[reviewDate] = [el.star];
-    } else {
-      avgStars[reviewDate].push(el.star);
-    }
-  });
-
-  for (let i = 0; i < Object.keys(avgStars).length; i++) {
-    const avgStar = Math.round(mean(avgStars[Object.keys(avgStars)[i]]) * 10) / 10;
-    stars.push({
-      star: avgStar,
-      date: Object.keys(avgStars)[i],
+  if (data) {
+    data.forEach((el) => {
+      const reviewMth = el.date.split('-')[0];
+      const reviewYr = el.date.split('-')[2];
+      const reviewDate = reviewMth.concat('-10-', reviewYr);
+      if (!avgStars[reviewDate]) {
+        avgStars[reviewDate] = [el.star];
+      } else {
+        avgStars[reviewDate].push(el.star);
+      }
     });
+  
+    for (let i = 0; i < Object.keys(avgStars).length; i++) {
+      const avgStar = Math.round(mean(avgStars[Object.keys(avgStars)[i]]) * 10) / 10;
+      stars.push({
+        star: avgStar,
+        date: Object.keys(avgStars)[i],
+      });
+    }
   }
 
   const result = { reviews, stars };

@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 
-Modal.setAppElement(document.getElementById('app'))
+Modal.setAppElement('#app');
 
 const ShareTitle = styled.button`
   height: 31px;

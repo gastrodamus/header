@@ -4,7 +4,7 @@ import Share from './Share.jsx';
 import Save from './Save.jsx';
 import styled from 'styled-components';
 
-Modal.setAppElement(document.getElementById('app'));
+Modal.setAppElement('#app');
 
 const PhotoTitle = styled.button`
   height: 31px;

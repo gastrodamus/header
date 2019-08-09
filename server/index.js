@@ -1,27 +1,43 @@
-const newrelic = require('newrelic');
-const express = require('express');
-const path = require('path');
-const morgan = require('morgan');
+import express from 'express';
+import React from 'react';
+import path from 'path';
+import { renderToString } from 'react-dom/server';
+import App from '../client/src/components/App.jsx';
 
 const controllers = require('./controllers/postgres');
 const { cache } = require('./cacheService');
 
 const router = express.Router();
 const app = express();
-const port = 3003;
+const port = process.env.PORT || 3000;
 
-// app.get('/loaderio-282738d0ea6be493bbf17aa5e5e163a5', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'loaderio-282738d0ea6be493bbf17aa5e5e163a5.txt'));
-// });
-
-// app.use(morgan('dev'));
-app.use('/:id', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 app.use('/api/header', router);
 app.use(express.json());
 
-// const cache = (req, res, next) => {
-//   next();
-// };
+app.get('/:id', (req, res) => {
+  const body = renderToString(<App />);
+  res.send(`
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://kit.fontawesome.com/0c048ecc77.js"></script> 
+      <title>Munch Header</title>
+    </head>
+    <body style="margin:0">
+      <div id="app">
+        <div id="header">
+          ${body}
+        </div>
+      </div>
+      <script src="./bundle.js"></script>
+    </body>
+  </html>
+  `);
+});
+
+app.use('/:id', express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 
 router.get('/restaurants', cache, controllers.getRestaurantList);
 router.get('/:id', cache, controllers.getRestaurantInfo);
