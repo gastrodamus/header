@@ -37,22 +37,25 @@ npm install -g webpack
 npm install
 npm run build
 ```
-## API
+## [API Server Routes](https://github.com/gastrodamus/header/blob/master/api/api.md)
 
-| HTTP Method  | Endpoint                        |
-| -----------  | ------------------------------- |
-| GET          | /api/header/:id/restaurant      |
-|              | /api/header/:id/category        |
-|              | /api/header/:id/reviews         |
-| POST         | /api/header/:id/restaurant      |
-|              | /api/:id/category/:catId        |
-| PATCH        | /api/header/:id/restaurant      |
-|              | /api/header/:id/category        |
-| DELETE       | /api/header/:id/restaurant      |
-| DELETE       | /api/header/:id/category/:catId |
+### Restaurant listings
 
-Routes
+- **<code>GET</code> api/header/restaurants**
+- **<code>POST</code> api/header/restaurants**
 
+### Restaurant's details and reviews
+
+- **<code>GET</code> api/header/:id/restaurant**
+- **<code>DELETE</code> api/header/:id/restaurant**
+- **<code>PATCH</code> api/header/:id/restaurant**
+
+## Restaurant's categories
+
+- **<code>GET</code> api/header/:id/category**
+- **<code>POST</code> api/header/:id/category/:catId**
+- **<code>DELETE</code> api/header/:id/category/:catId**
+- **<code>PATCH</code> api/header/:id/category/:catId**
 
 ## Authors
 Esme
