@@ -1,6 +1,6 @@
 # header
 
-> Business page header for munch, a web-based restaurant review platform, including a trend/history of rating details
+> Backend architecture for Gastrodamus's Header Microservice. Benchmarked Cassandra and Postgres databases with 10m restaurant listings and over 300m data records. Optimized throughput and latency with horizontal scaling using load balancers, Redis caching, hash tables, and server-side rendering.
 
 ## Related Projects
 
