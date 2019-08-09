@@ -37,7 +37,7 @@ npm install -g webpack
 npm install
 npm run build
 ```
-## [API Server Routes](https://github.com/gastrodamus/header/blob/master/api/api.md)
+## [API](https://github.com/gastrodamus/header/blob/master/api/api.md)
 
 ### Restaurant listings
 
