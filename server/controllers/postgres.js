@@ -116,9 +116,11 @@ const postRestaurant = async (req, res) => {
 };
 
 const patchRestaurant = async (req, res) => {
+  // req.body example: {"resName": "Seafood", "resPrice": 35}
   const result = await queryDb(
     `UPDATE restaurant
-    SET restaurant_name = ${req.body.newRestaurant.resName}
+    SET restaurant_name = ${req.body.resName},
+    SET price = ${req.body.resPrice},
     WHERE restaurant_id = ${req.params.id}`,
   );
   client.set(req.method + req.originalUrl, JSON.stringify(result));
@@ -128,13 +130,13 @@ const patchRestaurant = async (req, res) => {
 // new category id
 
 const patchCategory = async (req, res) => {
-  // req.body example: {"oldCatId": 2, "newCatId": "5"}
+  // req.body example: {"newCatId": "5"}
   // update with new category id
   const result = await queryDb(
     `UPDATE restaurant_category 
     SET category_id = ${req.body.newCatId}
     WHERE restaurant_id = ${req.params.id}
-    AND category_id = ${req.body.oldCatId}`,
+    AND category_id = ${req.params.catId}`,
   );
   client.set(req.method + req.originalUrl, JSON.stringify(result));
   return (result ? res.send('successfully patched category') : res.sendStatus(404));

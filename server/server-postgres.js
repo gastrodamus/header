@@ -29,11 +29,11 @@ router.get('/:id/restaurant', cache, controllers.getRestaurant);
 router.get('/:id/category', cache, controllers.getCategories);
 router.get('/:id/review', cache, controllers.getReviews);
 
-router.post('/:id/restaurant', cache, controllers.postRestaurant);
+router.post('/restaurants', cache, controllers.postRestaurant);
 router.post('/:id/category/:catId', cache, controllers.postCategory);
 
 router.patch('/:id/restaurant', cache, controllers.patchRestaurant);
-router.patch('/:id/category', cache, controllers.patchCategory);
+router.patch('/:id/category/:catId', cache, controllers.patchCategory);
 
 router.delete('/:id/restaurant', cache, controllers.deleteRestaurant);
 router.delete('/:id/category/:catId', cache, controllers.deleteCategory);
