@@ -1,42 +1,23 @@
 # header
 
-> Backend architecture for Gastrodamus's Header Microservice. Benchmarked Cassandra and Postgres databases with 10m restaurant listings and over 300m data records. Optimized throughput and latency with horizontal scaling using load balancers, Redis caching, hash tables, and server-side rendering.
-
-## Related Projects
-
-  - https://github.com/gastrodamus/popular
-  - https://github.com/gastrodamus/reservation
+Backend architecture for Gastrodamus's Header and Review Microservices.
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+1. [Tech Stack](#tech-stack)
 1. [API](#api)
-1. [Authors](#authors)
-1. [License](#license)
+1. [Usage](#usage)
+1. [Requirements](#requirements)
+1. [Related Projects](#related-projects)
 
-## Usage
+## Tech Stack
 
-> Some usage instructions
+Back-end: Node.js, Express, AWS EC2, Nginx
+<br />
+Database: PostgreSQL, Cassandra
+<br />
+Load testing: Loader.io, K6, New Relic
 
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
-npm run build
-```
 ## [API](https://github.com/gastrodamus/header/blob/master/api/api.md)
 
 ### Restaurant listings
@@ -57,8 +38,34 @@ npm run build
 - **<code>DELETE</code> api/header/:id/category/:catId**
 - **<code>PATCH</code> api/header/:id/category/:catId**
 
-## Authors
-Esme
+## Usage
 
-## License
-MIT
+```bash
+# clone this repository
+$ git clone https://github.com/gastrodamus/header.git
+
+# install dependencies
+$ npm install webpack
+$ npm install
+
+# seed postgresql database
+$ npm run schema-postgres
+$ npm run postgres-seed
+
+# bundle files with webpack
+$ npm run react-dev
+
+# run the app!
+$ npm start
+```
+
+## Requirements
+
+- Nvm
+- Node
+- Git
+
+## Related Projects
+
+  - https://github.com/gastrodamus/popular
+  - https://github.com/gastrodamus/reservation
