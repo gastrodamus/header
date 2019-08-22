@@ -1,4 +1,4 @@
-# header
+# Gastrodamus
 
 Backend architecture for Gastrodamus's Header and Review Microservices.
 
