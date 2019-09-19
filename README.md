@@ -4,7 +4,7 @@ Backend architecture for Gastrodamus's Header and Review Microservices.
 
 ###
 
-![gastrodamus png](https://i.ibb.co/JQfr15m/gastro.png)
+![gastrodamus png](https://i.ibb.co/pLQ8GB8/gastro.png)
 
 ## Table of Contents
 
