@@ -2,6 +2,10 @@
 
 Backend architecture for Gastrodamus's Header and Review Microservices.
 
+###
+
+![gastrodamus png](https://i.ibb.co/JQfr15m/gastro.png)
+
 ## Table of Contents
 
 1. [Tech Stack](#tech-stack)
